@@ -16,11 +16,17 @@ public class ModStatusEffects {
                     "9f66ca04-e8c5-4225-952c-665ccb332fe7",
                     ModConfig.CONFIG.carveModifier,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
-    public static final StatusEffect STALWART = new CooldownStatusEffect();
+    public static final StatusEffect STALWART = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL)
+            .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                    "775287b5-79b9-48f4-9afe-ab8fd2cfd35f",
+                    ModConfig.CONFIG.stalwartSpeedModifier,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final StatusEffect STALWART_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
 
     public static void init() {
         init("carve", CARVE);
         init("stalwart", STALWART);
+        init("stalwart_cooldown", STALWART_COOLDOWN);
     }
     private static void init(String name,StatusEffect statusEffect){
         Registry.register(Registries.STATUS_EFFECT, MoonayMod.id(name), statusEffect);

@@ -15,10 +15,10 @@ public class MoonayHelper {
     public static int getEntLvl(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack);
     }
-    public static boolean dontHasStatus(StatusEffect statusEffect,LivingEntity user) {
+    public static boolean dontHasThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) == null;
     }
-    public static boolean stillHasStatus(StatusEffect statusEffect,LivingEntity user) {
+    public static boolean stillHasThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) != null;
     }
     public static boolean hasStatusWithAmpValue(StatusEffect statusEffect, LivingEntity user, int lessthan) {

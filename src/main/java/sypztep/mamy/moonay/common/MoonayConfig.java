@@ -10,4 +10,5 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 public class MoonayConfig implements ConfigData {
     @Comment("How many perc that gonna stripe armor out Default 8% per stack")
     public double carveModifier = -0.08D;
+    public double stalwartSpeedModifier = 0.02D;
 }
