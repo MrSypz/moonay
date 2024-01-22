@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "moonay",
+  "version": "${version}",
+  "name": "moonay",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Mrsypz/moonay"
+  },
+  "license": "MIT",
+  "icon": "assets/moonay/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "sypztep.mamy.moonay.client.MoonayClient"
+    ],
+    "main": [
+      "sypztep.mamy.moonay.common.MoonayMod"
+    ],
+    "modmenu": [
+      "sypztep.mamy.moonay.common.compat.ModMenuIntegration"
+    ],
+    "cardinal-components-entity": [
+      "sypztep.mamy.moonay.common.init.ModEntityComponents"
+    ]
+  },
+  "mixins": [
+    "moonay.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "cardinal-components": [
+    ]
+  }
+}

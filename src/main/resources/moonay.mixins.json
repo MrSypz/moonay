@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "sypztep.mamy.moonay.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "carve.ItemMixin",
+    "carve.LivingEntityMixin",
+    "carve.PlayerEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
