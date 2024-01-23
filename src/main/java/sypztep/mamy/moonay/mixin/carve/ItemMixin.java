@@ -29,13 +29,13 @@ public class ItemMixin
                 user.heal(j);
                 for (int phi = 0; phi <= 180; phi += 8) {
                     for (int theta = 0; theta < 360; theta += 8) {
-                        double phiRad = Math.toRadians(phi);
-                        double thetaRad = Math.toRadians(theta);
+                        double _3D = Math.toRadians(phi);
+                        double _4D = Math.toRadians(theta);
 
                         double radius = j * 0.3;
-                        double x = radius * Math.sin(phiRad) * Math.cos(thetaRad) * 1.5;
-                        double y = radius * Math.cos(phiRad) * 1.5;
-                        double z = radius * Math.sin(phiRad) * Math.sin(thetaRad) * 1.5;
+                        double x = radius * Math.sin(_3D) * Math.cos(_4D) * 1.5;
+                        double y = radius * Math.cos(_3D) * 1.5;
+                        double z = radius * Math.sin(_3D) * Math.sin(_4D) * 1.5;
 
                         double velocityMultiplier = 0.3;
                         double vx = x * velocityMultiplier;
