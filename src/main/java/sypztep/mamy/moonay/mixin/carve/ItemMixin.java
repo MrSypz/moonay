@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
+import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 @Mixin(Item.class)
@@ -27,29 +28,7 @@ public class ItemMixin
             if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART,user)) {
                 int j = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART,user);
                 user.heal(j);
-                for (int phi = 0; phi <= 180; phi += 8) {
-                    for (int theta = 0; theta < 360; theta += 8) {
-                        double _3D = Math.toRadians(phi);
-                        double _4D = Math.toRadians(theta);
-
-                        double radius = j * 0.3;
-                        double x = radius * Math.sin(_3D) * Math.cos(_4D) * 1.5;
-                        double y = radius * Math.cos(_3D) * 1.5;
-                        double z = radius * Math.sin(_3D) * Math.sin(_4D) * 1.5;
-
-                        double velocityMultiplier = 0.3;
-                        double vx = x * velocityMultiplier;
-                        double vy = y * velocityMultiplier;
-                        double vz = z * velocityMultiplier;
-                        user.getWorld().addParticle(
-                                ParticleTypes.SOUL,
-                                user.getX() + x,
-                                user.getY() + y + 0.5,
-                                user.getZ() + z,
-                                vx, vy, vz
-                        );
-                    }
-                }
+                CarveSoulPacket.send();
                 user.removeStatusEffect(ModStatusEffects.STALWART);
                 user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN,240 - (lvl * 2)));
             }
@@ -69,7 +48,6 @@ public class ItemMixin
             cir.setReturnValue(UseAction.SPEAR);
         }
     }
-
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack stack = user.getStackInHand(hand);
