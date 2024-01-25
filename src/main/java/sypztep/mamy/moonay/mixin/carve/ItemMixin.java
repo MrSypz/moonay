@@ -28,7 +28,9 @@ public class ItemMixin
             if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART,user)) {
                 int j = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART,user);
                 user.heal(j);
-                CarveSoulPacket.send();
+                if (user.getWorld().isClient())
+                    CarveSoulPacket.send();
+                MoonayHelper.carvesoulParticle(user);
                 user.removeStatusEffect(ModStatusEffects.STALWART);
                 user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN,240 - (lvl * 2)));
             }

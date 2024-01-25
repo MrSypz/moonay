@@ -1,5 +1,6 @@
 package sypztep.mamy.moonay.common.util;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -9,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
+import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 
 public class MoonayHelper {
     public static boolean hasEnt(Enchantment enchantment, ItemStack stack) {
@@ -51,13 +53,12 @@ public class MoonayHelper {
         return 0; // Default value if the status effect is not present
     }
     public static void carvesoulParticle(Entity entity) {
-        int j = getStatusAmp(ModStatusEffects.STALWART, (LivingEntity) entity);
         for (int phi = 0; phi <= 180; phi += 8) {
             for (int theta = 0; theta < 360; theta += 8) {
                 double _3D = Math.toRadians(phi);
                 double _4D = Math.toRadians(theta);
 
-                double radius = j * 0.3;
+                double radius = 3 * 0.3;
                 double x = radius * Math.sin(_3D) * Math.cos(_4D) * 1.5;
                 double y = radius * Math.cos(_3D) * 1.5;
                 double z = radius * Math.sin(_3D) * Math.sin(_4D) * 1.5;

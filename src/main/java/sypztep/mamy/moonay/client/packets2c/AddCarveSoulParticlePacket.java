@@ -17,12 +17,11 @@ import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 public class AddCarveSoulParticlePacket {
-    public static final Identifier ID = MoonayMod.id("add_swirl_particle");
+    public static final Identifier ID = MoonayMod.id("add_carvesoul_particle");
     public static void send(ServerPlayerEntity player,int id) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(id);
-        PlayerLookup.tracking(player.getServerWorld(), player.getChunkPos())
-                .forEach(pl -> ServerPlayNetworking.send(pl, ID, buf));
+        ServerPlayNetworking.send(player, ID, buf);
     }
     @Environment(EnvType.CLIENT)
     public static class Receiver implements ClientPlayNetworking.PlayChannelHandler {
@@ -31,9 +30,8 @@ public class AddCarveSoulParticlePacket {
             int id = buf.readInt();
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
-                if (entity != null) {
+                if (entity != null)
                     MoonayHelper.carvesoulParticle(entity);
-                }
             });
         }
     }
