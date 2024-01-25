@@ -22,11 +22,13 @@ public class ModStatusEffects {
                     ModConfig.CONFIG.stalwartSpeedModifier,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final StatusEffect STALWART_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
+    public static final StatusEffect STIGMA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
 
     public static void init() {
         init("carve", CARVE);
         init("stalwart", STALWART);
         init("stalwart_cooldown", STALWART_COOLDOWN);
+        init("stigma_cooldown", STIGMA_COOLDOWN);
     }
     private static void init(String name,StatusEffect statusEffect){
         Registry.register(Registries.STATUS_EFFECT, MoonayMod.id(name), statusEffect);
