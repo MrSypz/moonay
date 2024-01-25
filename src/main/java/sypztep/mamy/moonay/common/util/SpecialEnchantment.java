@@ -9,11 +9,11 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public interface SpecialEnchantment {
-    void onFinishUsing(ItemStack stack, World world, LivingEntity user);
+    void onFinishUsing(ItemStack stack, World world, LivingEntity living);
 
-    int getMaxUseTime(ItemStack stack);
+    int maxUseTime(ItemStack stack);
 
-    UseAction getUseAction(ItemStack stack);
+    UseAction useAction(ItemStack stack);
 
     TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack);
 }
