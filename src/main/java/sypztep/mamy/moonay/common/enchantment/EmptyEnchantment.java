@@ -9,7 +9,7 @@ public class EmptyEnchantment extends Enchantment {
      * This <strong>String</strong> is define a name of enchantment.
      */
     protected String name;
-    protected EmptyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes) {
+    protected EmptyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
     /**
