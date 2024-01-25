@@ -10,9 +10,6 @@ import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
 import sypztep.mamy.moonay.common.enchantment.EmptyEnchantment;
 import sypztep.mamy.moonay.common.enchantment.StigmaEnchantment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModEnchantments {
     /**
      * <Strong>Sword
@@ -27,7 +24,10 @@ public class ModEnchantments {
         init(STIGMA);
     }
     private static void init(EmptyEnchantment enchantment) {
-        String name = enchantment.getName(); // Assuming the getName method is implemented in your EmptyEnchantment class
+        String name = enchantment.getName();
+        Registry.register(Registries.ENCHANTMENT, MoonayMod.id(name), enchantment);
+    }
+    private static void init(String name,EmptyEnchantment enchantment) {
         Registry.register(Registries.ENCHANTMENT, MoonayMod.id(name), enchantment);
     }
 }

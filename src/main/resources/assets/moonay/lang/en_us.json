@@ -1,5 +1,6 @@
 {
-  "moonay.modifytooltip":"Heal Amount : ",
+  "moonay.modifytooltip.carve":"Heal Amount : ",
+  "moonay.modifytooltip.stigma":"Heal Amount : ",
   "enchantment.moonay.carve" : "Carve",
   "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
