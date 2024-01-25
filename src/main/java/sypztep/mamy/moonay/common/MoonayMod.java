@@ -10,6 +10,7 @@ import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModParticles;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
+import sypztep.mamy.moonay.common.packetc2s.StigmaPacket;
 
 public class MoonayMod implements ModInitializer {
     public static final String MODID = "moonay";
@@ -28,5 +29,6 @@ public class MoonayMod implements ModInitializer {
         ModParticles.init();
 
         ServerPlayNetworking.registerGlobalReceiver(CarveSoulPacket.ID,new CarveSoulPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(StigmaPacket.ID,new StigmaPacket.Receiver());
     }
 }
