@@ -18,11 +18,6 @@ import sypztep.mamy.moonay.common.util.MoonayHelper;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     @Shadow public abstract ItemStack getMainHandStack();
-
-    @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
-
-    @Shadow public boolean handSwinging;
-
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
 
     @Inject(at = @At("HEAD"), method = "onAttacking")
