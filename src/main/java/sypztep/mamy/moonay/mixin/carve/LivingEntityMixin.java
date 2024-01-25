@@ -30,8 +30,8 @@ public abstract class LivingEntityMixin {
         int carvelvl = MoonayHelper.getEntLvl(ModEnchantments.CARVE, this.getMainHandStack());
         LivingEntity living = LivingEntity.class.cast(this);
         if (carvelvl != 0) {
-            int fervorcount = MoonayHelper.getStatusCount(living, ModStatusEffects.STALWART, carvelvl);
-            this.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + carvelvl * 12, fervorcount));
+            int carvecount = MoonayHelper.getStatusCount(living, ModStatusEffects.STALWART, carvelvl);
+            this.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + carvelvl * 12, carvecount));
         }
     }
 }
