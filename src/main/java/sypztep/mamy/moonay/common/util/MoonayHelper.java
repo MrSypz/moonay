@@ -1,6 +1,5 @@
 package sypztep.mamy.moonay.common.util;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -9,8 +8,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import sypztep.mamy.moonay.common.init.ModStatusEffects;
-import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 
 public class MoonayHelper {
     public static boolean hasEnt(Enchantment enchantment, ItemStack stack) {
@@ -58,5 +55,17 @@ public class MoonayHelper {
                 double z = 3* Math.sin(circle) * 1.5;
                 entity.getWorld().addParticle(ParticleTypes.COMPOSTER, entity.getX() + x, entity.getEyeY(), entity.getZ() + z, 0,0,0);
         }
+    }
+    public static boolean hasSpecialEnchantment(ItemStack stack) {
+        return getSpecialEnchantment(stack) != null;
+    }
+
+    public static SpecialEnchantment getSpecialEnchantment(ItemStack stack) {
+        for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
+            if (enchantment instanceof SpecialEnchantment) {
+                return (SpecialEnchantment) enchantment;
+            }
+        }
+        return null;
     }
 }
