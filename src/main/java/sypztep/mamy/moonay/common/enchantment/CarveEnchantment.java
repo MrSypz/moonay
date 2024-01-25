@@ -18,6 +18,7 @@ import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
+import sypztep.mamy.moonay.common.util.AbilityHelper;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 import sypztep.mamy.moonay.common.util.SpecialEnchantment;
 
@@ -33,38 +34,36 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     }
     @Override
     protected boolean canAccept(Enchantment other) {
-        return super.canAccept(other) && !canAccept(Enchantments.SHARPNESS);
+        return super.canAccept(other) && other != Enchantments.SHARPNESS;
     }
 
     @Override
-    public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
-        System.out.println("onFinishUsing called");
+    public void onFinishUsing(ItemStack stack, World world, LivingEntity living) {
         int lvl = MoonayHelper.getEntLvl(this, stack);
-        if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, user)) {
-            int j = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, user);
-            user.heal(j + ((user.getHealth() - user.getMaxHealth()) * 0.5f));
-            if (user.getWorld().isClient()) {
+        if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, living)) {
+            int j = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, living);
+            living.heal(j + AbilityHelper.getMissingHealth(living,0.05f));
+            if (living.getWorld().isClient())
                 CarveSoulPacket.send();
-            }
-            MoonayHelper.carvesoulParticle(user);
-            user.removeStatusEffect(ModStatusEffects.STALWART);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2)));
+            MoonayHelper.carvesoulParticle(living);
+            living.removeStatusEffect(ModStatusEffects.STALWART);
+            living.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2)));
         }
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int maxUseTime(ItemStack stack) {
         return 20;
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
+    public UseAction useAction(ItemStack stack) {
         return UseAction.SPEAR;
     }
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        if (MoonayHelper.hasEnt(ModEnchantments.CARVE, stack) && MoonayHelper.dontHasThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)) {
+        if (MoonayHelper.hasEnt(this, stack) && MoonayHelper.dontHasThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
         }
