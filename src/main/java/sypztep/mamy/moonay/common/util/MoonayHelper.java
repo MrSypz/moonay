@@ -52,19 +52,11 @@ public class MoonayHelper {
         return 0; // Default value if the status effect is not present
     }
     public static void carvesoulParticle(Entity entity) {
-        for (int phi = 0; phi <= 180; phi += 8) {
-            for (int theta = 0; theta < 360; theta += 8) {
-                double _3D = Math.toRadians(phi);
-                double _4D = Math.toRadians(theta);
-                double radius = 3 * 0.3;
-                double x = radius * Math.sin(_3D) * Math.cos(_4D) * 1.5;
-                double y = radius * Math.cos(_3D) * 1.5;
-                double z = radius * Math.sin(_3D) * Math.sin(_4D) * 1.5;
-                double vx = x * 0.3;
-                double vy = y * 0.3;
-                double vz = z * 0.3;
-                entity.getWorld().addParticle(ParticleTypes.SOUL, entity.getX() + x, entity.getY() + y + 0.5, entity.getZ() + z, vx, vy, vz);
-            }
+        for (int i = 0; i <= 360; i += 8) {
+                double circle = Math.toRadians(i);
+                double x = 3 * Math.cos(circle) * 1.5;
+                double z = 3* Math.sin(circle) * 1.5;
+                entity.getWorld().addParticle(ParticleTypes.COMPOSTER, entity.getX() + x, entity.getEyeY(), entity.getZ() + z, 0,0,0);
         }
     }
 }
