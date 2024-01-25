@@ -8,14 +8,23 @@ import net.minecraft.registry.Registry;
 import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
 import sypztep.mamy.moonay.common.enchantment.EmptyEnchantment;
+import sypztep.mamy.moonay.common.enchantment.StigmaEnchantment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModEnchantments {
-    public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    /**
+     * <Strong>Sword
+     */
+    public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    /**
+     * <Strong>Axe
+     */
+    public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static void init() {
         init(CARVE);
+        init(STIGMA);
     }
     private static void init(EmptyEnchantment enchantment) {
         String name = enchantment.getName(); // Assuming the getName method is implemented in your EmptyEnchantment class
