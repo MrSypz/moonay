@@ -6,8 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
+import net.minecraft.item.SwordItem;
 
 public class MoonayHelper {
     public static boolean hasEnt(Enchantment enchantment, ItemStack stack) {
@@ -22,6 +24,29 @@ public class MoonayHelper {
     public static boolean stillHasThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) != null;
     }
+    public static WeaponType checkIsItemCorrectUse(LivingEntity user, ItemStack stack) {
+        if (stack.getItem() instanceof AxeItem)
+            return WeaponType.AXE;
+         else if (stack.getItem()instanceof SwordItem)
+            return WeaponType.SWORD;
+        // Default case or unknown item type
+        return null;
+    }
+    public enum WeaponType {
+        AXE(AxeItem.class),
+        SWORD(SwordItem.class);
+
+        private final Class<? extends Item> itemClass;
+
+        WeaponType(Class<? extends Item> itemClass) {
+            this.itemClass = itemClass;
+        }
+
+        public Class<? extends Item> getItemClass() {
+            return itemClass;
+        }
+    }
+
     public static boolean hasStatusWithAmpValue(StatusEffect statusEffect, LivingEntity user, int lessthan) {
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
         if (instance != null)
@@ -48,14 +73,7 @@ public class MoonayHelper {
         }
         return 0; // Default value if the status effect is not present
     }
-    public static void carvesoulParticle(Entity entity) {
-        for (int i = 0; i <= 360; i += 8) {
-                double circle = Math.toRadians(i);
-                double x = 3 * Math.cos(circle) * 1.5;
-                double z = 3* Math.sin(circle) * 1.5;
-                entity.getWorld().addParticle(ParticleTypes.COMPOSTER, entity.getX() + x, entity.getEyeY(), entity.getZ() + z, 0,0,0);
-        }
-    }
+
     public static boolean hasSpecialEnchantment(ItemStack stack) {
         return getSpecialEnchantment(stack) != null;
     }
