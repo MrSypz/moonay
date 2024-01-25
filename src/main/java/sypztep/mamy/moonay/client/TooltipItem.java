@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -34,13 +35,12 @@ public class TooltipItem {
             }
         } else if (MoonayHelper.hasEnt(ModEnchantments.STIGMA,stack)) {
             if (client != null) {
-                String formattedAmount = String.format("%.2f", MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, client) + AbilityHelper.getMissingHealth(client, 0.05f));
+                double value = client.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+                String formattedAmount = String.format("%.2f", value * 0.25f + AbilityHelper.getMissingHealth(client,0.12f) * AbilityHelper.getHitAmount());
                 MutableFloat mutableFloat = new MutableFloat(formattedAmount);
-                if (MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, client) > 0)
-                    lines.add(Text.translatable(MoonayMod.MODID + ".modifytooltip.stigma").formatted(Formatting.GRAY)
-                            .append(Text.literal(mutableFloat.toString()).formatted(Formatting.RED)));
-                else lines.add(Text.translatable(MoonayMod.MODID + ".modifytooltip.stigma").formatted(Formatting.GRAY)
-                        .append(Text.literal(String.valueOf(MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, client))).formatted(Formatting.RED)));
+                lines.add(Text.translatable(MoonayMod.MODID + ".modifytooltip.stigma").formatted(Formatting.GRAY)
+                        .append(Text.literal(mutableFloat.toString()).formatted(Formatting.RED))
+                        .append(Text.translatable(MoonayMod.MODID + ".modifytooltip.stigma.desc")).formatted(Formatting.GRAY));
             }
         }
     }
