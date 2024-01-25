@@ -12,10 +12,13 @@ import net.minecraft.particle.DefaultParticleType;
 
 @Environment(EnvType.CLIENT)
 public class BloodwaveParticle extends ShockwaveParticle {
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
     BloodwaveParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider, double velocityX, double velocityY, double velocityZ) {
         super(world, x, y, z, spriteProvider, velocityX, velocityY, velocityZ);
-//        this.maxAge = 10;
-        this.scale = 6.75F;
+        this.maxAge = 14;
         this.gravityStrength = 0.0F;
         this.setVelocity(0D, 0D, 0D);
         this.setSpriteForAge(spriteProvider);
@@ -24,10 +27,6 @@ public class BloodwaveParticle extends ShockwaveParticle {
     @Override
     protected int getBrightness(float tint) {
         return 255;
-    }
-    @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Environment(EnvType.CLIENT)
