@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -14,7 +13,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.util.MoonayHelper;
+import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
 
 public class AddCarveSoulParticlePacket {
     public static final Identifier ID = MoonayMod.id("add_carvesoul_particle");
@@ -31,7 +30,7 @@ public class AddCarveSoulParticlePacket {
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null)
-                    MoonayHelper.carvesoulParticle(entity);
+                    CarveEnchantment.carvesoulParticle(entity);
             });
         }
     }
