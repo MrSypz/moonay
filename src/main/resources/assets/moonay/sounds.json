@@ -1,0 +1,20 @@
+{
+  "item.carve": {
+    "sounds": [
+      "moonay:item/carve"
+    ],
+    "subtitle": "subtitles.moonay.item.carve"
+  },
+  "item.stigma": {
+    "sounds": [
+      "moonay:item/stigma"
+    ],
+    "subtitle": "subtitles.moonay.item.stigma"
+  },
+  "item.stalwart": {
+    "sounds": [
+      "moonay:item/stalwart"
+    ],
+    "subtitle": "subtitles.moonay.item.stalwart"
+  }
+}
