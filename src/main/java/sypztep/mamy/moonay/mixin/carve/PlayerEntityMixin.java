@@ -7,13 +7,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
+import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
@@ -36,7 +36,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                         if (carvecount < carve) {
                             carvecount++;
                             if (carvecount == carve)
-                                target.playSound(SoundEvents.ENTITY_GOAT_HORN_BREAK, 1, (float) (0.01 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
+                                target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
                         }
                     }
                     ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.CARVE, 20 + carve * 4, carvecount));
