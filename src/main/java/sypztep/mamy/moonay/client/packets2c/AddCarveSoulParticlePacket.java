@@ -17,9 +17,10 @@ import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
 
 public class AddCarveSoulParticlePacket {
     public static final Identifier ID = MoonayMod.id("add_carvesoul_particle");
-    public static void send(ServerPlayerEntity player,int id) {
+    public static void send(ServerPlayerEntity player,int id,int power) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(id);
+        buf.writeInt(power);
         ServerPlayNetworking.send(player, ID, buf);
     }
     @Environment(EnvType.CLIENT)
@@ -27,10 +28,11 @@ public class AddCarveSoulParticlePacket {
         @Override
         public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
             int id = buf.readInt();
+            int pow = buf.readInt();
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null)
-                    CarveEnchantment.carvesoulParticle(entity);
+                    CarveEnchantment.carvesoulParticle(entity,pow);
             });
         }
     }
