@@ -16,14 +16,17 @@ import sypztep.mamy.moonay.common.MoonayMod;
 public class CarveSoulPacket {
 	public static final Identifier ID = MoonayMod.id("carvesoul");
 
-	public static void send() {
-		ClientPlayNetworking.send(ID, new PacketByteBuf(Unpooled.buffer()));
+	public static void send(int power) {
+		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+		buf.writeInt(power);
+		ClientPlayNetworking.send(ID, buf);
 	}
 	public static class Receiver implements ServerPlayNetworking.PlayChannelHandler {
 		@Override
 		public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+			int pow = buf.readInt();
 			if (player != null)
-				PlayerLookup.tracking(player).forEach(foundPlayer -> AddCarveSoulParticlePacket.send(foundPlayer, player.getId()));
+				PlayerLookup.tracking(player).forEach(foundPlayer -> AddCarveSoulParticlePacket.send(foundPlayer, player.getId(),pow));
 		}
 	}
 }
