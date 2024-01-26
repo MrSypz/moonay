@@ -6,6 +6,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import sypztep.mamy.moonay.common.MoonayMod;
+import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 import sypztep.mamy.moonay.common.util.AbilityHelper;
@@ -38,25 +41,36 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     }
 
     @Override
-    public void onFinishUsing(ItemStack stack, World world, LivingEntity living) {
+    public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
         int lvl = MoonayHelper.getEntLvl(this, stack);
-        if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, living)) {
-            int j = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, living);
-            living.heal(j + AbilityHelper.getMissingHealth(living,0.05f));
-            if (living.getWorld().isClient())
-                CarveSoulPacket.send();
-            carvesoulParticle(living);
-            living.removeStatusEffect(ModStatusEffects.STALWART);
-            living.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2)));
+        int amp = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, user);
+        float value = (float) user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, user)) {
+            MoonayMod.LOGGER.info(String.valueOf(value));
+            AbilityHelper.boxDamage(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),amp,value * 1.5f); //150% Damage base on player attack damage
+            user.heal(amp + AbilityHelper.getMissingHealth(user,0.05f));
+            if (user.getWorld().isClient())
+                CarveSoulPacket.send(amp);
+            carvesoulParticle(user,amp);
+            user.removeStatusEffect(ModStatusEffects.STALWART);
+            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2)));
         }
     }
-    public static void carvesoulParticle(Entity entity) {
+    public static void carvesoulParticle(Entity entity,int radius) {
         for (int i = 0; i <= 360; i += 8) {
             double circle = Math.toRadians(i);
-            double x = 3 * Math.cos(circle) * 1.5;
-            double z = 3* Math.sin(circle) * 1.5;
-            entity.getWorld().addParticle(ParticleTypes.COMPOSTER, entity.getX() + x, entity.getEyeY(), entity.getZ() + z, 0,0,0);
+            double x = radius * 0.2 * Math.cos(circle) * 1.5d;
+            double z = radius * 0.2 * Math.sin(circle) * 1.5d;
+
+            double xVec = x * 0.25d;
+            double zVec = z * 0.25d;
+
+            entity.getWorld().addParticle(ParticleTypes.SOUL, entity.getX() + x, entity.getEyeY() + z , entity.getZ() + z, xVec,0,zVec);
+            entity.getWorld().addParticle(ParticleTypes.SOUL, entity.getX() + x, entity.getEyeY() + (z * -1) , entity.getZ() + z, xVec,0,zVec);
+            entity.getWorld().addParticle(ParticleTypes.SOUL, entity.getX() + x, entity.getEyeY() + ((z * 2) * -1) , entity.getZ() + z, xVec,0,zVec);
+            entity.getWorld().addParticle(ParticleTypes.SOUL, entity.getX() + x, entity.getEyeY() + ((z * 2)) , entity.getZ() + z, xVec,0,zVec);
         }
+        entity.playSound(ModSoundEvents.ITEM_STALWART, 1, (float) (1 + ((LivingEntity) entity).getRandom().nextGaussian() / 20.0));
     }
 
     @Override
