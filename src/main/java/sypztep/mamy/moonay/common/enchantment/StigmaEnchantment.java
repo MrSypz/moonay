@@ -9,12 +9,14 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModParticles;
+import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.StigmaPacket;
 import sypztep.mamy.moonay.common.util.AbilityHelper;
@@ -40,23 +42,24 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     }
 
     @Override
-    public void onFinishUsing(ItemStack stack, World world, LivingEntity living) {
+    public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
         int lvl = MoonayHelper.getEntLvl(this, stack);
-        double value = living.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        AbilityHelper.boxDamage(living,living.getWorld().getDamageSources().playerAttack((PlayerEntity) living),3, (float) value * 1.5f); //150% Damage base on player attack damage
-        if (living.getWorld().isClient())
+        double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        AbilityHelper.boxDamage(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),3, (float) value * 1.5f); //150% Damage base on player attack damage
+        if (user.getWorld().isClient())
             StigmaPacket.send();
-        stigmaParticle(living);
-        living.heal(((float) value * 0.25f + AbilityHelper.getMissingHealth(living,0.12f)) * AbilityHelper.getHitAmount());
-        living.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STIGMA_COOLDOWN, 600 - (lvl * 20)));
+        stigmaParticle(user);
+        user.heal(((float) value * 0.25f + AbilityHelper.getMissingHealth(user,0.12f)) * AbilityHelper.getHitAmount());
+        user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STIGMA_COOLDOWN, 600 - (lvl * 20)));
     }
     public static void stigmaParticle(Entity entity) {
         entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getX(), entity.getY() + 0.1, entity.getZ(), 0,0,0);
+        entity.getWorld().playSound(null,entity.getBlockPos(), ModSoundEvents.ITEM_STIGMA, SoundCategory.PLAYERS,1,1f);
     }
 
     @Override
     public int maxUseTime(ItemStack stack) {
-        return 20;
+        return 10;
     }
 
     @Override
