@@ -9,7 +9,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public interface SpecialEnchantment {
-    void onFinishUsing(ItemStack stack, World world, LivingEntity living);
+    void onFinishUsing(ItemStack stack, World world, LivingEntity user);
 
     int maxUseTime(ItemStack stack);
 
