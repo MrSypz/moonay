@@ -1,9 +1,15 @@
 {
-  "moonay.modifytooltip.carve":"Heal Amount : ",
-  "moonay.modifytooltip.stigma":"Heal Amount : ",
-  "moonay.modifytooltip.stigma.desc":" + Foreach target hit",
+  "moonay.modifytooltip.carve":"Heal Amount ♥ : ",
+  "moonay.modifytooltip.stigma.desc":" (foreach target hit)",
+  "moonay.modifytooltip.stigma.desc.passive":"% ,It'll excute the target.",
+  "moonay.modifytooltip.stigma.passive":"If target health below ",
+
+
   "enchantment.moonay.carve" : "Carve",
   "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
+  "enchantment.moonay.stigma" : "Stigma",
+  "enchantment.moonay.stigma.desc" : "Can execute if target have low health and heal player,can rightclick to heal and deal damage aroud user",
+
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
   "effect.moonay.carve" : "Carve"

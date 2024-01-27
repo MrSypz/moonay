@@ -14,6 +14,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModParticles;
 import sypztep.mamy.moonay.common.init.ModSoundEvents;
@@ -42,15 +43,29 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     }
 
     @Override
+    public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        if (!target.getWorld().isClient()) {
+            if (target instanceof LivingEntity livingTarget) {
+                double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+                float missingHealthPercentage = (float) (0.014 * level);
+                if (livingTarget.getHealth() < livingTarget.getMaxHealth() * missingHealthPercentage) {
+                    target.timeUntilRegen = 0;
+                    target.damage(target.getWorld().getDamageSources().playerAttack((PlayerEntity) user), (float) (value * 1.25f));
+                }
+            }
+        }
+    }
+
+    @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
         int lvl = MoonayHelper.getEntLvl(this, stack);
         double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        AbilityHelper.boxDamage(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),3, (float) value * 1.5f); //150% Damage base on player attack damage
+        AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),3, (float) value * 1.5f,1.0f); //150% Damage base on player attack damage
         if (user.getWorld().isClient())
             StigmaPacket.send();
         stigmaParticle(user);
         user.heal(((float) value * 0.25f + AbilityHelper.getMissingHealth(user,0.12f)) * AbilityHelper.getHitAmount());
-        user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STIGMA_COOLDOWN, 600 - (lvl * 20)));
+        MoonayHelper.applyEffect(user,ModStatusEffects.STIGMA_COOLDOWN, 600 - (lvl * 20));
     }
     public static void stigmaParticle(Entity entity) {
         entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getX(), entity.getY() + 0.1, entity.getZ(), 0,0,0);

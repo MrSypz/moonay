@@ -15,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
@@ -44,16 +43,15 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
         int lvl = MoonayHelper.getEntLvl(this, stack);
         int amp = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, user);
-        float value = (float) user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
         if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, user)) {
-            MoonayMod.LOGGER.info(String.valueOf(value));
-            AbilityHelper.boxDamage(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),amp,value * 1.5f); //150% Damage base on player attack damage
+            AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),amp, (float) (value * 1.5f),1.0f); //150% Damage base on player attack damage
             user.heal(amp + AbilityHelper.getMissingHealth(user,0.05f));
             if (user.getWorld().isClient())
                 CarveSoulPacket.send(amp);
             carvesoulParticle(user,amp);
             user.removeStatusEffect(ModStatusEffects.STALWART);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2)));
+            MoonayHelper.applyEffect(user,ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2));
         }
     }
     public static void carvesoulParticle(Entity entity,int radius) {

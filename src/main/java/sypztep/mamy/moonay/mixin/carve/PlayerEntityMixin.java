@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                                 target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
                         }
                     }
-                    ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.CARVE, 20 + carve * 4, carvecount));
+                    MoonayHelper.applyEffect(living,ModStatusEffects.CARVE, 20 + carve * 4, carvecount);
                     ((ServerWorld) ((PlayerEntity) (Object) this).getWorld()).spawnParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
                 }
             }
