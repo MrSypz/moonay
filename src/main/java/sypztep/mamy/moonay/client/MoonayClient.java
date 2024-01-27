@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import sypztep.mamy.moonay.client.packets2c.AddCarveSoulParticlePacket;
 import sypztep.mamy.moonay.client.packets2c.AddStigmaParticlePacket;
+import sypztep.mamy.moonay.client.particle.WarpParticle;
 import sypztep.mamy.moonay.client.particle.BloodwaveParticle;
 import sypztep.mamy.moonay.client.particle.ShockwaveParticle;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
@@ -26,6 +27,8 @@ public class MoonayClient implements ClientModInitializer {
         ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
         particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
         particleRegistry.register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
+        particleRegistry.register(ModParticles.WARP, WarpParticle.Factory::new);
+
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             if (minecraft.player != null) {
                 if (MoonayHelper.hasEnt(ModEnchantments.STIGMA,minecraft.player.getMainHandStack()))

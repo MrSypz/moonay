@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -35,8 +36,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                         carvecount = markInstance.getAmplifier();
                         if (carvecount < carve) {
                             carvecount++;
-                            if (carvecount == carve)
+                            if (carvecount == carve) {
                                 target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
+                                MoonayHelper.applyEffect(living, StatusEffects.SLOWNESS, 40 + carve * 4, 0);
+                                ((ServerWorld) ((PlayerEntity) (Object) this).getWorld()).spawnParticles(ParticleTypes.ENCHANTED_HIT, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
+                            }
                         }
                     }
                     MoonayHelper.applyEffect(living,ModStatusEffects.CARVE, 20 + carve * 4, carvecount);

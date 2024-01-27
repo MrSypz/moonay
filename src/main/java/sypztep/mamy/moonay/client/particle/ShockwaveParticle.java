@@ -15,8 +15,8 @@ import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class ShockwaveParticle extends SpriteBillboardParticle {
-    private final SpriteProvider spriteProvider;
-    private static final Quaternionf QUATERNION = new Quaternionf(0F, -0.7F, 0.7F, 0F);
+    protected final SpriteProvider spriteProvider;
+    protected static final Quaternionf QUATERNION = new Quaternionf(0F, -0.7F, 0.7F, 0F);
 
     ShockwaveParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider, double velocityX, double velocityY, double velocityZ) {
         super(world, x, y , z, 0.0, 0.0, 0.0);
