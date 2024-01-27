@@ -23,6 +23,10 @@ repositories {
         name = 'Ladysnake Mods'
         url = 'https://maven.ladysnake.org/releases'
     }
+    maven {
+        name = "willBlRepositoryReleases"
+        url = "https://maven.willbl.dev/releases"
+    }
 }
 
 dependencies {
@@ -42,7 +46,10 @@ dependencies {
 
     modCompileOnly "maven.modrinth:sodium:${sodium_version}"
     modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
+
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+    modImplementation "com.ptsmods:devlogin:3.4.1"
 }
 
 processResources {
