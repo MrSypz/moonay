@@ -74,6 +74,9 @@ public class MoonayHelper {
     public static boolean hasSpecialEnchantment(ItemStack stack) {
         return getSpecialEnchantment(stack) != null;
     }
+    public static boolean hasCustomSpecial(ItemStack stack) {
+        return getCustomSpecial(stack) != null;
+    }
 
     public static SpecialEnchantment getSpecialEnchantment(ItemStack stack) {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
@@ -83,6 +86,15 @@ public class MoonayHelper {
         }
         return null;
     }
+    public static CustomSpecial getCustomSpecial(ItemStack stack) {
+        for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
+            if (enchantment instanceof CustomSpecial) {
+                return (CustomSpecial) enchantment;
+            }
+        }
+        return null;
+    }
+
     public static ItemStack getItemStackUnderCursor() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null) {
