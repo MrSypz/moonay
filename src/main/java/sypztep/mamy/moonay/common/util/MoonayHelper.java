@@ -1,6 +1,8 @@
 package sypztep.mamy.moonay.common.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -93,6 +95,20 @@ public class MoonayHelper {
             }
         }
         return null;
+    }
+    public static void drawtextcustom(DrawContext context, TextRenderer textRenderer, String text, int x, int y , int color, int board, boolean shadow){
+        context.drawText(textRenderer,text,x + 1,y,board,shadow);
+        context.drawText(textRenderer,text,x - 1,y,board,shadow);
+        context.drawText(textRenderer,text,x ,y + 1,board,shadow);
+        context.drawText(textRenderer,text,x ,y - 1,board,shadow);
+        context.drawText(textRenderer,text,x,y,color,shadow);
+    }
+    public static void drawtextcustom(DrawContext context, TextRenderer textRenderer, String text, int x, int y , int color, boolean shadow){
+        context.drawText(textRenderer,text,x + 1,y,color,shadow);
+        context.drawText(textRenderer,text,x - 1,y,color,shadow);
+        context.drawText(textRenderer,text,x ,y + 1,color,shadow);
+        context.drawText(textRenderer,text,x ,y - 1,color,shadow);
+        context.drawText(textRenderer,text,x,y,color,shadow);
     }
 
     public static ItemStack getItemStackUnderCursor() {

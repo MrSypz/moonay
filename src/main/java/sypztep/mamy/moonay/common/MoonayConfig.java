@@ -12,4 +12,6 @@ public class MoonayConfig implements ConfigData {
     public double carveModifier = -0.08D;
     @Comment("Movement speed multiply from stalwart.")
     public double stalwartSpeedModifier = 0.02D;
+    public boolean newCritOverhaul = true;
+    public boolean playerstats = true;
 }

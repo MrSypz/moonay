@@ -5,10 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sypztep.mamy.moonay.common.init.ModConfig;
-import sypztep.mamy.moonay.common.init.ModEnchantments;
-import sypztep.mamy.moonay.common.init.ModParticles;
-import sypztep.mamy.moonay.common.init.ModStatusEffects;
+import sypztep.mamy.moonay.common.init.*;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 import sypztep.mamy.moonay.common.packetc2s.StigmaPacket;
 
@@ -27,6 +24,7 @@ public class MoonayMod implements ModInitializer {
         ModEnchantments.init();
         ModStatusEffects.init();
         ModParticles.init();
+        ModEntityAttributes.init();
 
         ServerPlayNetworking.registerGlobalReceiver(CarveSoulPacket.ID,new CarveSoulPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(StigmaPacket.ID,new StigmaPacket.Receiver());

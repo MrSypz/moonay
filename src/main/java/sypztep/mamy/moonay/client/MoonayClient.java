@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import sypztep.mamy.moonay.client.packets2c.AddCarveSoulParticlePacket;
 import sypztep.mamy.moonay.client.packets2c.AddStigmaParticlePacket;
+import sypztep.mamy.moonay.client.packets2c.SyncCritS2CPacket;
 import sypztep.mamy.moonay.client.particle.WarpParticle;
 import sypztep.mamy.moonay.client.particle.BloodwaveParticle;
 import sypztep.mamy.moonay.client.particle.ShockwaveParticle;
@@ -23,6 +24,7 @@ public class MoonayClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(AddCarveSoulParticlePacket.ID, new AddCarveSoulParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddStigmaParticlePacket.ID, new AddStigmaParticlePacket.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(SyncCritS2CPacket.ID, new SyncCritS2CPacket.Receiver());
 
         ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
         particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);

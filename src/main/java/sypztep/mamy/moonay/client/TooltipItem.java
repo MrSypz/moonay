@@ -7,12 +7,14 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
+import sypztep.mamy.moonay.common.init.ModEntityAttributes;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.AbilityHelper;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
@@ -23,7 +25,6 @@ import java.util.*;
 public class TooltipItem {
     public static void onTooltipRender(ItemStack stack, List<Text> lines, TooltipContext context) {
         ClientPlayerEntity client = MinecraftClient.getInstance().player;
-
         if (MoonayHelper.hasEnt(ModEnchantments.CARVE, stack)) {
             addCarveTooltip(lines, client);
         } else if (MoonayHelper.hasEnt(ModEnchantments.STIGMA, stack)) {
@@ -46,7 +47,6 @@ public class TooltipItem {
             addFormattedTooltip(lines, 1f + MoonayHelper.getEntLvl(ModEnchantments.STIGMA,client.getMainHandStack()), "stigma.passive", "stigma.desc.passive");
         }
     }
-
     private static void addFormattedTooltip(List<Text> lines, double amount, String key, String... extraKeys) {
         String formattedAmount = String.format("%.2f", amount);
         MutableFloat mutableFloat = new MutableFloat(formattedAmount);

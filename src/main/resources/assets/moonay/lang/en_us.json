@@ -4,6 +4,16 @@
   "moonay.modifytooltip.stigma.desc.passive":"% ,It'll instant execute the target.",
   "moonay.modifytooltip.stigma.passive":"If target health below ",
 
+  "moonay.gui.player_info.header":"Player Info",
+  "moonay.gui.player_info.critchance":"Crit Chance",
+  "moonay.gui.player_info.critdamge":"Crit Damage",
+  "moonay.gui.player_info.damagereduce":"Damage Reduce",
+
+  "moonay.gui.player_info.tooltip.critchance":"Chance to proc a 'Critical Hit' default : 0%, Your chance",
+  "moonay.gui.player_info.tooltip.critdamage":"Deal 'Extra damage' default : 50%, Your extra damage",
+  "moonay.gui.player_info.tooltip.damagereduce":"Percent that negate damage income ",
+
+
 
   "enchantment.moonay.carve" : "Carve",
   "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
