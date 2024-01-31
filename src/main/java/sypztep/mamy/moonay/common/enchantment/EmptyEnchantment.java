@@ -12,6 +12,10 @@ public class EmptyEnchantment extends Enchantment {
     protected EmptyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
+    protected EmptyEnchantment(String name, Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+        super(weight, target, slotTypes);
+        this.name = name;
+    }
     /**
      * When <strong>Construce Create</strong>.
      *
