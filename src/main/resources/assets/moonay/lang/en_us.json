@@ -1,7 +1,7 @@
 {
   "moonay.modifytooltip.carve":"Heal Amount ♥ : ",
   "moonay.modifytooltip.stigma.desc":" (foreach target hit)",
-  "moonay.modifytooltip.stigma.desc.passive":"% ,It'll excute the target.",
+  "moonay.modifytooltip.stigma.desc.passive":"% ,It'll instant execute the target.",
   "moonay.modifytooltip.stigma.passive":"If target health below ",
 
 
