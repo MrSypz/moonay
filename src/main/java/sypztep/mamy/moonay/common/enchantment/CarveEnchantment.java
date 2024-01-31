@@ -8,32 +8,31 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import sypztep.mamy.moonay.common.MoonayMod;
+import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
-import sypztep.mamy.moonay.common.util.AbilityHelper;
-import sypztep.mamy.moonay.common.util.MoonayHelper;
-import sypztep.mamy.moonay.common.util.SpecialEnchantment;
+import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEnchantment {
+public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEnchantment, CustomSpecial {
+    private boolean soundPlayed = false;
     public CarveEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.setName("carve");
     }
 
-    @Override
-    public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        //Move to carve LivingEntityMixin
-    }
     @Override
     protected boolean canAccept(Enchantment other) {
         return super.canAccept(other) && other != Enchantments.SHARPNESS;
@@ -90,5 +89,41 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
         } else if (weaponType == MoonayHelper.WeaponType.AXE)
             return TypedActionResult.pass(stack);
         return TypedActionResult.pass(stack);
+    }
+
+    @Override
+    public void applyOnTarget(LivingEntity user, Entity target) {
+        int carve = MoonayHelper.getEntLvl(ModEnchantments.CARVE, user.getMainHandStack());
+        int carvecount = 0;
+
+        if (carve != 0 && target.isAttackable() && !target.getWorld().isClient && user.distanceTo(target) <= 6 && target instanceof LivingEntity living) {
+            if (living.getArmor() > 0) {
+                StatusEffectInstance markInstance = living.getStatusEffect(ModStatusEffects.CARVE);
+
+                if (markInstance != null) {
+                    carvecount = Math.min(markInstance.getAmplifier() + 1, carve);
+
+                    if (carvecount == carve && !soundPlayed) {
+                        target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1 + living.getRandom().nextGaussian() / 10.0));
+                        soundPlayed = true; // Set the flag to true once the sound is played
+                        MoonayHelper.applyEffect(living, StatusEffects.SLOWNESS, 40 + carve * 4, 0);
+                        ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.ENCHANTED_HIT, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
+                    }
+                } else soundPlayed = false;
+
+                MoonayHelper.applyEffect(living, ModStatusEffects.CARVE, 20 + carve * 4, carvecount);
+                ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
+            }
+        }
+    }
+
+    @Override
+    public void applyOnUser(LivingEntity user) {
+        int carvelvl = MoonayHelper.getEntLvl(ModEnchantments.CARVE, user.getMainHandStack());
+
+        if (carvelvl != 0) {
+            int carvecount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, carvelvl);
+            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + carvelvl * 12, carvecount));
+        }
     }
 }
