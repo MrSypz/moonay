@@ -1,11 +1,9 @@
-package sypztep.mamy.moonay.mixin.vanillachange;
+package sypztep.mamy.moonay.mixin.vanillachange.newCrit;
 
-import com.mojang.serialization.Dynamic;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.damage.DamageSource;

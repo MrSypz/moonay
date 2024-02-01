@@ -1,6 +1,5 @@
-package sypztep.mamy.moonay.mixin.util;
+package sypztep.mamy.moonay.mixin.vanillachange.newCrit.util;
 
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

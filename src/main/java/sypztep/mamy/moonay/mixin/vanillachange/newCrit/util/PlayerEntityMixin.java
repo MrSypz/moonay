@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.util;
+package sypztep.mamy.moonay.mixin.vanillachange.newCrit.util;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
