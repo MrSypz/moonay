@@ -1,5 +1,6 @@
 package sypztep.mamy.moonay.mixin.vanillachange.newCrit;
 
+import it.unimi.dsi.fastutil.floats.FloatConsumer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,8 @@ import sypztep.mamy.moonay.common.data.CritOverhaulConfig;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEntityAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
@@ -29,36 +32,65 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
     protected PlayerEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
-
-    /**
-     * This one get from anyppart
-     */
     @Unique
-    private String moonay$getEquipItemAndHold() {
+    private List<String> getItemIdsFromEquippedSlots() {
+        List<String> itemIds = new ArrayList<>();
         EquipmentSlot[] slots = EquipmentSlot.values();
 
         for (EquipmentSlot slot : slots) {
             if (slot != EquipmentSlot.OFFHAND) {
                 ItemStack itemStack = this.getEquippedStack(slot);
                 if (!itemStack.isEmpty()) {
-                    return Registries.ITEM.getId(itemStack.getItem()).toString();
+                    String itemId = Registries.ITEM.getId(itemStack.getItem()).toString();
+                    itemIds.add(itemId);
                 }
             }
         }
-        return ""; // Return an empty string or handle accordingly if no equipped items found
+
+        return itemIds;
     }
 
+    // Usage in your main logic
+
+
+
+    /**
+     * This one get from anyppart
+     */
+    @Unique
+    private void forEachItemExceptOffHand(FloatConsumer critChanceConsumer) {
+        if (!this.getWorld().isClient()) {
+            EquipmentSlot[] slots = EquipmentSlot.values();
+
+            for (EquipmentSlot equipmentSlot : slots) {
+                if (equipmentSlot != EquipmentSlot.OFFHAND) {
+                    ItemStack itemStack = this.getEquippedStack(equipmentSlot);
+                    String itemName = Registries.ITEM.getId(itemStack.getItem()).toString();
+                    if (!itemStack.isEmpty()) {
+                        float critChance = critOverhaulConfig.getCritDataForItem(itemName).getCritChance();
+                        critChanceConsumer.accept(critChance);
+                    }
+                }
+            }
+        }
+    }
     /**
      * Add Crit Chance Part
      */
     public float moonay$getCritRateFromEquipped() {
         if (ModConfig.CONFIG.newCritOverhaul) {
-            MutableFloat additionalRate = new MutableFloat();
+            MutableFloat critRate = new MutableFloat();
+            //Add from attribute
+            critRate.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE)).getValue()); //Get From attribute
+            //Add from item now stackable
+            List<String> equippedItemIds = getItemIdsFromEquippedSlots();
+            for (String itemId : equippedItemIds) {
+                critRate.add(critOverhaulConfig.getCritDataForItem(itemId).getCritChance());
+            }
 
-            additionalRate.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE)).getValue());//Get From attribute
 
-            additionalRate.add(critOverhaulConfig.getCritDataForItem(moonay$getEquipItemAndHold()).getCritChance()); //Get From Config
-            return additionalRate.floatValue();
+
+            return critRate.floatValue();
         }
         return 0;
     }
@@ -68,11 +100,15 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      */
     public float moonay$getCritDamageFromEquipped() {
         if (ModConfig.CONFIG.newCritOverhaul) {
-            MutableFloat additionalDamage = new MutableFloat();
-            additionalDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue()); //Get From attribute
+            MutableFloat critDamage = new MutableFloat();
 
-            additionalDamage.add(critOverhaulConfig.getCritDataForItem(moonay$getEquipItemAndHold()).getCritDamage()); //Get From Config
-            return additionalDamage.floatValue();
+            critDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue()); //Get From attribute
+            //Add from item now stackable
+            List<String> equippedItemIds = getItemIdsFromEquippedSlots();
+            for (String itemId : equippedItemIds) {
+                critDamage.add(critOverhaulConfig.getCritDataForItem(itemId).getCritDamage());
+            }
+            return critDamage.floatValue();
         }
         return 0;
     }
