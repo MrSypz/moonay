@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.vanillachange.inventory.client;
+package sypztep.mamy.moonay.mixin.vanillachange.newCrit.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,7 +14,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -77,15 +76,13 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                 if (index != 0 && isMouseOverText(mouseX, mouseY, i + xOffset, j + yOffset, textRenderer.getWidth(text), 10)) {
                     List<Text> tooltipText = new ArrayList<>();
                     // Add individual tooltip lines for other elements
-                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "critchance").append(String.format(": %.2f%%", getCritRate(player))).formatted(Formatting.GRAY));
-                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "critdamage").append(String.format(": %.2f%%", getCritDamage(player))).formatted(Formatting.GRAY));
-                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "damagereduce").append(String.format(": %.2f%%", reduce)).formatted(Formatting.GRAY));
+                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "critchance"));
+                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "critdamage"));
+                    tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "damagereduce"));
                     tooltipText.add(Text.translatable(MoonayMod.MODID + ".gui.player_info.tooltip." + "empty"));
-                    if (index < tooltipText.size()) {
-                        int x = mouseX - 5;
-                        int y = mouseY + 2;
-                        context.drawTooltip(textRenderer, tooltipText.get(index - 1), x, y);
-                    }
+                    int x = mouseX - 5;
+                    int y = mouseY + 2;
+                    context.drawTooltip(textRenderer, tooltipText.get(index - 1), x, y);
                 }
                 yOffset += offset;
                 xOffset = xoffset2;
@@ -112,7 +109,6 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     private float getCritRate(ClientPlayerEntity player) {
         if (player instanceof NewCriticalOverhaul invoker)
             return invoker.getTotalCritRate();
-
         return 0.0F; // Return a default value if the player is not a LivingEntityInvoker
     }
     @Unique
