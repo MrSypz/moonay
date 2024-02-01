@@ -6,13 +6,13 @@
   "mixins": [
     "enchantment.ItemMixin",
     "enchantment.PlayerEntityMixin",
-    "util.LivingEntityMixin",
-    "util.PlayerEntityMixin",
-    "vanillachange.LivingEntityMixin",
-    "vanillachange.PlayerEntityMixin"
+    "vanillachange.newCrit.util.LivingEntityMixin",
+    "vanillachange.newCrit.util.PlayerEntityMixin",
+    "vanillachange.newCrit.LivingEntityMixin",
+    "vanillachange.newCrit.PlayerEntityMixin"
   ],
   "client": [
-    "vanillachange.inventory.client.InventoryScreenMixin"
+    "vanillachange.newCrit.client.InventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
