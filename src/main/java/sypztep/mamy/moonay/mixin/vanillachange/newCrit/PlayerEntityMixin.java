@@ -32,6 +32,9 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
     protected PlayerEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
+    /**
+     *
+     */
     @Unique
     private List<String> getItemIdsFromEquippedSlots() {
         List<String> itemIds = new ArrayList<>();
@@ -49,31 +52,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
 
         return itemIds;
     }
-
-    // Usage in your main logic
-
-
-
-    /**
-     * This one get from anyppart
-     */
-    @Unique
-    private void forEachItemExceptOffHand(FloatConsumer critChanceConsumer) {
-        if (!this.getWorld().isClient()) {
-            EquipmentSlot[] slots = EquipmentSlot.values();
-
-            for (EquipmentSlot equipmentSlot : slots) {
-                if (equipmentSlot != EquipmentSlot.OFFHAND) {
-                    ItemStack itemStack = this.getEquippedStack(equipmentSlot);
-                    String itemName = Registries.ITEM.getId(itemStack.getItem()).toString();
-                    if (!itemStack.isEmpty()) {
-                        float critChance = critOverhaulConfig.getCritDataForItem(itemName).getCritChance();
-                        critChanceConsumer.accept(critChance);
-                    }
-                }
-            }
-        }
-    }
     /**
      * Add Crit Chance Part
      */
@@ -87,9 +65,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
             for (String itemId : equippedItemIds) {
                 critRate.add(critOverhaulConfig.getCritDataForItem(itemId).getCritChance());
             }
-
-
-
             return critRate.floatValue();
         }
         return 0;
