@@ -1,5 +1,8 @@
 package sypztep.mamy.moonay.common.util;
 
+import net.minecraft.entity.player.PlayerEntity;
+import sypztep.mamy.moonay.common.init.ModEnchantments;
+
 import java.util.Random;
 
 public interface NewCriticalOverhaul {
@@ -23,34 +26,41 @@ public interface NewCriticalOverhaul {
     default NewCriticalOverhaul storeCrit() {
         return this;
     }
-
     default void moonay$setCritRate(float critRate) {
     }
-
     default void moonay$setCritDamage(float critDamage) {
     }
-
     default float moonay$getCritRate() { //Crit rate = 0
         return 0.0F;
     }
-
     default float moonay$getCritRateFromEquipped() {
-        return 0.0F;
+        return 0.0F; //Crit rate = 0%
     }
-
-    default float getTotalCritRate() {
-        return this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+    default float moonay$getCritDamage() {
+        return 50.0F; //Crit damage = 50%
     }
-
-    default float moonay$getCritDamage() {//Crit damage = 50%
-        return 50.0F;
-    }
-
     default float moonay$getCritDamageFromEquipped() {
         return 0.0F;
     }
-
+    default float getTotalCritRate() {
+        PlayerEntity player = (PlayerEntity) this;
+        float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+        if (MoonayHelper.hasEnt(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack()))
+            return Math.min(100,totalCritRate);
+        return totalCritRate;
+    }
     default float getTotalCritDamage() {
-        return this.moonay$getCritDamage() + this.moonay$getCritDamageFromEquipped();
+        PlayerEntity player = (PlayerEntity) this;
+        float totalCritDamage = this.moonay$getCritDamage() + this.moonay$getCritDamageFromEquipped();
+        if (MoonayHelper.hasEnt(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack())) {
+            int amp = MoonayHelper.getEntLvl(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack());
+            //not use getTotalCritRate it decrease value
+            float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+            float additionalCritDamage = 0.0F;
+            if (totalCritRate > 100.0F)
+                additionalCritDamage = amp * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F));
+            return additionalCritDamage + totalCritDamage;
+        }
+        return totalCritDamage;
     }
 }
