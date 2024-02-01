@@ -4,7 +4,7 @@ import java.util.Random;
 
 public interface NewCriticalOverhaul {
 
-    void moonay$setCritical(boolean flag);
+    void moonay$setCritical(boolean setCrit);
 
     boolean moonay$isCritical();
     default float calculateCritDamage(float amount) {
