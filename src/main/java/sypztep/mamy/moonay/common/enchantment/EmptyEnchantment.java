@@ -9,12 +9,14 @@ public class EmptyEnchantment extends Enchantment {
      * This <strong>String</strong> is define a name of enchantment.
      */
     protected String name;
+    protected int level;
     protected EmptyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
-    public EmptyEnchantment(String name, Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public EmptyEnchantment(String name, int lvl, Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.name = name;
+        this.level = lvl;
     }
     /**
      * When <strong>Construce Create</strong>.
@@ -28,6 +30,12 @@ public class EmptyEnchantment extends Enchantment {
     protected void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public int getMaxLevel() {
+        return this.level;
+    }
+
     @Override
     public int getMinPower(int level) {
         return level * 25;
