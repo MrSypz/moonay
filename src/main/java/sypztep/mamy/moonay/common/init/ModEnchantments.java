@@ -6,17 +6,14 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
-import sypztep.mamy.moonay.common.enchantment.EmptyEnchantment;
-import sypztep.mamy.moonay.common.enchantment.StigmaEnchantment;
-import sypztep.mamy.moonay.common.enchantment.SwordEnchantment;
+import sypztep.mamy.moonay.common.enchantment.*;
 
 public class ModEnchantments {
     /**
      * <Strong>Sword
      */
     public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment HEXA_EXPERIMENT = new SwordEnchantment("hexa_experiment", Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment HEXA_EXPERIMENT = new EmptyEnchantment("hexa_experiment",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     /**
      * <Strong>Axe
      */
