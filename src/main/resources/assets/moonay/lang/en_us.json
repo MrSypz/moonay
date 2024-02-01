@@ -9,11 +9,9 @@
   "moonay.gui.player_info.critdamge":"Crit Damage",
   "moonay.gui.player_info.damagereduce":"Damage Reduce",
 
-  "moonay.gui.player_info.tooltip.critchance":"Chance to proc a 'Critical Hit' default : 0%, Your chance",
-  "moonay.gui.player_info.tooltip.critdamage":"Deal 'Extra damage' default : 50%, Your extra damage",
-  "moonay.gui.player_info.tooltip.damagereduce":"Percent that negate damage income ",
-
-
+  "moonay.gui.player_info.tooltip.critchance":"Indicates the likelihood of landing a 'Critical Hit.",
+  "moonay.gui.player_info.tooltip.critdamage":"Represents the additional damage dealt with a 'Critical Hit'",
+  "moonay.gui.player_info.tooltip.damagereduce":"The percentage of incoming damage that is negated.",
 
   "enchantment.moonay.carve" : "Carve",
   "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
@@ -23,5 +21,9 @@
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
   "effect.moonay.carve" : "Carve",
-  "effect.moonay.stigma_cooldown" : "Stigma Cooldown"
+  "effect.moonay.stigma_cooldown" : "Stigma Cooldown",
+
+  "text.autoconfig.moonay.title": "Moonay Config",
+  "text.autoconfig.moonay.option.newCritOverhaul": "New Critical Overhaul",
+  "text.autoconfig.moonay.option.playerstats": "Player stats"
 }
