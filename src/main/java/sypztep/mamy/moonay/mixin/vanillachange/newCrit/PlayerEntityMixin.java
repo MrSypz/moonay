@@ -1,8 +1,8 @@
 package sypztep.mamy.moonay.mixin.vanillachange.newCrit;
 
-import it.unimi.dsi.fastutil.floats.FloatConsumer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -58,8 +58,13 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
     public float moonay$getCritRateFromEquipped() {
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat critRate = new MutableFloat();
-            //Add from attribute
+            /*
+            ATTRIBUTE
+             */
+            //CritChance
             critRate.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE)).getValue()); //Get From attribute
+            //Luck
+            critRate.add(Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_LUCK)).getValue() * 5); //Get From attribute
             //Add from item now stackable
             List<String> equippedItemIds = getItemIdsFromEquippedSlots();
             for (String itemId : equippedItemIds) {
