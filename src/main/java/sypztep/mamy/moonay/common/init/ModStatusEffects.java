@@ -14,12 +14,12 @@ public class ModStatusEffects {
     public static final StatusEffect CARVE = new MarkStatusEffect(StatusEffectCategory.HARMFUL)
             .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,
                     "9f66ca04-e8c5-4225-952c-665ccb332fe7",
-                    ModConfig.CONFIG.carveModifier,
+                    -0.08D,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final StatusEffect STALWART = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL)
             .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
                     "775287b5-79b9-48f4-9afe-ab8fd2cfd35f",
-                    ModConfig.CONFIG.stalwartSpeedModifier,
+                    0.02D,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final StatusEffect STALWART_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
     public static final StatusEffect STIGMA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
