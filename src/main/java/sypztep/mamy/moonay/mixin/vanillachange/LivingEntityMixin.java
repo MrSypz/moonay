@@ -1,9 +1,11 @@
 package sypztep.mamy.moonay.mixin.vanillachange;
 
+import com.mojang.serialization.Dynamic;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.damage.DamageSource;
@@ -23,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
 
 import java.util.Random;
@@ -67,25 +70,26 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
 
     @ModifyVariable(method = {"applyDamage"},at = @At("HEAD"),ordinal = 0,argsOnly = true)
     private float applyDamageFirst(float amount, DamageSource source) {
-        if (!this.getWorld().isClient()) {
-            Entity entity;
-            entity = source.getAttacker();
-            if (entity instanceof NewCriticalOverhaul invoker) {
-                entity = source.getSource();
-                if (entity instanceof PersistentProjectileEntity projectile) {
-                    invoker.storeCrit().moonay$setCritical(projectile.isCritical());
-                    amount = invoker.calculateCritDamage(amount);
-                    return amount;
+        if (ModConfig.CONFIG.newCritOverhaul) {
+            if (!this.getWorld().isClient()) {
+                Entity entity;
+                entity = source.getAttacker();
+                if (entity instanceof NewCriticalOverhaul invoker) {
+                    entity = source.getSource();
+                    if (entity instanceof PersistentProjectileEntity projectile) {
+                        invoker.storeCrit().moonay$setCritical(projectile.isCritical());
+                        amount = invoker.calculateCritDamage(amount);
+                        return amount;
+                    }
+                }
+
+                if (!(source.getAttacker() instanceof PlayerEntity)) {
+                    entity = source.getAttacker();
+                    if (entity instanceof NewCriticalOverhaul invoker)
+                        amount = invoker.calculateCritDamage(amount);
                 }
             }
-
-            if (!(source.getAttacker() instanceof PlayerEntity)) {
-                entity = source.getAttacker();
-                if (entity instanceof NewCriticalOverhaul invoker)
-                    amount = invoker.calculateCritDamage(amount);
-            }
         }
-
         return amount;
     }
 

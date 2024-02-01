@@ -46,7 +46,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Inject(method = "drawBackground", at = @At(value = "RETURN"))
     public void drawBackgroundMixin(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo info) {
-        if (!ModConfig.CONFIG.playerstats)
+        if (!ModConfig.CONFIG.playerstats || !ModConfig.CONFIG.newCritOverhaul)
             return;
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         double reduce = calculateDamageReduction(Objects.requireNonNull(player).getArmor(),player.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
