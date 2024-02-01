@@ -22,11 +22,10 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
     private boolean docrit(boolean crit) {
         if (ModConfig.CONFIG.newCritOverhaul) {
             boolean iscrit = this.moonay$isCritical();
-            if (iscrit) {
+            if (iscrit)
                 crit = true;
-            } else if (crit) {
+             else if (crit)
                 this.moonay$setCritical(true);
-            }
             return crit;
         }
         return crit;

@@ -30,7 +30,6 @@ import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InventoryScreen.class)
@@ -47,7 +46,13 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     public InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
-
+    /**
+     * Draws player information on the screen, including crit chance, crit damage, and damage reduction.
+     *
+     * @param context  The drawing context.
+     * @param mouseX   The x-coordinate of the mouse.
+     * @param mouseY   The y-coordinate of the mouse.
+     */
     @Inject(method = "drawBackground", at = @At(value = "RETURN"))
     public void drawBackgroundMixin(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo info) {
         if (!ModConfig.CONFIG.playerstats || !ModConfig.CONFIG.newCritOverhaul) {
@@ -59,7 +64,14 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
             drawPlayerInfo(context, player, mouseX, mouseY);
         }
     }
-
+    /**
+     * Draws player information, including crit chance, crit damage, and damage reduction.
+     *
+     * @param context  The drawing context.
+     * @param player   The client player entity.
+     * @param mouseX   The x-coordinate of the mouse.
+     * @param mouseY   The y-coordinate of the mouse.
+     */
     @Unique
     private void drawPlayerInfo(DrawContext context, ClientPlayerEntity player, int mouseX, int mouseY) {
         double reduce = calculateDamageReduction(player.getArmor(), player.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
@@ -111,18 +123,9 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     }
     @Unique
     public double calculateDamageReduction(int armorPoints, double armorToughness) {
-        // The base damage reduction is 80% when armor is at 20 points
-        double baseDamageReduction = 80.0;
-
-        // Calculate the effective damage reduction based on armor points
-        double effectiveDamageReduction = baseDamageReduction * (armorPoints / 20.0);
-
-        // Adjust the effective damage reduction based on armor toughness
+        double effectiveDamageReduction = 80.0 * (armorPoints / 20.0);
         effectiveDamageReduction += armorToughness;
-
-        // Cap the effective damage reduction at 80%
         effectiveDamageReduction = Math.min(80.0, effectiveDamageReduction);
-
         return effectiveDamageReduction;
     }
     @Unique

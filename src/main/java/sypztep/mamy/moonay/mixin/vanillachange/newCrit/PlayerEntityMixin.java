@@ -33,7 +33,10 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         super(type, world);
     }
     /**
+     * Retrieves a list of item IDs from the equipped slots of the entity.
+     * Excludes the offhand slot.
      *
+     * @return A list of item IDs from the equipped slots.
      */
     @Unique
     private List<String> getItemIdsFromEquippedSlots() {
@@ -53,14 +56,17 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         return itemIds;
     }
     /**
-     * Add Crit Chance Part
+     * Retrieves the total crit chance from equipped items, attributes, and other sources.
+     * Takes into account the new crit overhaul configuration.
+     *
+     * @return The total crit chance.
      */
     public float moonay$getCritRateFromEquipped() {
+        //TODO: Have it mor congigable
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat critRate = new MutableFloat();
-            /*
-            ATTRIBUTE
-             */
+
+            //ATTRIBUTE
             //CritChance
             critRate.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE)).getValue()); //Get From attribute
             //Luck
@@ -76,9 +82,12 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
     }
 
     /**
-     * Add Crit Damage Part
+     * Retrieves the total crit damage from equipped items and attributes, considering the new crit overhaul configuration.
+     *
+     * @return The total crit damage.
      */
     public float moonay$getCritDamageFromEquipped() {
+        //TODO: Have it mor congigable
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat critDamage = new MutableFloat();
 
@@ -93,23 +102,36 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         return 0;
     }
 
-    @ModifyVariable(method = {"attack"},at = @At(value = "STORE",ordinal = 1),ordinal = 0)
-    private float storedamage(float f) {
+    /**
+     * Modifies the damage value before it's stored, considering the new crit overhaul configuration.
+     *
+     * @param original The original damage value.
+     * @return The modified damage value.
+     */
+    @ModifyVariable(method = "attack", at = @At(value = "STORE", ordinal = 1), ordinal = 0)
+    private float storedamage(float original) {
         if (ModConfig.CONFIG.newCritOverhaul) {
-            float f1 = this.calculateCritDamage(f);
-            this.alreadyCalculated = f != f1;
-            return f1;
+            float modifiedDamage = this.calculateCritDamage(original);
+            this.alreadyCalculated = original != modifiedDamage;
+            return modifiedDamage;
         }
-        return f;
+        return original;
     }
 
-    @ModifyConstant(method = {"attack"},constant = {@Constant(floatValue = 1.5F)})
+    /**
+     * Modifies the constant representing the default critical damage value.
+     *
+     * @param defaultcritdmg The default critical damage value.
+     * @return The modified critical damage value.
+     */
+    @ModifyConstant(method = "attack", constant = @Constant(floatValue = 1.5F))
     private float storevanillacritdmg(float defaultcritdmg) {
         if (ModConfig.CONFIG.newCritOverhaul) {
-            float f = this.alreadyCalculated ? 1.0F : (this.storeCrit().moonay$isCritical() ? this.getTotalCritDamage() / 100.0F + 1.0F : defaultcritdmg);
+            float modifiedCritDamage = this.alreadyCalculated ? 1.0F : (this.storeCrit().moonay$isCritical() ? this.getTotalCritDamage() / 100.0F + 1.0F : defaultcritdmg);
             this.alreadyCalculated = false;
-            return f;
+            return modifiedCritDamage;
         }
         return defaultcritdmg;
     }
+
 }

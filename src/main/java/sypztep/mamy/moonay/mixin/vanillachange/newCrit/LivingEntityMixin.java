@@ -65,26 +65,32 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
         if (nbt.contains("CritDamage"))
             this.moonay$setCritDamage(nbt.getFloat("CritDamage"));
     }
-
-    @ModifyVariable(method = {"applyDamage"},at = @At("HEAD"),ordinal = 0,argsOnly = true)
+    /**
+     * Modifies the damage amount before applying it, considering the new crit overhaul configuration.
+     *
+     * @param amount The original damage amount.
+     * @param source The source of the damage.
+     * @return The modified damage amount.
+     */
+    @ModifyVariable(method = "applyDamage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float applyDamageFirst(float amount, DamageSource source) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
-            if (!this.getWorld().isClient()) {
-                Entity entity;
-                entity = source.getAttacker();
-                if (entity instanceof NewCriticalOverhaul invoker) {
-                    entity = source.getSource();
-                    if (entity instanceof PersistentProjectileEntity projectile) {
-                        invoker.storeCrit().moonay$setCritical(projectile.isCritical());
-                        amount = invoker.calculateCritDamage(amount);
-                        return amount;
-                    }
-                }
+        if (ModConfig.CONFIG.newCritOverhaul && !this.getWorld().isClient()) {
+            Entity attacker = source.getAttacker();
 
-                if (!(source.getAttacker() instanceof PlayerEntity)) {
-                    entity = source.getAttacker();
-                    if (entity instanceof NewCriticalOverhaul invoker)
-                        amount = invoker.calculateCritDamage(amount);
+            if (attacker instanceof NewCriticalOverhaul invoker) {
+                Entity projectileSource = source.getSource();
+
+                if (projectileSource instanceof PersistentProjectileEntity projectile) {
+                    invoker.storeCrit().moonay$setCritical(projectile.isCritical());
+                    amount = invoker.calculateCritDamage(amount);
+                    return amount;
+                }
+            }
+
+            if (!(source.getAttacker() instanceof PlayerEntity)) {
+                if (attacker instanceof NewCriticalOverhaul invoker) {
+                    amount = invoker.calculateCritDamage(amount);
+                    return amount;
                 }
             }
         }
