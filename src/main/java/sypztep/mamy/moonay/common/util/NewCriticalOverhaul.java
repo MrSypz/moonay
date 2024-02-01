@@ -53,12 +53,12 @@ public interface NewCriticalOverhaul {
         PlayerEntity player = (PlayerEntity) this;
         float totalCritDamage = this.moonay$getCritDamage() + this.moonay$getCritDamageFromEquipped();
         if (MoonayHelper.hasEnt(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack())) {
-            int amp = MoonayHelper.getEntLvl(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack());
+            int lvl = MoonayHelper.getEntLvl(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack());
             //not use getTotalCritRate it decrease value
             float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
             float additionalCritDamage = 0.0F;
             if (totalCritRate > 100.0F)
-                additionalCritDamage = amp * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F));
+                additionalCritDamage = lvl * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
             return additionalCritDamage + totalCritDamage;
         }
         return totalCritDamage;
