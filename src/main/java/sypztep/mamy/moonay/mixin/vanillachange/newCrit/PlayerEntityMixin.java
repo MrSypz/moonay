@@ -45,6 +45,10 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
             }
         }
     }
+
+    /**
+     * Add Crit Chance Part
+     */
     public float moonay$getCritRateFromEquipped() {
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat additionalRate = new MutableFloat();
@@ -57,6 +61,9 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         }
         return 0;
     }
+    /**
+     * Add Crit Damage Part
+     */
     public float moonay$getCritDamageFromEquipped() {
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat additionalDamage = new MutableFloat();
