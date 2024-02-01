@@ -52,10 +52,6 @@ public class CritOverhaulConfig {
             e.printStackTrace();
         }
     }
-
-    public CritOverhaulData getCritChanceData() {
-        return critOverhaulData;
-    }
     public CritOverhaulEntry getCritDataForItem(String itemName) {
         return critOverhaulData.getItems().getOrDefault(itemName, new CritOverhaulEntry(0.0f, 0.0f));
     }
