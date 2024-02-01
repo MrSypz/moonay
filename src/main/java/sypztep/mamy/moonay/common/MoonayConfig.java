@@ -8,10 +8,8 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 @Config.Gui.Background("minecraft:textures/block/dirt.png")
 
 public class MoonayConfig implements ConfigData {
-    @Comment("How many percent that gonna stripe armor out.")
-    public double carveModifier = -0.08D;
-    @Comment("Movement speed multiply from stalwart.")
-    public double stalwartSpeedModifier = 0.02D;
+    @Comment("New Crit feature overhaul.")
     public boolean newCritOverhaul = true;
+    @Comment("UI to show stats when open inventory.")
     public boolean playerstats = true;
 }
