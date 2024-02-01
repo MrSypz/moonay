@@ -71,7 +71,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
 
             this.forEachItemExceptOffHand((itemStack) -> {
                 additionalDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue());
-//            additionalDamage.add(Critical.CRIT_DAMAGE.getPercent(EnchantmentHelper.getLevel(Critical.CRIT_DAMAGE, itemStack)));
             });
             return additionalDamage.floatValue();
         }
