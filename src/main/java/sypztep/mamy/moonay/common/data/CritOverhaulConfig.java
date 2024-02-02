@@ -3,6 +3,7 @@ package sypztep.mamy.moonay.common.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import sypztep.mamy.moonay.common.MoonayMod;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -45,9 +46,14 @@ public class CritOverhaulConfig {
             Path configFilePath = Paths.get(CONFIG_FILE_PATH);
             Files.createDirectories(configFilePath.getParent());
 
-            try (Writer writer = new FileWriter(configFilePath.toFile())) {
-                gson.toJson(data, writer);
-            }
+            // Check if the file already exists
+            if (!Files.exists(configFilePath)) {
+                try (Writer writer = new FileWriter(configFilePath.toFile())) {
+                    gson.toJson(data, writer);
+                }
+            } else
+                MoonayMod.LOGGER.info("File already exists. Skipping save.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
