@@ -13,14 +13,14 @@ public class ModEnchantments {
      * <Strong>Sword
      */
     public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment HEXA_EXPERIMENT = new EmptyEnchantment("hexa_experiment",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment DECI_EXPERIMENT = new EmptyEnchantment("deci_experiment",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     /**
      * <Strong>Axe
      */
     public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static void init() {
         init(CARVE);
-        init(HEXA_EXPERIMENT);
+        init(DECI_EXPERIMENT);
         init(STIGMA);
     }
     private static void init(EmptyEnchantment enchantment) {
