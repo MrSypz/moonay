@@ -45,15 +45,15 @@ public interface NewCriticalOverhaul {
     default float getTotalCritRate() {
         PlayerEntity player = (PlayerEntity) this;
         float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
-        if (MoonayHelper.hasEnt(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack()))
+        if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack()))
             return Math.min(100,totalCritRate);
         return totalCritRate;
     }
     default float getTotalCritDamage() {
         PlayerEntity player = (PlayerEntity) this;
         float totalCritDamage = this.moonay$getCritDamage() + this.moonay$getCritDamageFromEquipped();
-        if (MoonayHelper.hasEnt(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack())) {
-            int lvl = MoonayHelper.getEntLvl(ModEnchantments.HEXA_EXPERIMENT, player.getMainHandStack());
+        if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack())) {
+            int lvl = MoonayHelper.getEntLvl(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack());
             //not use getTotalCritRate it decrease value
             float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
             float additionalCritDamage = 0.0F;
