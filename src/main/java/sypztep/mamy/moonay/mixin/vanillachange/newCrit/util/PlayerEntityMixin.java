@@ -24,14 +24,14 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
             boolean iscrit = this.moonay$isCritical();
             if (iscrit)
                 crit = true;
-             else if (crit)
+            else if (crit)
                 this.moonay$setCritical(true);
             return crit;
         }
         return crit;
     }
     /**
-     * Is add player entity this attribute
+     * Injects custom attributes for player entities during attribute initialization.
      */
     @Inject(method = "createPlayerAttributes",at = @At("RETURN"))
     private static void initAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> ci) {
