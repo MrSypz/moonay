@@ -55,7 +55,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
      */
     @Inject(method = "drawBackground", at = @At(value = "RETURN"))
     public void drawBackgroundMixin(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo info) {
-        if (!ModConfig.CONFIG.playerstats || !ModConfig.CONFIG.newCritOverhaul) {
+        if (!ModConfig.CONFIG.playerstats || !ModConfig.CONFIG.shouldDoCrit()) {
             return;
         }
 
@@ -95,7 +95,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
             for (int index = 0; index < information.length; index++) {
                 MutableText text = information[index];
 
-                int offset = (index == 0) ? 20 : 14;
+                int offset = (index == 0) ? 24 : 15;
                 int xoffset2 = 10;
 
                 MoonayHelper.drawtextcustom(context, textRenderer, text.getString(), i + xOffset, j + yOffset, 0xFFFFFF, 0, false);
