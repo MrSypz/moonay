@@ -21,7 +21,9 @@ public class CritOverhaulEntry {
     public float getCritDamage() {
         return critDamage;
     }
-
+    public boolean isValid() {
+        return getId() != null;
+    }
     public String getId() {
         return id;
     }
