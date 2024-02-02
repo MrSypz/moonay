@@ -62,7 +62,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      * @return The total crit chance.
      */
     public float moonay$getCritRateFromEquipped() {
-        //TODO: Have it mor congigable
+        //TODO: Have it mor configable
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat critRate = new MutableFloat();
 
@@ -87,7 +87,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      * @return The total crit damage.
      */
     public float moonay$getCritDamageFromEquipped() {
-        //TODO: Have it mor congigable
+        //TODO: Have it mor configable
         if (ModConfig.CONFIG.newCritOverhaul) {
             MutableFloat critDamage = new MutableFloat();
 
