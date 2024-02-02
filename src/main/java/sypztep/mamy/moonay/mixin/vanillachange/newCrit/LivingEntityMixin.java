@@ -74,7 +74,7 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
      */
     @ModifyVariable(method = "applyDamage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float applyDamageFirst(float amount, DamageSource source) {
-        if (ModConfig.CONFIG.newCritOverhaul && !this.getWorld().isClient()) {
+        if (ModConfig.CONFIG.shouldDoCrit() && !this.getWorld().isClient()) {
             Entity attacker = source.getAttacker();
 
             if (attacker instanceof NewCriticalOverhaul invoker) {

@@ -63,7 +63,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      */
     public float moonay$getCritRateFromEquipped() {
         //TODO: Have it mor configable
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             MutableFloat critRate = new MutableFloat();
 
             //ATTRIBUTE
@@ -88,7 +88,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      */
     public float moonay$getCritDamageFromEquipped() {
         //TODO: Have it mor configable
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             MutableFloat critDamage = new MutableFloat();
 
             critDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue()); //Get From attribute
@@ -110,7 +110,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      */
     @ModifyVariable(method = "attack", at = @At(value = "STORE", ordinal = 1), ordinal = 0)
     private float storedamage(float original) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             float modifiedDamage = this.calculateCritDamage(original);
             this.alreadyCalculated = original != modifiedDamage;
             return modifiedDamage;
@@ -126,7 +126,7 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
      */
     @ModifyConstant(method = "attack", constant = @Constant(floatValue = 1.5F))
     private float storevanillacritdmg(float defaultcritdmg) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             float modifiedCritDamage = this.alreadyCalculated ? 1.0F : (this.storeCrit().moonay$isCritical() ? this.getTotalCritDamage() / 100.0F + 1.0F : defaultcritdmg);
             this.alreadyCalculated = false;
             return modifiedCritDamage;

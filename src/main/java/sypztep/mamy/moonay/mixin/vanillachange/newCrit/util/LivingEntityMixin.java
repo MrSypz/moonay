@@ -1,6 +1,7 @@
 package sypztep.mamy.moonay.mixin.vanillachange.newCrit.util;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -8,8 +9,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +41,7 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
      */
     @Inject(method = "damage", at = @At("HEAD"))
     private void damageFirst(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             if (source.getAttacker() instanceof NewCriticalOverhaul newCriticalOverhaul &&
                     source.getSource() instanceof PersistentProjectileEntity projectile)
                 newCriticalOverhaul.moonay$setCritical(projectile.isCritical());
@@ -55,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
      */
     @Inject(method = "damage", at = @At("RETURN"))
     private void handleCrit(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             if (source.getAttacker() instanceof NewCriticalOverhaul newCriticalOverhaul)
                 newCriticalOverhaul.moonay$setCritical(false);
         }
@@ -71,7 +74,7 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
      */
     @Override
     public void moonay$setCritical(boolean setCrit) {
-        if (ModConfig.CONFIG.newCritOverhaul) {
+        if (ModConfig.CONFIG.shouldDoCrit()) {
             this.crit = setCrit;
             if (!this.getWorld().isClient) {
                 PacketByteBuf byteBuf = new SyncCritPacket(this.getId(), this.crit).write(PacketByteBufs.create());
