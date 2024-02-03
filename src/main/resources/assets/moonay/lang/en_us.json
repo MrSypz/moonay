@@ -7,9 +7,9 @@
   "moonay.modifytooltip.critdmg":"Crit Damage ✦",
 
   "moonay.gui.player_info.header":"Player Info",
-  "moonay.gui.player_info.critchance":"Crit Chance ✧",
-  "moonay.gui.player_info.critdamge":"Crit Damage ✦",
-  "moonay.gui.player_info.damagereduce":"Damage Reduce",
+  "moonay.gui.player_info.critchance":"C. Chance ✧",
+  "moonay.gui.player_info.critdamge":"C. Damage ✦",
+  "moonay.gui.player_info.damagereduce":"Dmg. Reduce",
 
   "moonay.gui.player_info.tooltip.critchance":"Indicates the likelihood of landing a 'Critical Hit.",
   "moonay.gui.player_info.tooltip.critdamage":"Represents the additional damage dealt with a 'Critical Hit'",

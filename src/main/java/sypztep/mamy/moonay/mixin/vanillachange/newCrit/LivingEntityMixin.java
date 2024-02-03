@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
 
@@ -66,7 +67,7 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
             this.moonay$setCritDamage(nbt.getFloat("CritDamage"));
     }
     /**
-     * Modifies the damage amount before applying it, considering the new crit overhaul configuration.
+     * Modifies the damage amount before applying it, considering the new crit overhaul configuration (apply for projectile).
      *
      * @param amount The original damage amount.
      * @param source The source of the damage.
@@ -76,19 +77,10 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
     private float applyDamageFirst(float amount, DamageSource source) {
         if (ModConfig.CONFIG.shouldDoCrit() && !this.getWorld().isClient()) {
             Entity attacker = source.getAttacker();
-
             if (attacker instanceof NewCriticalOverhaul invoker) {
                 Entity projectileSource = source.getSource();
-
                 if (projectileSource instanceof PersistentProjectileEntity projectile) {
                     invoker.storeCrit().moonay$setCritical(projectile.isCritical());
-                    amount = invoker.calculateCritDamage(amount);
-                    return amount;
-                }
-            }
-
-            if (!(source.getAttacker() instanceof PlayerEntity)) {
-                if (attacker instanceof NewCriticalOverhaul invoker) {
                     amount = invoker.calculateCritDamage(amount);
                     return amount;
                 }
