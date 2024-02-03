@@ -10,7 +10,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
 
@@ -79,8 +77,8 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
             Entity attacker = source.getAttacker();
             if (attacker instanceof NewCriticalOverhaul invoker) {
                 Entity projectileSource = source.getSource();
-                if (projectileSource instanceof PersistentProjectileEntity projectile) {
-                    invoker.storeCrit().moonay$setCritical(projectile.isCritical());
+                if (projectileSource instanceof PersistentProjectileEntity) {
+                    invoker.storeCrit().moonay$setCritical(this.moonay$isCritical());
                     amount = invoker.calculateCritDamage(amount);
                     return amount;
                 }
