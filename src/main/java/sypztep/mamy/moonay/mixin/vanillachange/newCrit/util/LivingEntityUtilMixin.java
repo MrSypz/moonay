@@ -1,7 +1,6 @@
 package sypztep.mamy.moonay.mixin.vanillachange.newCrit.util;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,25 +8,24 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sypztep.mamy.moonay.client.packets2c.SyncCritS2CPacket;
+import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.packetc2s.SyncCritPacket;
 import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements NewCriticalOverhaul {
+public abstract class LivingEntityUtilMixin extends Entity implements NewCriticalOverhaul {
     @Unique
     private boolean crit;
 
-    LivingEntityMixin(EntityType<?> type, World world) {
+    LivingEntityUtilMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
@@ -43,8 +41,8 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
     private void damageFirst(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.CONFIG.shouldDoCrit()) {
             if (source.getAttacker() instanceof NewCriticalOverhaul newCriticalOverhaul &&
-                    source.getSource() instanceof PersistentProjectileEntity projectile)
-                newCriticalOverhaul.moonay$setCritical(projectile.isCritical());
+                    source.getSource() instanceof PersistentProjectileEntity)
+                newCriticalOverhaul.moonay$setCritical(this.moonay$isCritical());
         }
     }
 
