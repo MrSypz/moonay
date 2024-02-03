@@ -44,17 +44,18 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         EquipmentSlot[] slots = EquipmentSlot.values();
 
         for (EquipmentSlot slot : slots) {
-            if (slot != EquipmentSlot.OFFHAND) {
-                ItemStack itemStack = this.getEquippedStack(slot);
-                if (!itemStack.isEmpty()) {
-                    String itemId = Registries.ITEM.getId(itemStack.getItem()).toString();
-                    itemIds.add(itemId);
-                }
+            if (ModConfig.CONFIG.exceptoffhandslot && slot == EquipmentSlot.OFFHAND)
+                continue;
+            ItemStack itemStack = this.getEquippedStack(slot);
+            if (!itemStack.isEmpty()) {
+                String itemId = Registries.ITEM.getId(itemStack.getItem()).toString();
+                itemIds.add(itemId);
             }
         }
 
         return itemIds;
     }
+
     /**
      * Retrieves the total crit chance from equipped items, attributes, and other sources.
      * Takes into account the new crit overhaul configuration.
@@ -133,5 +134,4 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         }
         return defaultcritdmg;
     }
-
 }

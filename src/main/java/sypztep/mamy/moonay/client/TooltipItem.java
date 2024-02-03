@@ -24,7 +24,7 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TooltipItem {
-    private static final CritOverhaulConfig critOverhaulConfig = new CritOverhaulConfig();
+    private static final CritOverhaulConfig CRIT_OVERHAUL_LOAD_CONFIG = new CritOverhaulConfig();
     public static void onTooltipRender(ItemStack stack, List<Text> lines, TooltipContext context) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         String itemId = Registries.ITEM.getId(stack.getItem()).toString();
@@ -33,17 +33,17 @@ public class TooltipItem {
         } else if (MoonayHelper.hasEnt(ModEnchantments.STIGMA, stack)) {
             addStigmaTooltip(lines, player);
         }
-        if (critOverhaulConfig.getCritDataForItem(itemId).isValid()) {
-            if (critOverhaulConfig.getCritDataForItem(itemId).getCritChance() >= 0) {
+        if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).isValid()) {
+            if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() >= 0) {
                 addCritOverhaulTooltip(stack, lines, Formatting.DARK_GREEN);
-            } else if (critOverhaulConfig.getCritDataForItem(itemId).getCritChance() < 0)
+            } else if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() < 0)
                 addCritOverhaulTooltip(stack, lines, Formatting.RED);
         }
     }
     private static void addCritOverhaulTooltip(ItemStack stack, List<Text> lines,Formatting color) {
         String itemName = Registries.ITEM.getId(stack.getItem()).toString();
 
-        CritOverhaulEntry critData = critOverhaulConfig.getCritDataForItem(itemName);
+        CritOverhaulEntry critData = CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemName);
 
         addFormattedTooltip(lines, critData.getCritChance(), "critchance" ,color);
         addFormattedTooltip(lines, critData.getCritDamage(), "critdmg" ,color);

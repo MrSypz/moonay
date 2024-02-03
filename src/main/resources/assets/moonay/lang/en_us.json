@@ -29,5 +29,6 @@
 
   "text.autoconfig.moonay.title": "Moonay Config",
   "text.autoconfig.moonay.option.critOptional": "New Critical Overhaul",
-  "text.autoconfig.moonay.option.playerstats": "Playerstats UI"
+  "text.autoconfig.moonay.option.playerstats": "Playerstats UI",
+  "text.autoconfig.moonay.option.exceptoffhandslot": "Except offhand slot"
 }

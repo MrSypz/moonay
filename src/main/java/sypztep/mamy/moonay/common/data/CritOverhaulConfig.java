@@ -3,7 +3,6 @@ package sypztep.mamy.moonay.common.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import sypztep.mamy.moonay.common.MoonayMod;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,53 +11,48 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class CritOverhaulConfig {
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final String CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("newcritoverhaul/crit_chances.json").toString();
     private final CritOverhaulData critOverhaulData;
-
+    private static final CritOverhaulData CLIENT_DEFAULT_DATA = new CritOverhaulData();
+    public static String getConfigFilePath() {
+        return CONFIG_FILE_PATH;
+    }
     public CritOverhaulConfig() {
         this.critOverhaulData = loadConfig();
     }
-    private CritOverhaulData loadConfig() {
+    public CritOverhaulData loadConfig() {
         try {
             Path configFilePath = Paths.get(CONFIG_FILE_PATH);
-
             if (Files.exists(configFilePath)) {
                 try (Reader reader = new FileReader(configFilePath.toFile())) {
                     return gson.fromJson(reader, CritOverhaulData.class);
                 }
             } else {
-                // If the config file doesn't exist, create a default one
-                CritOverhaulData defaultData = new CritOverhaulData();
-                saveConfig(defaultData);
-                return defaultData;
+                saveConfig(CLIENT_DEFAULT_DATA);
+                return CLIENT_DEFAULT_DATA;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return new CritOverhaulData(); // Return default data in case of an error
+            return new CritOverhaulData();
         }
     }
 
-    private void saveConfig(CritOverhaulData data) {
+    private void saveConfig(CritOverhaulData newData) {
         try {
             Path configFilePath = Paths.get(CONFIG_FILE_PATH);
             Files.createDirectories(configFilePath.getParent());
 
-            // Check if the file already exists
-            if (!Files.exists(configFilePath)) {
-                // Create the file
+            if (!Files.exists(configFilePath) || Files.size(configFilePath) == 0) {
                 Files.createFile(configFilePath);
-            }
-
-            try (Writer writer = new FileWriter(configFilePath.toFile())) {
-                // Save the configuration data to the file
-                gson.toJson(data, writer);
+                try (Writer writer = new FileWriter(configFilePath.toFile())) {
+                    gson.toJson(newData, writer);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public CritOverhaulEntry getCritDataForItem(String itemName) {
         return critOverhaulData.getItems().getOrDefault(itemName, new CritOverhaulEntry(0.0f, 0.0f));
     }

@@ -8,6 +8,7 @@
     "enchantment.PlayerEntityMixin",
     "vanillachange.newCrit.LivingEntityMixin",
     "vanillachange.newCrit.PlayerEntityMixin",
+    "vanillachange.newCrit.PlayerManagerMixin",
     "vanillachange.newCrit.util.LivingEntityUtilMixin",
     "vanillachange.newCrit.util.PlayerEntityUtilMixin"
   ],

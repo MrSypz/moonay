@@ -9,7 +9,6 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 @Config.Gui.Background("minecraft:textures/block/dirt.png")
 
 public class MoonayConfig implements ConfigData {
-
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     @ConfigEntry.Category("gameplay")
     @Comment("New Crit feature overhaul. It have 3 Mode " +
@@ -20,6 +19,9 @@ public class MoonayConfig implements ConfigData {
     @ConfigEntry.Category("gameplay")
     @Comment("(Client) UI to show stats when open inventory.")
     public boolean playerstats = true;
+    @ConfigEntry.Category("gameplay")
+    @Comment("Get anyslot but not for offhand.")
+    public boolean exceptoffhandslot = true;
     public boolean shouldDoCrit() {
         return critOptional == CritOptional.NEW_OVERHAUL || critOptional == CritOptional.KEEP_JUMPCRIT || critOptional != CritOptional.DISABLE;
     }

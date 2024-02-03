@@ -34,35 +34,35 @@ public class ModCritData {
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            if (item instanceof ArmorItem armorItem) {
+            else if (item instanceof ArmorItem armorItem) {
                 ArmorMaterial armorMaterial = armorItem.getMaterial();
                 float critChance = getArmorCritChance(armorMaterial);
                 float critDamage = 2.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            if (item instanceof AxeItem axeItem) {
+            else if (item instanceof AxeItem axeItem) {
                 ToolMaterial axeItemMaterial = axeItem.getMaterial();
                 float critChance = getToolCritChance(axeItemMaterial);
                 float critDamage = 12.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            if (item instanceof HoeItem hoeItem) {
+            else if (item instanceof HoeItem hoeItem) {
                 ToolMaterial hoeItemMaterial = hoeItem.getMaterial();
                 float critChance = getToolCritChance(hoeItemMaterial) * 3;
                 float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            if (item instanceof PickaxeItem pickaxeItem) {
+            else if (item instanceof PickaxeItem pickaxeItem) {
                 ToolMaterial pickaxeItemMaterial = pickaxeItem.getMaterial();
                 float critChance = getToolCritChance(pickaxeItemMaterial) * 1.5f;
                 float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            if (item instanceof ShovelItem shovelItem) {
+            else if (item instanceof ShovelItem shovelItem) {
                 ToolMaterial shovelItemMaterial = shovelItem.getMaterial();
                 float critChance = getToolCritChance(shovelItemMaterial) * 1.25f;
                 float critDamage = 3.0f;
