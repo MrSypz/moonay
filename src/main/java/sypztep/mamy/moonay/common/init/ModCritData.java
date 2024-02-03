@@ -17,56 +17,55 @@ public class ModCritData {
     public static void initItemData() {
 
         List<CritOverhaulEntry> itemsToManualAdd = of(
-                new CritOverhaulEntry(MC + "trident", 10.0f, 9.0f),
+                new CritOverhaulEntry(MC + "trident", 12.0f, 15.0f),
+                new CritOverhaulEntry(MC + "bow", 12.0f, 15.0f),
+                new CritOverhaulEntry(MC + "crossbow", 12.0f, 15.0f),
                 new CritOverhaulEntry(MC + "turtle_helmet", 4.0f, 6.0f),
-                new CritOverhaulEntry(MC + "elytra", -20.0f, -10.0f) // I hate elytra :) nothing personal
+                new CritOverhaulEntry(MC + "elytra", -20.0f, -12.0f) // I hate elytra :) nothing personal
         );
 
         for (Item item : Registries.ITEM) {
             String itemId = Registries.ITEM.getId(item).toString();
 
-            // Add sword items
             if (item instanceof SwordItem swordItem) {
                 ToolMaterial axeItemMaterial = swordItem.getMaterial();
-                float critChance = getToolCritChance(axeItemMaterial) * 2;  // Set your default crit chance
-                float critDamage = 3.0f; // Set your default crit damage
+                float critChance = getToolCritChance(axeItemMaterial) * 2;
+                float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            // Add armor items
             if (item instanceof ArmorItem armorItem) {
                 ArmorMaterial armorMaterial = armorItem.getMaterial();
                 float critChance = getArmorCritChance(armorMaterial);
-                float critDamage = 2.0f;  // Set your default crit damage for armor
+                float critDamage = 2.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
-            // Add axe items
             if (item instanceof AxeItem axeItem) {
                 ToolMaterial axeItemMaterial = axeItem.getMaterial();
                 float critChance = getToolCritChance(axeItemMaterial);
-                float critDamage = 12.0f;  // Set your default crit damage for axe
+                float critDamage = 12.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
             if (item instanceof HoeItem hoeItem) {
                 ToolMaterial hoeItemMaterial = hoeItem.getMaterial();
                 float critChance = getToolCritChance(hoeItemMaterial) * 3;
-                float critDamage = 3.0f;  // Set your default crit damage for hoe
+                float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
             if (item instanceof PickaxeItem pickaxeItem) {
                 ToolMaterial pickaxeItemMaterial = pickaxeItem.getMaterial();
                 float critChance = getToolCritChance(pickaxeItemMaterial) * 1.5f;
-                float critDamage = 3.0f;  // Set your default crit damage for pickaxe
+                float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
 
             if (item instanceof ShovelItem shovelItem) {
                 ToolMaterial shovelItemMaterial = shovelItem.getMaterial();
                 float critChance = getToolCritChance(shovelItemMaterial) * 1.25f;
-                float critDamage = 3.0f;  // Set your default crit damage for pickaxe
+                float critDamage = 3.0f;
                 CRIT_OVERHAUL_CONFIG.addItems(of(new CritOverhaulEntry(itemId, critChance, critDamage)));
             }
         }
@@ -102,7 +101,7 @@ public class ModCritData {
         } else if (toolMaterial == ToolMaterials.NETHERITE) {
             return 4.5f;
         } else {
-            return 0f;  // Set a default value for unknown tool materials
+            return 0f;
         }
     }
 }
