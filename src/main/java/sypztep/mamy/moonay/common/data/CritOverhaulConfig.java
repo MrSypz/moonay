@@ -19,8 +19,6 @@ public class CritOverhaulConfig {
     public CritOverhaulConfig() {
         this.critOverhaulData = loadConfig();
     }
-
-
     private CritOverhaulData loadConfig() {
         try {
             Path configFilePath = Paths.get(CONFIG_FILE_PATH);
@@ -48,16 +46,19 @@ public class CritOverhaulConfig {
 
             // Check if the file already exists
             if (!Files.exists(configFilePath)) {
-                try (Writer writer = new FileWriter(configFilePath.toFile())) {
-                    gson.toJson(data, writer);
-                }
-            } else
-                MoonayMod.LOGGER.info("File already exists. Skipping save.");
+                // Create the file
+                Files.createFile(configFilePath);
+            }
 
+            try (Writer writer = new FileWriter(configFilePath.toFile())) {
+                // Save the configuration data to the file
+                gson.toJson(data, writer);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public CritOverhaulEntry getCritDataForItem(String itemName) {
         return critOverhaulData.getItems().getOrDefault(itemName, new CritOverhaulEntry(0.0f, 0.0f));
     }
