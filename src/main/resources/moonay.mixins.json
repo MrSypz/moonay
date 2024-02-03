@@ -8,8 +8,8 @@
     "enchantment.PlayerEntityMixin",
     "vanillachange.newCrit.LivingEntityMixin",
     "vanillachange.newCrit.PlayerEntityMixin",
-    "vanillachange.newCrit.util.LivingEntityMixin",
-    "vanillachange.newCrit.util.PlayerEntityMixin"
+    "vanillachange.newCrit.util.LivingEntityUtilMixin",
+    "vanillachange.newCrit.util.PlayerEntityUtilMixin"
   ],
   "client": [
     "vanillachange.newCrit.client.InventoryScreenMixin"
