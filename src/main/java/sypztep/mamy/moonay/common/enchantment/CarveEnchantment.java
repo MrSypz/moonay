@@ -83,7 +83,10 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
         MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user, stack);
-        if (MoonayHelper.hasEnt(this, stack) && MoonayHelper.dontHasThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user) && weaponType == MoonayHelper.WeaponType.SWORD) {
+        if (MoonayHelper.hasEnt(this, stack)
+                && MoonayHelper.dontHasThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)
+                && weaponType == MoonayHelper.WeaponType.SWORD
+                && MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART,user)) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
         } else if (weaponType == MoonayHelper.WeaponType.AXE)
