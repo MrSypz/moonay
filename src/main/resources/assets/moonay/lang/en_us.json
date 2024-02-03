@@ -19,8 +19,8 @@
   "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
   "enchantment.moonay.stigma" : "Stigma",
   "enchantment.moonay.stigma.desc" : "Can execute if target have low health and heal player,can rightclick to heal and deal damage aroud user",
-  "enchantment.moonay.deci" : "Can execute if target have low health and heal player,can rightclick to heal and deal damage aroud user",
-  "enchantment.moonay.deci.desc" : "Can execute if target have low health and heal player,can rightclick to heal and deal damage aroud user",
+  "enchantment.moonay.deci_experiment" : "Deci Experiment",
+  "enchantment.moonay.deci_experiment.desc" : "If C. Chance is over 100% foreach 10% -> 1% + lvl C.Damage",
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
