@@ -43,24 +43,30 @@ public interface NewCriticalOverhaul {
         return 0.0F;
     }
     default float getTotalCritRate() {
-        PlayerEntity player = (PlayerEntity) this;
         float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
-        if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack()))
-            return Math.min(100,totalCritRate);
-        return totalCritRate;
+        if (!(this instanceof PlayerEntity player)) {
+            return totalCritRate;
+        } else {
+            if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack()))
+                return Math.min(100, totalCritRate);
+            return totalCritRate;
+        }
     }
     default float getTotalCritDamage() {
-        PlayerEntity player = (PlayerEntity) this;
         float totalCritDamage = this.moonay$getCritDamage() + this.moonay$getCritDamageFromEquipped();
-        if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack())) {
-            int lvl = MoonayHelper.getEntLvl(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack());
-            //not use getTotalCritRate it decrease value
-            float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
-            float additionalCritDamage = 0.0F;
-            if (totalCritRate > 100.0F)
-                additionalCritDamage = lvl * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
-            return additionalCritDamage + totalCritDamage;
+        if (!(this instanceof PlayerEntity player)) {
+            return totalCritDamage;
+        } else {
+            if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack())) {
+                int lvl = MoonayHelper.getEntLvl(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack());
+                //not use getTotalCritRate it decrease value
+                float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+                float additionalCritDamage = 0.0F;
+                if (totalCritRate > 100.0F)
+                    additionalCritDamage = lvl * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
+                return additionalCritDamage + totalCritDamage;
+            }
+            return totalCritDamage;
         }
-        return totalCritDamage;
     }
 }
