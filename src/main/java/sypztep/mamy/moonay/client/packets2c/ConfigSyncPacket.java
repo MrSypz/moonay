@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 import static sypztep.mamy.moonay.common.data.CritOverhaulConfig.gson;
 public class ConfigSyncPacket {
@@ -49,7 +50,7 @@ public class ConfigSyncPacket {
             client.execute(() -> {
                 boolean isMatch = isClientConfigMatch(jsonConfig);
                 if (isMatch)
-                    handler.sendChatMessage("Client configuration matches the server.");
+                    Objects.requireNonNull(client.getCameraEntity()).sendMessage(Text.of("You're config already sync to server"));
                  else {
                     handler.getConnection().disconnect(DISCONNECT_TEXT);
                 }
