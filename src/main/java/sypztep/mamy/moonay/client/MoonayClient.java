@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import sypztep.mamy.moonay.client.event.CarveRenderEvent;
 import sypztep.mamy.moonay.client.packets2c.AddCarveSoulParticlePacket;
 import sypztep.mamy.moonay.client.packets2c.AddStigmaParticlePacket;
 import sypztep.mamy.moonay.client.packets2c.ConfigSyncPacket;
@@ -33,9 +35,11 @@ public class MoonayClient implements ClientModInitializer {
         particleRegistry.register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
         particleRegistry.register(ModParticles.WARP, WarpParticle.Factory::new);
 
+        HudRenderCallback.EVENT.register(new CarveRenderEvent());
+
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             if (minecraft.player != null) {
-                if (MoonayHelper.hasEnt(ModEnchantments.STIGMA,minecraft.player.getMainHandStack()))
+                if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA,minecraft.player.getMainHandStack()))
                     AbilityHelper.boxArea(minecraft.player, 3);
             }
         });

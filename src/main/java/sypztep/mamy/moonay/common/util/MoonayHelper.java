@@ -1,6 +1,5 @@
 package sypztep.mamy.moonay.common.util;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.enchantment.Enchantment;
@@ -13,43 +12,45 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 
 public class MoonayHelper {
-    public static boolean hasEnt(Enchantment enchantment, ItemStack stack) {
+    public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
     }
-    public static int getEntLvl(Enchantment enchantment, ItemStack stack) {
+    public static int getEnchantmentLvl(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack);
     }
-    public static boolean dontHasThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
+    public static boolean dontHaveThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) == null;
     }
-    public static boolean stillHasThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
+    public static boolean stillHaveThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) != null;
     }
-    public static WeaponType checkIsItemCorrectUse(LivingEntity user, ItemStack stack) {
-        if (stack.getItem() instanceof AxeItem)
+    public static WeaponType checkIsItemCorrectUse(LivingEntity user) {
+        if (user.getMainHandStack().getItem() instanceof AxeItem)
             return WeaponType.AXE;
-         else if (stack.getItem()instanceof SwordItem)
+         else if (user.getMainHandStack().getItem()instanceof SwordItem)
             return WeaponType.SWORD;
         // Default case or unknown item type
         return null;
     }
-    public static void applyEffect(LivingEntity user,StatusEffect effect,int time) {
+    public static void addStatus(LivingEntity user, StatusEffect effect, int time) {
         user.addStatusEffect(new StatusEffectInstance(effect,time));
     }
-    public static void applyEffect(LivingEntity user,StatusEffect effect,int time,int amp) {
+    public static void addStatus(LivingEntity user, StatusEffect effect, int time, int amp) {
         user.addStatusEffect(new StatusEffectInstance(effect,time,amp));
     }
 
-    public static boolean hasStatusWithAmpValue(StatusEffect statusEffect, LivingEntity user, int lessthan) {
+    public static boolean hasStatusWithAmpValue$lessthan(StatusEffect statusEffect, LivingEntity user, int lessthan) {
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
         if (instance != null)
             return instance.getAmplifier() < lessthan;
+        return false;
+    }
+    public static boolean hasStatusWithAmpValue$greather(StatusEffect statusEffect, LivingEntity user, int greathan) {
+        StatusEffectInstance instance = user.getStatusEffect(statusEffect);
+        if (instance != null)
+            return instance.getAmplifier() > greathan;
         return false;
     }
     public static int getStatusAmp(StatusEffect statusEffect,LivingEntity user) {
@@ -59,8 +60,8 @@ public class MoonayHelper {
             amp = instance.getAmplifier();
         return amp;
     }
-    public static boolean hasEntWithLimitDistance(Enchantment enchantment,LivingEntity user, Entity target,double lessthan) {
-        return hasEnt(enchantment, user.getMainHandStack()) || user.distanceTo(target) >= lessthan || !(target instanceof LivingEntity);
+    public static boolean hasEnchantWithRangeDistance(Enchantment enchantment, LivingEntity user, Entity target, double lessthan) {
+        return hasEnchantment(enchantment, user.getMainHandStack()) || user.distanceTo(target) >= lessthan || !(target instanceof LivingEntity);
     }
     public static int getStatusCount(LivingEntity user, StatusEffect statusEffect, int i) {
         StatusEffectInstance cooldownInstance = user.getStatusEffect(statusEffect);
@@ -82,7 +83,7 @@ public class MoonayHelper {
 
     public static SpecialEnchantment getSpecialEnchantment(ItemStack stack) {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
-            if (enchantment instanceof SpecialEnchantment) {
+            if (enchantment instanceof SpecialEnchantment ) {
                 return (SpecialEnchantment) enchantment;
             }
         }
@@ -111,30 +112,6 @@ public class MoonayHelper {
         context.drawText(textRenderer,text,x,y,color,shadow);
     }
 
-    public static ItemStack getItemStackUnderCursor() {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null) {
-            return ItemStack.EMPTY;
-        }
-
-        HitResult hitResult = client.crosshairTarget;
-        if (hitResult == null || hitResult.getType() == HitResult.Type.MISS) {
-            return ItemStack.EMPTY;
-        }
-
-        if (hitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
-            // You can interact with the block position if needed
-            // For example, get the BlockState: client.world.getBlockState(blockPos);
-        } else if (hitResult.getType() == HitResult.Type.ENTITY) {
-            EntityHitResult entityHitResult = (EntityHitResult) hitResult;
-            if (entityHitResult.getEntity() instanceof LivingEntity livingEntity) {
-                return livingEntity.getMainHandStack();
-            }
-        }
-
-        return ItemStack.EMPTY;
-    }
     public enum WeaponType {
         AXE(AxeItem.class),
         SWORD(SwordItem.class);

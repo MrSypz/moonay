@@ -47,7 +47,7 @@ public interface NewCriticalOverhaul {
         if (!(this instanceof PlayerEntity player)) {
             return totalCritRate;
         } else {
-            if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack()))
+            if (MoonayHelper.hasEnchantment(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack()))
                 return Math.min(100, totalCritRate);
             return totalCritRate;
         }
@@ -57,8 +57,8 @@ public interface NewCriticalOverhaul {
         if (!(this instanceof PlayerEntity player)) {
             return totalCritDamage;
         } else {
-            if (MoonayHelper.hasEnt(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack())) {
-                int lvl = MoonayHelper.getEntLvl(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack());
+            if (MoonayHelper.hasEnchantment(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack())) {
+                int lvl = MoonayHelper.getEnchantmentLvl(ModEnchantments.DECI_EXPERIMENT, player.getMainHandStack());
                 //not use getTotalCritRate it decrease value
                 float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
                 float additionalCritDamage = 0.0F;
