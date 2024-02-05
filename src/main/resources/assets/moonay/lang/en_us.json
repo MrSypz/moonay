@@ -1,8 +1,10 @@
 {
-  "moonay.modifytooltip.carve":"Heal Amount ♥ : ",
-  "moonay.modifytooltip.stigma.desc":" (foreach target hit)",
-  "moonay.modifytooltip.stigma.desc.passive":"% ,It'll instant execute the target.",
-  "moonay.modifytooltip.stigma.passive":"If target health below ",
+  "moonay.modifytooltip.carve":"Healing Bonus ♥ : ",
+  "moonay.modifytooltip.stigma": "Deals additional damage for each target hit and heals ♥ : ",
+  "moonay.modifytooltip.stigma.condition": " | (Amount of targets in user's range)",
+  "moonay.modifytooltip.stigma.desc": "If the target's health is below ",
+  "moonay.modifytooltip.stigma.desc2": " It will automatically execute the target",
+
   "moonay.modifytooltip.critchance":"Crit Chance ✧",
   "moonay.modifytooltip.critdmg":"Crit Damage ✦",
 
@@ -16,11 +18,13 @@
   "moonay.gui.player_info.tooltip.damagereduce":"The percentage of incoming damage that is negated.",
 
   "enchantment.moonay.carve" : "Carve",
-  "enchantment.moonay.carve.desc" : "Everytime attack target it gonna decrease protection amount,when attack for a while can rightclick to heal",
+  "enchantment.moonay.carve.desc": "Reduces the target's protection with each attack. After attacking for a while, Right-clicking can trigger a healing effect.",
   "enchantment.moonay.stigma" : "Stigma",
-  "enchantment.moonay.stigma.desc" : "Can execute if target have low health and heal player,can rightclick to heal and deal damage aroud user",
+  "enchantment.moonay.stigma.desc": "Allows the player to perform a special attack when the target has low health. Right-clicking can heal the player and deal damage around them.",
   "enchantment.moonay.deci_experiment" : "Deci Experiment",
-  "enchantment.moonay.deci_experiment.desc" : "If C. Chance is over 100% foreach 10% -> 1% + lvl C.Damage",
+  "enchantment.moonay.deci_experiment.desc": "Increases Critical Damage for every 10% exceeding 100% Crit Chance by 1% per level.",
+  "enchantment.moonay.praminax" : "Praminax",
+  "enchantment.moonay.praminax.desc": "After attacking twice, the next attack deals player attack damage multiplied by 20% per enchantment level.",
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
