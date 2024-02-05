@@ -17,8 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.init.ModEnchantments;
+import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
@@ -39,18 +38,17 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     }
 
     @Override
-    public void onFinishUsing(ItemStack stack, World world, LivingEntity user) {
-        int lvl = MoonayHelper.getEntLvl(this, stack);
+    public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
         int amp = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, user);
         double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        if (MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART, user)) {
+        if (MoonayHelper.stillHaveThisStatusEffect(ModStatusEffects.STALWART, user)) {
             AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),amp, (float) (value * 1.5f),1.0f); //150% Damage base on player attack damage
-            user.heal(amp + AbilityHelper.getMissingHealth(user,0.05f));
+            user.heal(amp + AbilityHelper.getMissingHealth(user, ModConfig.CONFIG.carvehealratio));
             if (user.getWorld().isClient())
                 CarveSoulPacket.send(amp);
             carvesoulParticle(user,amp);
             user.removeStatusEffect(ModStatusEffects.STALWART);
-            MoonayHelper.applyEffect(user,ModStatusEffects.STALWART_COOLDOWN, 240 - (lvl * 2));
+            MoonayHelper.addStatus(user,ModStatusEffects.STALWART_COOLDOWN, 240 - (level * 2));
         }
     }
     public static void carvesoulParticle(Entity entity,int radius) {
@@ -82,11 +80,11 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user, stack);
-        if (MoonayHelper.hasEnt(this, stack)
-                && MoonayHelper.dontHasThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)
+        MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user);
+        if (MoonayHelper.hasEnchantment(this, stack)
+                && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)
                 && weaponType == MoonayHelper.WeaponType.SWORD
-                && MoonayHelper.stillHasThisStatusEffect(ModStatusEffects.STALWART,user)) {
+                && MoonayHelper.stillHaveThisStatusEffect(ModStatusEffects.STALWART,user)) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
         } else if (weaponType == MoonayHelper.WeaponType.AXE)
@@ -95,38 +93,40 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements SpecialEn
     }
 
     @Override
-    public void applyOnTarget(LivingEntity user, Entity target) {
-        int carve = MoonayHelper.getEntLvl(ModEnchantments.CARVE, user.getMainHandStack());
+    public void applyOnTarget(LivingEntity user, Entity target, int level) {
         int carvecount = 0;
 
-        if (carve != 0 && target.isAttackable() && !target.getWorld().isClient && user.distanceTo(target) <= 6 && target instanceof LivingEntity living) {
+        if (level != 0 && target.isAttackable() && !target.getWorld().isClient && user.distanceTo(target) <= 6 && target instanceof LivingEntity living) {
             if (living.getArmor() > 0) {
                 StatusEffectInstance markInstance = living.getStatusEffect(ModStatusEffects.CARVE);
 
                 if (markInstance != null) {
-                    carvecount = Math.min(markInstance.getAmplifier() + 1, carve);
+                    carvecount = Math.min(markInstance.getAmplifier() + 1, level);
 
-                    if (carvecount == carve && !soundPlayed) {
+                    if (carvecount == level && !soundPlayed) {
                         target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1 + living.getRandom().nextGaussian() / 10.0));
                         soundPlayed = true; // Set the flag to true once the sound is played
-                        MoonayHelper.applyEffect(living, StatusEffects.SLOWNESS, 40 + carve * 4, 0);
+                        MoonayHelper.addStatus(living, StatusEffects.SLOWNESS, 40 + level * 4, 0);
                         ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.ENCHANTED_HIT, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
                     }
                 } else soundPlayed = false;
 
-                MoonayHelper.applyEffect(living, ModStatusEffects.CARVE, 20 + carve * 4, carvecount);
+                MoonayHelper.addStatus(living, ModStatusEffects.CARVE, 20 + level * 4, carvecount);
                 ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
             }
         }
     }
 
     @Override
-    public void applyOnUser(LivingEntity user) {
-        int carvelvl = MoonayHelper.getEntLvl(ModEnchantments.CARVE, user.getMainHandStack());
-
-        if (carvelvl != 0) {
-            int carvecount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, carvelvl);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + carvelvl * 12, carvecount));
+    public void applyOnUser(LivingEntity user, int level) {
+        if (level != 0) {
+            int carvecount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, level);
+            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + level * 12, carvecount));
         }
+    }
+
+    @Override
+    public Enchantment getEnchantment() {
+        return this;
     }
 }
