@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.vanillachange.newCrit;
+package sypztep.mamy.moonay.mixin.vanillachange.newcrit;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;

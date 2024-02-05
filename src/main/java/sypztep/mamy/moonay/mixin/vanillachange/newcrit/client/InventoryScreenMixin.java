@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.vanillachange.newCrit.client;
+package sypztep.mamy.moonay.mixin.vanillachange.newcrit.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

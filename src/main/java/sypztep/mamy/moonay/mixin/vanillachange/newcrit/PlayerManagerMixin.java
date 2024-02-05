@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.vanillachange.newCrit;
+package sypztep.mamy.moonay.mixin.vanillachange.newcrit;
 
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;

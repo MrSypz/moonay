@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.vanillachange.newCrit.util;
+package sypztep.mamy.moonay.mixin.vanillachange.newcrit.util;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sypztep.mamy.moonay.client.packets2c.SyncCritS2CPacket;
-import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.packetc2s.SyncCritPacket;
 import sypztep.mamy.moonay.common.util.NewCriticalOverhaul;
