@@ -4,15 +4,16 @@
   "package": "sypztep.mamy.moonay.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "enchantment.ItemMixin",
-    "enchantment.PlayerEntityMixin",
+    "enchantment.praminax.PlayerEntityMixin",
+    "enchantment.special.ItemMixin",
+    "enchantment.special.PlayerEntityMixin",
     "vanillachange.newCrit.LivingEntityMixin",
     "vanillachange.newCrit.PlayerEntityMixin",
-    "vanillachange.newCrit.PlayerManagerMixin",
     "vanillachange.newCrit.util.LivingEntityUtilMixin",
     "vanillachange.newCrit.util.PlayerEntityUtilMixin"
   ],
   "client": [
+    "enchantment.special.InGameHudAccessor",
     "vanillachange.newCrit.client.InventoryScreenMixin"
   ],
   "injectors": {
