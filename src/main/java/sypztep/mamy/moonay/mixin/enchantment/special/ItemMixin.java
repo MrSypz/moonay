@@ -1,4 +1,4 @@
-package sypztep.mamy.moonay.mixin.enchantment;
+package sypztep.mamy.moonay.mixin.enchantment.special;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +21,9 @@ public class ItemMixin {
     @Inject(method = "finishUsing", at = @At("HEAD"))
     private void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if (MoonayHelper.hasSpecialEnchantment(stack)) {
-            Objects.requireNonNull(MoonayHelper.getSpecialEnchantment(stack)).onFinishUsing(stack,world,user);
+            ItemStack mainHandStack = user.getMainHandStack();
+            int lvl = MoonayHelper.getEnchantmentLvl(Objects.requireNonNull(MoonayHelper.getCustomSpecial(mainHandStack)).getEnchantment(), mainHandStack);
+            Objects.requireNonNull(MoonayHelper.getSpecialEnchantment(stack)).onFinishUsing(stack,world,user,lvl);
         }
     }
 
