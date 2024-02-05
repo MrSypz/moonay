@@ -29,12 +29,13 @@ public class TooltipItem {
     public static void onTooltipRender(ItemStack stack, List<Text> lines, TooltipContext context) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         String itemId = Registries.ITEM.getId(stack.getItem()).toString();
-//        if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).isValid()) {
-//            if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() >= 0) {
-//                addCritOverhaulTooltip(stack, lines, Formatting.DARK_GREEN);
-//            } else if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() < 0)
-//                addCritOverhaulTooltip(stack, lines, Formatting.RED);
-//        }
+        if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).isValid()) {
+            if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() > 0)
+                addCritOverhaulTooltip(stack, lines, Formatting.DARK_GREEN);
+             else if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() < 0)
+                addCritOverhaulTooltip(stack, lines, Formatting.RED);
+             else return;
+        }
         if (MoonayHelper.hasEnchantment(ModEnchantments.CARVE, stack)) {
             addCarveTooltip(lines, player);
         } else if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, stack)) {
@@ -53,16 +54,15 @@ public class TooltipItem {
     private static void addCarveTooltip(List<Text> lines, ClientPlayerEntity client) {
         if (client != null) {
             double amount = MoonayHelper.getStatusAmp(ModStatusEffects.STALWART, client) + AbilityHelper.getMissingHealth(client, ModConfig.CONFIG.carvehealratio);
-            addFormattedTooltip(lines, String.valueOf(amount), "carve");
+            addFormattedTooltip(lines, String.format("%.2f",amount), "carve");
         }
     }
 
     private static void addStigmaTooltip(List<Text> lines, ClientPlayerEntity client) {
         if (client != null) {
-            double damage = client.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-            double amount = damage * 0.25f + AbilityHelper.getMissingHealth(client, 0.12f);
-            addFormattedTooltip(lines, amount + " + " + AbilityHelper.getHitAmount(), "stigma","stigma.condition");
-            addFormattedTooltip(lines, 1f + " + " + MoonayHelper.getEnchantmentLvl(ModEnchantments.STIGMA, client.getMainHandStack()), "stigma.desc","stigma.desc2");
+            double amount = 0.25f + AbilityHelper.getMissingHealth(client, 0.12f);
+            addFormattedTooltip(lines, String.format("%.2f",amount) + " x " + AbilityHelper.getHitAmount(), "stigma","stigma.condition");
+            addFormattedTooltip(lines, 1.5f + "% x " + (float) MoonayHelper.getEnchantmentLvl(ModEnchantments.STIGMA, client.getMainHandStack()) + "%", "stigma.desc","stigma.desc2");
         }
     }
 
@@ -81,7 +81,7 @@ public class TooltipItem {
         String formattedAmount = String.format("%.2f", amount);
         MutableFloat mutableFloat = new MutableFloat(formattedAmount);
 
-        Text tooltip = Text.literal(" " + mutableFloat + "% ").formatted(formatting).append(Text.translatable(MoonayMod.MODID + ".modifytooltip." + key).formatted(Formatting.DARK_GREEN));
+        Text tooltip = Text.literal(" " + mutableFloat + "% ").formatted(formatting).append(Text.translatable(MoonayMod.MODID + ".modifytooltip." + key).formatted(formatting));
 
         for (String extraKey : extraKeys)
             tooltip = tooltip.copy().append(Text.translatable(MoonayMod.MODID + ".modifytooltip." + extraKey).formatted(Formatting.DARK_GREEN));
