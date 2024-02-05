@@ -30,7 +30,7 @@ public class ConfigSyncPacket {
     private static CritOverhaulData critOverhaulData = new CritOverhaulData();
     private static final CritOverhaulData SERVER_DATA = loadCritOverhaulDataFromFile();
     public static final Identifier ID = MoonayMod.id("config_sync");
-    private static final Text DISCONNECT_TEXT = Text.literal("The server you are attempting to connect to has ")
+    private static final Text SYNC_MESSAGE = Text.literal("The server you are attempting to connect to has ")
             .append(Text.literal("Mooony Mod").formatted(Formatting.GREEN))
             .append(" installed, but your configuration file does not match the server's.\n" +
                     "the server already send a file to your game\n").formatted(Formatting.AQUA)
@@ -52,7 +52,7 @@ public class ConfigSyncPacket {
                 if (isMatch)
                     Objects.requireNonNull(client.getCameraEntity()).sendMessage(Text.of("You're config already sync to server"));
                  else {
-                    handler.getConnection().disconnect(DISCONNECT_TEXT);
+                    handler.getConnection().disconnect(SYNC_MESSAGE);
                 }
                 // Continue with handling the received configuration
                 handleReceivedConfig(jsonConfig);
@@ -64,7 +64,6 @@ public class ConfigSyncPacket {
         }
     }
     private static void handleReceivedConfig(String jsonConfig) {
-        // Parse the JSON config and update the client's state
         try {
             CritOverhaulData receivedData = CritOverhaulConfig.gson.fromJson(jsonConfig, CritOverhaulData.class);
             updateState(receivedData);
