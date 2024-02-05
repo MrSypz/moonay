@@ -40,6 +40,20 @@ public class AbilityHelper {
     public static float getMissingHealth(LivingEntity living, float percentofmissinghealth) {
         return (living.getMaxHealth() - living.getHealth()) * percentofmissinghealth;
     }
+    public static float getTargetMissingHealthPercent(LivingEntity living) {
+        if (living != null) {
+            if (living.getMaxHealth() > 0) {
+                return living.getHealth() / living.getMaxHealth();
+            } else {
+                return 0.0f;
+            }
+        }
+        return 0.0f;
+    }
+    public static boolean targetMissingHealthPercentBelow(LivingEntity living, float percentofmissinghealth) {
+        // Check if the target's health is below 5%
+        return living.getHealth() / living.getMaxHealth() <= percentofmissinghealth;
+    }
     public static int getHitAmount(){
         return counts;
     }
