@@ -13,19 +13,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-import sypztep.mamy.moonay.common.init.ModEnchantments;
-import sypztep.mamy.moonay.common.init.ModParticles;
-import sypztep.mamy.moonay.common.init.ModSoundEvents;
-import sypztep.mamy.moonay.common.init.ModStatusEffects;
+import sypztep.mamy.moonay.common.init.*;
 import sypztep.mamy.moonay.common.packetc2s.StigmaPacket;
-import sypztep.mamy.moonay.common.util.AbilityHelper;
-import sypztep.mamy.moonay.common.util.CustomSpecial;
-import sypztep.mamy.moonay.common.util.MoonayHelper;
-import sypztep.mamy.moonay.common.util.SpecialEnchantment;
+import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantment, CustomSpecial {
+public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantment, CustomSpecial, DamageHandler {
+    private static boolean shouldTriggerAdditionalDamage = false;
     public StigmaEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.setName("stigma");
@@ -40,29 +35,15 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     public int getMaxLevel() {
         return 5;
     }
-
-    @Override
-    public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if (!target.getWorld().isClient()) {
-            if (target instanceof LivingEntity livingTarget) {
-                double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-                float missingHealthPercentage = (float) (0.014 * level);
-                if (livingTarget.getHealth() < livingTarget.getMaxHealth() * missingHealthPercentage) {
-                    target.timeUntilRegen = 0;
-                    target.damage(target.getWorld().getDamageSources().playerAttack((PlayerEntity) user), (float) (value * 1.25f));
-                }
-            }
-        }
-    }
-
     @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
-        double value = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user),3, (float) value * 1.5f,1.0f); //150% Damage base on player attack damage
+        double damage = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        double amount = ((0.25f + AbilityHelper.getMissingHealth(user, 0.12f)) * AbilityHelper.getHitAmount());
+        AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user), ModConfig.CONFIG.stigmarange, (float) damage * 1.5f,1.0f); //150% Damage base on player attack damage
         if (user.getWorld().isClient())
             StigmaPacket.send();
         stigmaParticle(user);
-        user.heal(((float) value * 0.25f + AbilityHelper.getMissingHealth(user,0.12f)) * AbilityHelper.getHitAmount());
+        user.heal((float) amount);
         MoonayHelper.addStatus(user,ModStatusEffects.STIGMA_COOLDOWN, 600 - (level * 20));
     }
     public static void stigmaParticle(Entity entity) {
@@ -93,6 +74,13 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
 
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
+        if (!MoonayHelper.hasEnchantWithRangeDistance(this,user,target,6)) {
+            return;
+        }
+        if (target instanceof LivingEntity livingTarget && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.AXE) {
+            if (AbilityHelper.targetMissingHealthPercentBelow(livingTarget,0.015f * level) && !target.equals(user))
+                setShouldTriggerAdditionalDamage(true); /* It'll set to false in Mixin */
+        }
     }
 
     @Override
@@ -102,5 +90,15 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     @Override
     public Enchantment getEnchantment() {
         return this;
+    }
+
+    @Override
+    public void setShouldTriggerAdditionalDamage(boolean value) {
+        shouldTriggerAdditionalDamage = value;
+    }
+
+    @Override
+    public boolean isShouldTriggerAdditionalDamage() {
+        return shouldTriggerAdditionalDamage;
     }
 }

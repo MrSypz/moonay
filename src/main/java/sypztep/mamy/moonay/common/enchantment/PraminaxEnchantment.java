@@ -10,11 +10,12 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.CustomSpecial;
+import sypztep.mamy.moonay.common.util.DamageHandler;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class PraminaxEnchantment extends SwordEnchantment implements CustomSpecial {
+public class PraminaxEnchantment extends SwordEnchantment implements CustomSpecial, DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
     public PraminaxEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
@@ -34,7 +35,8 @@ public class PraminaxEnchantment extends SwordEnchantment implements CustomSpeci
             StatusEffectInstance instance = user.getStatusEffect(ModStatusEffects.PRAMINAX);
             if (instance != null && instance.getAmplifier() == 2) {
                 if (!living.equals(user)) {
-                    setAdditionalDamageTrigger(true);
+                    setShouldTriggerAdditionalDamage(true); /* It'll set to false in Mixin */
+                    //TODO: ADD SOUND
                     user.removeStatusEffect(ModStatusEffects.PRAMINAX);
 
                     if (user.getWorld() instanceof ServerWorld) {
@@ -66,11 +68,13 @@ public class PraminaxEnchantment extends SwordEnchantment implements CustomSpeci
             }
         }
     }
-    public static void setAdditionalDamageTrigger(boolean value) {
+    @Override
+    public void setShouldTriggerAdditionalDamage(boolean value) {
         shouldTriggerAdditionalDamage = value;
     }
 
-    public static boolean isShouldTriggerAdditionalDamage() {
+    @Override
+    public boolean isShouldTriggerAdditionalDamage() {
         return shouldTriggerAdditionalDamage;
     }
 
