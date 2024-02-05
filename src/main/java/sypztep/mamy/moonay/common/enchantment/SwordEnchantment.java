@@ -9,11 +9,6 @@ public class SwordEnchantment extends EmptyEnchantment{
     public SwordEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
-    public SwordEnchantment(String name, Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
-        super(weight, target, slotTypes);
-        this.name = name;
-    }
-
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof SwordItem;
