@@ -12,7 +12,9 @@ public class MoonayConfig implements ConfigData {
     @ConfigEntry.Category("enchantment")
     @Comment("Percentage of missing health 1 = 100%, 0.1 = 10%")
     public float carvehealratio = 0.1f;
-
+    @ConfigEntry.Category("enchantment")
+    @Comment("Percentage of missing health 1 = 100%, 0.1 = 10%")
+    public double stigmarange = 5.0d;
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     @ConfigEntry.Category("gameplay")
     @Comment("New Crit feature overhaul. It have 3 Mode " +
