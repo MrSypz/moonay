@@ -80,6 +80,9 @@ public class MoonayHelper {
     public static boolean hasCustomSpecial(ItemStack stack) {
         return getCustomSpecial(stack) != null;
     }
+    public static boolean hasDamageHandler(ItemStack stack) {
+        return getDamageHandler(stack) != null;
+    }
 
     public static SpecialEnchantment getSpecialEnchantment(ItemStack stack) {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
@@ -93,6 +96,14 @@ public class MoonayHelper {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
             if (enchantment instanceof CustomSpecial) {
                 return (CustomSpecial) enchantment;
+            }
+        }
+        return null;
+    }
+    public static DamageHandler getDamageHandler(ItemStack stack) {
+        for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
+            if (enchantment instanceof DamageHandler) {
+                return (DamageHandler) enchantment;
             }
         }
         return null;
