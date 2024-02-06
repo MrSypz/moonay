@@ -19,7 +19,7 @@ import java.util.Objects;
 @Mixin(Item.class)
 public class ItemMixin {
     @Inject(method = "finishUsing", at = @At("HEAD"))
-    private void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
+    private void moonay$finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if (MoonayHelper.hasSpecialEnchantment(stack)) {
             ItemStack mainHandStack = user.getMainHandStack();
             int lvl = MoonayHelper.getEnchantmentLvl(Objects.requireNonNull(MoonayHelper.getCustomSpecial(mainHandStack)).getEnchantment(), mainHandStack);
@@ -28,14 +28,14 @@ public class ItemMixin {
     }
 
     @Inject(method = "getMaxUseTime", at = @At("HEAD"), cancellable = true)
-    private void getMaxUseTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+    private void moonay$getMaxUseTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if (MoonayHelper.hasSpecialEnchantment(stack)) {
             cir.setReturnValue(Objects.requireNonNull(MoonayHelper.getSpecialEnchantment(stack)).maxUseTime(stack));
         }
     }
 
     @Inject(method = "getUseAction", at = @At("HEAD"), cancellable = true)
-    private void getUseAction(ItemStack stack, CallbackInfoReturnable<UseAction> cir) {
+    private void moonay$getUseAction(ItemStack stack, CallbackInfoReturnable<UseAction> cir) {
         if (MoonayHelper.hasSpecialEnchantment(stack)) {
             cir.setReturnValue(Objects.requireNonNull(MoonayHelper.getSpecialEnchantment(stack)).useAction(stack));
         }
