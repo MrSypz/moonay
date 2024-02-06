@@ -60,7 +60,7 @@ public class TooltipItem {
 
     private static void addStigmaTooltip(List<Text> lines, ClientPlayerEntity client) {
         if (client != null) {
-            double amount = 0.25f + AbilityHelper.getMissingHealth(client, 0.12f);
+            double amount = 0.25f + AbilityHelper.getMissingHealth(client, ModConfig.CONFIG.stigmahealratio);
             addFormattedTooltip(lines, String.format("%.2f",amount) + " x " + AbilityHelper.getHitAmount(), "stigma","stigma.condition");
             addFormattedTooltip(lines, 1.5f + "% x " + (float) MoonayHelper.getEnchantmentLvl(ModEnchantments.STIGMA, client.getMainHandStack()) + "%", "stigma.desc","stigma.desc2");
         }

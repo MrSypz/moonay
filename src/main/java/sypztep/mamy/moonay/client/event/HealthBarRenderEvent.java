@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.AbilityHelper;
@@ -13,7 +14,6 @@ import sypztep.mamy.moonay.mixin.enchantment.special.InGameHudAccessor;
 import static sypztep.mamy.moonay.common.init.ModConfig.CONFIG;
 
 public class HealthBarRenderEvent implements HudRenderCallback {
-
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
         MinecraftClient minecraft = MinecraftClient.getInstance();
@@ -31,7 +31,7 @@ public class HealthBarRenderEvent implements HudRenderCallback {
                 }
             }
             if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA,client.getActiveItem())) {
-                double amount = (0.25f + AbilityHelper.getMissingHealth(client, 0.12f)) * AbilityHelper.getHitAmount();
+                double amount = (0.25f + AbilityHelper.getMissingHealth(client, ModConfig.CONFIG.stigmahealratio)) * AbilityHelper.getHitAmount();
                 ((InGameHudAccessor) minecraft.inGameHud).moonay$renderHealthBar(drawContext, minecraft.player, (scaledWidth / 2) - 25,(scaledHeight / 2) + 25 , 1, -1, client.getMaxHealth(), (int) amount, (int) amount ,0,true);
             }
         }

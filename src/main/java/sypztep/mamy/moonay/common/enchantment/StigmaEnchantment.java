@@ -38,7 +38,7 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
         double damage = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        double amount = ((0.25f + AbilityHelper.getMissingHealth(user, 0.12f)) * AbilityHelper.getHitAmount());
+        double amount = ((0.25f + AbilityHelper.getMissingHealth(user, ModConfig.CONFIG.stigmahealratio)) * AbilityHelper.getHitAmount());
         AbilityHelper.boxArea(user, user.getWorld().getDamageSources().playerAttack((PlayerEntity) user), ModConfig.CONFIG.stigmarange, (float) damage * 1.5f,1.0f); //150% Damage base on player attack damage
         if (user.getWorld().isClient())
             StigmaPacket.send();
