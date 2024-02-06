@@ -32,7 +32,7 @@ public class HealthBarRenderEvent implements HudRenderCallback {
             }
             if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA,client.getActiveItem())) {
                 double amount = (0.25f + AbilityHelper.getMissingHealth(client, ModConfig.CONFIG.stigmahealratio)) * AbilityHelper.getHitAmount();
-                ((InGameHudAccessor) minecraft.inGameHud).moonay$renderHealthBar(drawContext, minecraft.player, (scaledWidth / 2) - 25,(scaledHeight / 2) + 25 , 1, -1, client.getMaxHealth(), (int) amount, (int) amount ,0,true);
+                ((InGameHudAccessor) minecraft.inGameHud).moonay$renderHealthBar(drawContext, minecraft.player, (scaledWidth / 2) - 25,(scaledHeight / 2) + 25 , 1, -1, client.getMaxHealth(), (int) amount, (int) amount ,0,false);
             }
         }
     }
