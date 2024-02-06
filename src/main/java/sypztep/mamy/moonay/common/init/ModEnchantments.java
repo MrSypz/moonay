@@ -13,7 +13,7 @@ public class ModEnchantments {
      * <Strong>Sword
      */
     public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment DECI_EXPERIMENT = new EmptyEnchantment("deci_experiment",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment APINOX = new EmptyEnchantment("apinox",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     public static EmptyEnchantment PRAMINAX = new PraminaxEnchantment(Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     /**
      * <Strong>Axe
@@ -21,7 +21,7 @@ public class ModEnchantments {
     public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static void init() {
         init(CARVE);
-        init(DECI_EXPERIMENT);
+        init(APINOX);
         init(PRAMINAX);
         init(STIGMA);
     }

@@ -21,8 +21,8 @@
   "enchantment.moonay.carve.desc": "Reduces the target's protection with each attack. After attacking for a while, Right-clicking can trigger a healing effect.",
   "enchantment.moonay.stigma" : "Stigma",
   "enchantment.moonay.stigma.desc": "Allows the player to perform a special attack when the target has low health. Right-clicking can heal the player and deal damage around them.",
-  "enchantment.moonay.deci_experiment" : "Deci Experiment",
-  "enchantment.moonay.deci_experiment.desc": "Increases Critical Damage for every 10% exceeding 100% Crit Chance by 1% per level.",
+  "enchantment.moonay.apinox" : "Apinox",
+  "enchantment.moonay.apinox.desc": "Increases Critical Damage for every 10% exceeding 100% Crit Chance by 1% per level.",
   "enchantment.moonay.praminax" : "Praminax",
   "enchantment.moonay.praminax.desc": "After attacking twice, the next attack deals player attack damage multiplied by 20% per enchantment level.",
 
