@@ -4,6 +4,7 @@
   "moonay.modifytooltip.stigma.condition": " | (Amount of targets in user's range)",
   "moonay.modifytooltip.stigma.desc": "If the target's health is below ",
   "moonay.modifytooltip.stigma.desc2": " It will automatically execute the target",
+  "moonay.modifytooltip.praminax": "Praminax Additional Damage : ",
 
   "moonay.modifytooltip.critchance":"Crit Chance ✧",
   "moonay.modifytooltip.critdmg":"Crit Damage ✦",
