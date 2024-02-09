@@ -61,7 +61,7 @@ public class MoonayHelper {
         return amp;
     }
     public static boolean hasEnchantWithRangeDistance(Enchantment enchantment, LivingEntity user, Entity target, double lessthan) {
-        return hasEnchantment(enchantment, user.getMainHandStack()) || user.distanceTo(target) >= lessthan || !(target instanceof LivingEntity);
+        return !hasEnchantment(enchantment, user.getMainHandStack()) && !(user.distanceTo(target) >= lessthan) && target instanceof LivingEntity;
     }
     public static int getStatusCount(LivingEntity user, StatusEffect statusEffect, int i) {
         StatusEffectInstance cooldownInstance = user.getStatusEffect(statusEffect);
