@@ -64,7 +64,7 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
 
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
-        if (!MoonayHelper.hasEnchantWithRangeDistance(this,user,target,6)) {
+        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
         if (target instanceof LivingEntity livingTarget && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.AXE) {

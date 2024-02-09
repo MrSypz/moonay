@@ -30,7 +30,7 @@ public class PraminaxEnchantment extends SwordEnchantment implements CustomSpeci
     }
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
-        if (!MoonayHelper.hasEnchantWithRangeDistance(this,user,target,6)) {
+        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
         if (target instanceof LivingEntity living && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.SWORD) {
