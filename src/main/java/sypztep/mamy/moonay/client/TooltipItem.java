@@ -40,6 +40,8 @@ public class TooltipItem {
             addCarveTooltip(lines, player);
         } else if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, stack)) {
             addStigmaTooltip(lines, player);
+        } else if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, stack)) {
+            addPraminaxTooltip(lines, player);
         }
     }
     private static void addCritOverhaulTooltip(ItemStack stack, List<Text> lines,Formatting color) {
@@ -63,6 +65,12 @@ public class TooltipItem {
             double amount = 0.25f + AbilityHelper.getMissingHealth(client, ModConfig.CONFIG.stigmahealratio);
             addFormattedTooltip(lines, String.format("%.2f",amount) + " x " + AbilityHelper.getHitAmount(), "stigma","stigma.condition");
             addFormattedTooltip(lines, 1.5f + "% x " + (float) MoonayHelper.getEnchantmentLvl(ModEnchantments.STIGMA, client.getMainHandStack()) + "%", "stigma.desc","stigma.desc2");
+        }
+    }
+    private static void addPraminaxTooltip(List<Text> lines, ClientPlayerEntity client) {
+        if (client != null) {
+            int amount = 20 * MoonayHelper.getEnchantmentLvl(ModEnchantments.PRAMINAX,client.getMainHandStack());
+            addFormattedTooltip(lines, String.format("%d",amount) + "%", "praminax" );
         }
     }
 
