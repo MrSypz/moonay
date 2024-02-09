@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sypztep.mamy.moonay.client.packets2c.ConfigSyncPacket;
 import sypztep.mamy.moonay.common.init.*;
 import sypztep.mamy.moonay.common.packetc2s.CarveSoulPacket;
 import sypztep.mamy.moonay.common.packetc2s.StigmaPacket;

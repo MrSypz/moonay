@@ -16,5 +16,11 @@
       "moonay:item/stalwart"
     ],
     "subtitle": "subtitles.moonay.item.stalwart"
+  },
+  "item.praminax": {
+    "sounds": [
+      "moonay:item/praminax"
+    ],
+    "subtitle": "subtitles.moonay.item.praminax"
   }
 }

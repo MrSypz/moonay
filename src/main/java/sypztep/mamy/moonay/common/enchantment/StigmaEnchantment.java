@@ -52,16 +52,6 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     }
 
     @Override
-    public int maxUseTime(ItemStack stack) {
-        return 10;
-    }
-
-    @Override
-    public UseAction useAction(ItemStack stack) {
-        return UseAction.BOW;
-    }
-
-    @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
         MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user);
         if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && weaponType == MoonayHelper.WeaponType.AXE) {
@@ -79,19 +69,9 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
         }
         if (target instanceof LivingEntity livingTarget && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.AXE) {
             if (AbilityHelper.targetMissingHealthPercentBelow(livingTarget,0.015f * level) && !target.equals(user))
-                setShouldTriggerAdditionalDamage(true); /* It'll set to false in Mixin */
+                setShouldTriggerAdditionalDamage(true);
         }
     }
-
-    @Override
-    public void applyOnUser(LivingEntity user, int level) {
-    }
-
-    @Override
-    public Enchantment getEnchantment() {
-        return this;
-    }
-
     @Override
     public void setShouldTriggerAdditionalDamage(boolean value) {
         shouldTriggerAdditionalDamage = value;
@@ -101,4 +81,23 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
     public boolean isShouldTriggerAdditionalDamage() {
         return shouldTriggerAdditionalDamage;
     }
+    @Override
+    public void applyOnUser(LivingEntity user, int level) {
+    }
+    @Override
+    public int maxUseTime(ItemStack stack) {
+        return 10;
+    }
+
+    @Override
+    public UseAction useAction(ItemStack stack) {
+        return UseAction.BOW;
+    }
+
+    @Override
+    public Enchantment getEnchantment() {
+        return this;
+    }
+
+
 }

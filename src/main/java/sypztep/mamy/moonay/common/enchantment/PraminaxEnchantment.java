@@ -8,6 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.CustomSpecial;
 import sypztep.mamy.moonay.common.util.DamageHandler;
@@ -35,38 +37,47 @@ public class PraminaxEnchantment extends SwordEnchantment implements CustomSpeci
             StatusEffectInstance instance = user.getStatusEffect(ModStatusEffects.PRAMINAX);
             if (instance != null && instance.getAmplifier() == 2) {
                 if (!living.equals(user)) {
-                    setShouldTriggerAdditionalDamage(true); /* It'll set to false in Mixin */
-                    //TODO: ADD SOUND
+                    target.getWorld().playSound(null,target.getX(),target.getY(),target.getZ(),ModSoundEvents.ITEM_PRAMINAX, SoundCategory.PLAYERS,1,1);
+                    setShouldTriggerAdditionalDamage(true);
                     user.removeStatusEffect(ModStatusEffects.PRAMINAX);
-
-                    if (user.getWorld() instanceof ServerWorld) {
-                        double startX = target.getX();
-                        double startY = target.getY() + 1;
-                        double startZ = target.getZ();
-
-                        double endX = user.getX();
-                        double endY = user.getEyeY();
-                        double endZ = user.getZ();
-
-                        int particleNumConstant = 50;
-
-                        double xdif = (endX - startX) / particleNumConstant;
-                        double ydif = (endY - startY) / particleNumConstant;
-                        double zdif = (endZ - startZ) / particleNumConstant;
-
-                        for (int i = 0; i <= particleNumConstant; i++) {
-                            double t = (double) i / particleNumConstant;
-
-                            double x = startX + xdif * i + 1 * Math.sin(2 * Math.PI * t);
-                            double y = startY + ydif * i + 2.5 * Math.sin(2 * Math.PI * t);
-                            double z = startZ + zdif * i * Math.cos(4* Math.PI * t);
-
-                            ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.REVERSE_PORTAL, x, y, z, 0, 0, 0, 0, 1);
-                        }
-                    }
+                    praminaxParticle(user, target);
                 }
             }
         }
+    }
+    private void praminaxParticle(LivingEntity user, Entity target) {
+        if (user.getWorld() instanceof ServerWorld) {
+            double startX = target.getX();
+            double startY = target.getY() + 1;
+            double startZ = target.getZ();
+
+            double endX = user.getX();
+            double endY = user.getEyeY();
+            double endZ = user.getZ();
+
+            int particleNumConstant = 50;
+
+            double xdif = (endX - startX) / particleNumConstant;
+            double ydif = (endY - startY) / particleNumConstant;
+            double zdif = (endZ - startZ) / particleNumConstant;
+
+            for (int i = 0; i <= particleNumConstant; i++) {
+                double t = (double) i / particleNumConstant;
+
+                double x = startX + xdif * i + 1 * Math.sin(2 * Math.PI * t);
+                double y = startY + ydif * i + 2.5 * Math.sin(2 * Math.PI * t);
+                double z = startZ + zdif * i * Math.cos(4* Math.PI * t);
+
+                ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.REVERSE_PORTAL, x, y, z, 0, 0, 0, 0, 1);
+            }
+        }
+    }
+
+    @Override
+    public void applyOnUser(LivingEntity user,int level) {
+        int praminaxcount = MoonayHelper.getStatusCount(user, ModStatusEffects.PRAMINAX, 1);
+        if (praminaxcount < 3)
+            MoonayHelper.addStatus(user, ModStatusEffects.PRAMINAX, 40 + level * 20, praminaxcount);
     }
     @Override
     public void setShouldTriggerAdditionalDamage(boolean value) {
@@ -79,14 +90,9 @@ public class PraminaxEnchantment extends SwordEnchantment implements CustomSpeci
     }
 
     @Override
-    public void applyOnUser(LivingEntity user,int level) {
-        int praminaxcount = MoonayHelper.getStatusCount(user, ModStatusEffects.PRAMINAX, 1);
-        if (praminaxcount < 3)
-            MoonayHelper.addStatus(user, ModStatusEffects.PRAMINAX, 40 + level * 20, praminaxcount);
-    }
-
-    @Override
     public Enchantment getEnchantment() {
         return this;
     }
+
+
 }

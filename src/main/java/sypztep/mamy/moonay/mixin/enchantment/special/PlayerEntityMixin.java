@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.util.CustomSpecial;
 import sypztep.mamy.moonay.common.util.DamageHandler;
@@ -40,27 +41,26 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @ModifyVariable(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"), ordinal = 1)
     private float moonay$modifyattackdmg(float baseDamage, Entity target) {
         ItemStack mainHandStack = this.getMainHandStack();
+        DamageHandler handler = MoonayHelper.getDamageHandler(mainHandStack);
+        float attackDamage = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        int praminaxLevel = MoonayHelper.getEnchantmentLvl(ModEnchantments.PRAMINAX, mainHandStack);
 
         if (!MoonayHelper.hasDamageHandler(mainHandStack)) {
             return baseDamage;
         }
 
-        DamageHandler handler = MoonayHelper.getDamageHandler(mainHandStack);
         if (handler != null && handler.isShouldTriggerAdditionalDamage()) {
-            handler.setShouldTriggerAdditionalDamage(false);
-
-            int praminaxLevel = MoonayHelper.getEnchantmentLvl(ModEnchantments.PRAMINAX, mainHandStack);
             if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, mainHandStack) && target instanceof LivingEntity) {
-                float attackDamage = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+                handler.setShouldTriggerAdditionalDamage(false);
                 return baseDamage + (attackDamage * (0.2f * praminaxLevel));
             }
 
             if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, mainHandStack) && target instanceof LivingEntity) {
+                handler.setShouldTriggerAdditionalDamage(false);
                 return baseDamage + ((LivingEntity) target).getMaxHealth() * 10f;
             }
         }
 
         return baseDamage;
     }
-
 }
