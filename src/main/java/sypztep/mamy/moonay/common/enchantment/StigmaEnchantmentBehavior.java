@@ -53,11 +53,11 @@ public class StigmaEnchantmentBehavior extends AxeEnchantment implements ItemEnc
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user);
-        if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && weaponType == MoonayHelper.WeaponType.AXE) {
+        MoonayHelper.WeaponType handWeapon = checkIsItemCorrectUse(user);
+        if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && handWeapon == MoonayHelper.WeaponType.AXE) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
-        } else if (weaponType == MoonayHelper.WeaponType.SWORD)
+        } else if (handWeapon == MoonayHelper.WeaponType.SWORD)
             return TypedActionResult.pass(stack);
         return TypedActionResult.pass(stack);
     }
