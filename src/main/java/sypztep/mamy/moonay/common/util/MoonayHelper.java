@@ -11,7 +11,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
@@ -140,17 +139,11 @@ public class MoonayHelper {
     }
 
     public enum WeaponType {
-        AXE(AxeItem.class),
-        SWORD(SwordItem.class);
+        AXE(),
+        SWORD();
 
-        private final Class<? extends Item> itemClass;
-
-        WeaponType(Class<? extends Item> itemClass) {
-            this.itemClass = itemClass;
-        }
-
-        public Class<? extends Item> getItemClass() {
-            return itemClass;
+        WeaponType() {
         }
     }
+
 }
