@@ -11,13 +11,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
-import sypztep.mamy.moonay.common.util.CustomSpecial;
+import sypztep.mamy.moonay.common.util.EnchantmentSpecialEffect;
 import sypztep.mamy.moonay.common.util.DamageHandler;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class PraminaxEnchantment extends SwordEnchantment implements CustomSpecial, DamageHandler {
+public class PraminaxEnchantment extends OnHitApplyEnchantment implements EnchantmentSpecialEffect, DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
     public PraminaxEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);

@@ -12,18 +12,20 @@ public class ModEnchantments {
     /**
      * <Strong>Sword
      */
-    public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment APINOX = new EmptyEnchantment("apinox",3,Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment PRAMINAX = new PraminaxEnchantment(Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment CARVE = new CarveEnchantmentBehavior(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment APINOX = new EmptyEnchantment("apinox",3,Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment PRAMINAX = new PraminaxEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment THOUSAND_NEEDLE = new ThousandNeedleEnchantmentBehavior(Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     /**
      * <Strong>Axe
      */
-    public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment STIGMA = new StigmaEnchantmentBehavior(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static void init() {
         init(CARVE);
         init(APINOX);
         init(PRAMINAX);
         init(STIGMA);
+        init(THOUSAND_NEEDLE);
     }
     private static void init(EmptyEnchantment enchantment) {
         String name = enchantment.getName();

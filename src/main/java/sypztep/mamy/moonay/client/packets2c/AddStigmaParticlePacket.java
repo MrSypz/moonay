@@ -13,7 +13,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.enchantment.StigmaEnchantment;
+import sypztep.mamy.moonay.common.enchantment.StigmaEnchantmentBehavior;
 
 public class AddStigmaParticlePacket {
     public static final Identifier ID = MoonayMod.id("add_stigma_particle");
@@ -30,7 +30,7 @@ public class AddStigmaParticlePacket {
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null)
-                    StigmaEnchantment.stigmaParticle(entity);
+                    StigmaEnchantmentBehavior.stigmaParticle(entity);
             });
         }
     }

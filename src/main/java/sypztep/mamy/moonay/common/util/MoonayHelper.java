@@ -6,8 +6,10 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -84,18 +86,18 @@ public class MoonayHelper {
         return getDamageHandler(stack) != null;
     }
 
-    public static SpecialEnchantment getSpecialEnchantment(ItemStack stack) {
+    public static ItemEnchantmentBehavior getSpecialEnchantment(ItemStack stack) {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
-            if (enchantment instanceof SpecialEnchantment ) {
-                return (SpecialEnchantment) enchantment;
+            if (enchantment instanceof ItemEnchantmentBehavior) {
+                return (ItemEnchantmentBehavior) enchantment;
             }
         }
         return null;
     }
-    public static CustomSpecial getCustomSpecial(ItemStack stack) {
+    public static EnchantmentSpecialEffect getCustomSpecial(ItemStack stack) {
         for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet()) {
-            if (enchantment instanceof CustomSpecial) {
-                return (CustomSpecial) enchantment;
+            if (enchantment instanceof EnchantmentSpecialEffect) {
+                return (EnchantmentSpecialEffect) enchantment;
             }
         }
         return null;
@@ -107,6 +109,20 @@ public class MoonayHelper {
             }
         }
         return null;
+    }
+    public static boolean shouldHurt(Entity attacker, Entity hitEntity) {
+        if (attacker == null || hitEntity == null) {
+            return true;
+        }
+        if (attacker == hitEntity) {
+            return false;
+        }
+        if (hitEntity instanceof PlayerEntity hitPlayer && attacker instanceof PlayerEntity attackingPlayer) {
+            return attackingPlayer.shouldDamagePlayer(hitPlayer);
+        } else if (hitEntity instanceof Ownable ownable) {
+            return shouldHurt(attacker, ownable.getOwner());
+        }
+        return true;
     }
     public static void drawtextcustom(DrawContext context, TextRenderer textRenderer, String text, int x, int y , int color, int board, boolean shadow){
         context.drawText(textRenderer,text,x + 1,y,board,shadow);

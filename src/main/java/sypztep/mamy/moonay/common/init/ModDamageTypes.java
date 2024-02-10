@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.moonay.common.MoonayMod;
 
 public class ModDamageTypes {
-    public static final RegistryKey<DamageType> STIGMA = createType("stigma");
+    public static final RegistryKey<DamageType> NEEDLE = createType("needle");
     public static RegistryKey<DamageType> createType(String name) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, MoonayMod.id(name));
     }

@@ -19,9 +19,9 @@ import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantment, CustomSpecial, DamageHandler {
+public class StigmaEnchantmentBehavior extends AxeEnchantment implements ItemEnchantmentBehavior, EnchantmentSpecialEffect, DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
-    public StigmaEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public StigmaEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.setName("stigma");
     }
@@ -44,7 +44,7 @@ public class StigmaEnchantment extends AxeEnchantment implements SpecialEnchantm
             StigmaPacket.send();
         stigmaParticle(user);
         user.heal((float) amount);
-        MoonayHelper.addStatus(user,ModStatusEffects.STIGMA_COOLDOWN, 600 - (level * 20));
+        MoonayHelper.addStatus(user,ModStatusEffects.STIGMA_COOLDOWN, 600 - (level * 80));
     }
     public static void stigmaParticle(Entity entity) {
         entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getX(), entity.getY() + 0.1, entity.getZ(), 0, 0, 0);

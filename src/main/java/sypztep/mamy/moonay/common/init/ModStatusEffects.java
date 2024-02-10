@@ -21,9 +21,10 @@ public class ModStatusEffects {
                     "775287b5-79b9-48f4-9afe-ab8fd2cfd35f",
                     0.02D,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
-    public static final StatusEffect STALWART_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
-    public static final StatusEffect STIGMA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.HARMFUL);
+    public static final StatusEffect STALWART_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.BENEFICIAL);
+    public static final StatusEffect STIGMA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.BENEFICIAL);
     public static final StatusEffect PRAMINAX = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL);
+    public static final StatusEffect THOUSANDNEEDLE = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL);
 
     public static void init() {
         init("carve", CARVE);
@@ -31,6 +32,7 @@ public class ModStatusEffects {
         init("stalwart_cooldown", STALWART_COOLDOWN);
         init("stigma_cooldown", STIGMA_COOLDOWN);
         init("praminax", PRAMINAX);
+        init("thousandneedle", THOUSANDNEEDLE);
     }
     private static void init(String name,StatusEffect statusEffect){
         Registry.register(Registries.STATUS_EFFECT, MoonayMod.id(name), statusEffect);

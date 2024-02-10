@@ -12,9 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
-import sypztep.mamy.moonay.common.util.CustomSpecial;
+import sypztep.mamy.moonay.common.util.EnchantmentSpecialEffect;
 import sypztep.mamy.moonay.common.util.DamageHandler;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
@@ -32,10 +31,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         if (MoonayHelper.hasCustomSpecial(this.getMainHandStack()) && !target.handleAttack(this) && !(this).handSwinging) {
             int lvl = MoonayHelper.getEnchantmentLvl(Objects.requireNonNull(MoonayHelper.getCustomSpecial(mainHandStack)).getEnchantment(), mainHandStack);
-            CustomSpecial customSpecial = MoonayHelper.getCustomSpecial(mainHandStack);
-            assert customSpecial != null;
-            customSpecial.applyOnUser(this, lvl);
-            customSpecial.applyOnTarget(this,target,lvl);
+            EnchantmentSpecialEffect enchantmentSpecialEffect = MoonayHelper.getCustomSpecial(mainHandStack);
+            assert enchantmentSpecialEffect != null;
+            enchantmentSpecialEffect.applyOnUser(this, lvl);
+            enchantmentSpecialEffect.applyOnTarget(this,target,lvl);
         }
     }
     @ModifyVariable(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"), ordinal = 1)
