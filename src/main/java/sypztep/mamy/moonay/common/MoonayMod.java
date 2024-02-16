@@ -26,6 +26,7 @@ public class MoonayMod implements ModInitializer {
         ModParticles.init();
         ModEntityAttributes.init();
         ModCritData.initItemData();
+        ModEntityTypes.init();
 
         ServerPlayNetworking.registerGlobalReceiver(CarveSoulPacket.ID,new CarveSoulPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(StigmaPacket.ID,new StigmaPacket.Receiver());

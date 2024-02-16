@@ -11,11 +11,14 @@ import sypztep.mamy.moonay.client.packets2c.*;
 import sypztep.mamy.moonay.client.particle.BloodwaveParticle;
 import sypztep.mamy.moonay.client.particle.ShockwaveParticle;
 import sypztep.mamy.moonay.client.particle.WarpParticle;
+import sypztep.mamy.moonay.client.render.NeedleEntityRenderer;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
+import sypztep.mamy.moonay.common.init.ModEntityTypes;
 import sypztep.mamy.moonay.common.init.ModParticles;
 import sypztep.mamy.moonay.common.util.AbilityHelper;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 public class MoonayClient implements ClientModInitializer {
     @Override
@@ -32,6 +35,9 @@ public class MoonayClient implements ClientModInitializer {
         particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
         particleRegistry.register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
         particleRegistry.register(ModParticles.WARP, WarpParticle.Factory::new);
+
+        EntityRendererRegistry.register(ModEntityTypes.NEEDLE, NeedleEntityRenderer::new);
+
 
         HudRenderCallback.EVENT.register(new HealthBarRenderEvent());
 

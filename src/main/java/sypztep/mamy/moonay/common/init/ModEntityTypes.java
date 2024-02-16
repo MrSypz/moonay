@@ -1,7 +1,3 @@
-/*
- * All Rights Reserved (c) MoriyaShiine
- */
-
 package sypztep.mamy.moonay.common.init;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -16,6 +12,6 @@ public class ModEntityTypes {
 	public static final EntityType<NeedleEntity> NEEDLE = FabricEntityTypeBuilder.<NeedleEntity>create(SpawnGroup.MISC, NeedleEntity::new).dimensions(EntityType.ARROW.getDimensions()).build();
 
 	public static void init() {
-		Registry.register(Registries.ENTITY_TYPE, MoonayMod.id("ice_shard"), NEEDLE);
+		Registry.register(Registries.ENTITY_TYPE, MoonayMod.id("needle"), NEEDLE);
 	}
 }

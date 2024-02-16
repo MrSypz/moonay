@@ -7,6 +7,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
@@ -19,7 +20,7 @@ import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class StigmaEnchantmentBehavior extends AxeEnchantment implements ItemEnchantmentBehavior, EnchantmentSpecialEffect, DamageHandler {
+public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
     public StigmaEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
@@ -30,11 +31,11 @@ public class StigmaEnchantmentBehavior extends AxeEnchantment implements ItemEnc
     protected boolean canAccept(Enchantment other) {
         return super.canAccept(other) && other != ModEnchantments.CARVE;
     }
-
     @Override
-    public int getMaxLevel() {
-        return 5;
+    public boolean isAcceptableItem(ItemStack stack) {
+        return stack.getItem() instanceof AxeItem;
     }
+
     @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
         double damage = user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
@@ -80,9 +81,6 @@ public class StigmaEnchantmentBehavior extends AxeEnchantment implements ItemEnc
     @Override
     public boolean isShouldTriggerAdditionalDamage() {
         return shouldTriggerAdditionalDamage;
-    }
-    @Override
-    public void applyOnUser(LivingEntity user, int level) {
     }
     @Override
     public int maxUseTime(ItemStack stack) {

@@ -1,7 +1,3 @@
-/*
- * All Rights Reserved (c) MoriyaShiine
- */
-
 package sypztep.mamy.moonay.common.entity.projectile;
 
 import net.minecraft.block.BlockState;
@@ -26,7 +22,7 @@ import sypztep.mamy.moonay.common.init.ModEntityTypes;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 public class NeedleEntity extends PersistentProjectileEntity {
-	private static final ParticleEffect PARTICLE = new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.ICE));
+	private static final ParticleEffect PARTICLE = new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.POINTED_DRIPSTONE));
 
 	public NeedleEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
 		super(entityType, world);
