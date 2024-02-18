@@ -91,11 +91,4 @@ public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements 
     public UseAction useAction(ItemStack stack) {
         return UseAction.BOW;
     }
-
-    @Override
-    public Enchantment getEnchantment() {
-        return this;
-    }
-
-
 }
