@@ -40,7 +40,7 @@ public class OnHitApplyEnchantment extends EmptyEnchantment implements Enchantme
 
     @Override
     public Enchantment getEnchantment() {
-        return null;
+        return this;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class OnHitApplyEnchantment extends EmptyEnchantment implements Enchantme
 
     @Override
     public int maxUseTime(ItemStack stack) {
-        return 0;
+        return 20;
     }
 
     @Override
@@ -60,6 +60,6 @@ public class OnHitApplyEnchantment extends EmptyEnchantment implements Enchantme
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        return null;
+        return TypedActionResult.pass(stack);
     }
 }

@@ -87,11 +87,4 @@ public class PraminaxEnchantment extends OnHitApplyEnchantment implements Damage
     public boolean isShouldTriggerAdditionalDamage() {
         return shouldTriggerAdditionalDamage;
     }
-
-    @Override
-    public Enchantment getEnchantment() {
-        return this;
-    }
-
-
 }

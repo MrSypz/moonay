@@ -69,11 +69,6 @@ public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements I
     }
 
     @Override
-    public int maxUseTime(ItemStack stack) {
-        return 20;
-    }
-
-    @Override
     public UseAction useAction(ItemStack stack) {
         return UseAction.SPEAR;
     }
@@ -123,10 +118,5 @@ public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements I
             int carvecount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, level);
             user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + level * 12, carvecount));
         }
-    }
-
-    @Override
-    public Enchantment getEnchantment() {
-        return this;
     }
 }
