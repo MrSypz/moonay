@@ -32,7 +32,7 @@ public class PraminaxEnchantment extends OnHitApplyEnchantment implements Damage
         if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
-        if (target instanceof LivingEntity living && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.SWORD) {
+        if (target instanceof LivingEntity living && this.weaponType == MoonayHelper.WeaponType.SWORD) {
             StatusEffectInstance instance = user.getStatusEffect(ModStatusEffects.PRAMINAX);
             if (instance != null && instance.getAmplifier() == 2) {
                 if (!living.equals(user)) {

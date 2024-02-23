@@ -3,6 +3,7 @@ package sypztep.mamy.moonay.common.enchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,7 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
     }
 
     @Override
-    public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        return TypedActionResult.pass(stack);
+    public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
+        super.onFinishUsing(stack, world, user, level);
     }
 }

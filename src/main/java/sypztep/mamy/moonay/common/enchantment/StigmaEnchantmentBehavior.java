@@ -54,11 +54,11 @@ public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements 
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        MoonayHelper.WeaponType handWeapon = checkIsItemCorrectUse(user);
-        if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && handWeapon == MoonayHelper.WeaponType.AXE) {
+        this.weaponType = checkIsItemCorrectUse(user);
+        if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && this.weaponType == MoonayHelper.WeaponType.AXE) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
-        } else if (handWeapon == MoonayHelper.WeaponType.SWORD)
+        } else if (this.weaponType == MoonayHelper.WeaponType.SWORD)
             return TypedActionResult.pass(stack);
         return TypedActionResult.pass(stack);
     }
@@ -68,7 +68,7 @@ public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements 
         if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
-        if (target instanceof LivingEntity livingTarget && checkIsItemCorrectUse(user) == MoonayHelper.WeaponType.AXE) {
+        if (target instanceof LivingEntity livingTarget && this.weaponType == MoonayHelper.WeaponType.AXE) {
             if (AbilityHelper.targetMissingHealthPercentBelow(livingTarget,0.015f * level) && !target.equals(user))
                 setShouldTriggerAdditionalDamage(true);
         }
