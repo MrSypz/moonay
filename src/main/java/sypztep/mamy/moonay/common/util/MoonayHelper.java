@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
@@ -30,8 +31,10 @@ public class MoonayHelper {
     public static WeaponType checkIsItemCorrectUse(LivingEntity user) {
         if (user.getMainHandStack().getItem() instanceof AxeItem)
             return WeaponType.AXE;
-         else if (user.getMainHandStack().getItem()instanceof SwordItem)
+         else if (user.getMainHandStack().getItem() instanceof SwordItem)
             return WeaponType.SWORD;
+         else if (user.getMainHandStack().getItem() instanceof HoeItem)
+             return WeaponType.HOE;
         // Default case or unknown item type
         return null;
     }
@@ -140,7 +143,8 @@ public class MoonayHelper {
 
     public enum WeaponType {
         AXE(),
-        SWORD();
+        SWORD(),
+        HOE();
 
         WeaponType() {
         }

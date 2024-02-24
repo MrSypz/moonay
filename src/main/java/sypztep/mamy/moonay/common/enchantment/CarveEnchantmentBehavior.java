@@ -75,7 +75,7 @@ public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements I
 
     @Override
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
-        MoonayHelper.WeaponType weaponType = checkIsItemCorrectUse(user);
+        this.weaponType = checkIsItemCorrectUse(user);
         if (MoonayHelper.hasEnchantment(this, stack)
                 && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STALWART_COOLDOWN, user)
                 && weaponType == MoonayHelper.WeaponType.SWORD
@@ -115,8 +115,8 @@ public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements I
     @Override
     public void applyOnUser(LivingEntity user, int level) {
         if (level != 0) {
-            int carvecount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, level);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + level * 12, carvecount));
+            int hitcount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, level);
+            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + level * 12, hitcount));
         }
     }
 }

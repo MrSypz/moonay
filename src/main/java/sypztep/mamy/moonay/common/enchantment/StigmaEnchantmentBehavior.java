@@ -20,6 +20,7 @@ import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
+
 public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
     public StigmaEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
@@ -58,7 +59,7 @@ public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements 
         if (MoonayHelper.hasEnchantment(this, stack) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STIGMA_COOLDOWN, user) && this.weaponType == MoonayHelper.WeaponType.AXE) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
-        } else if (this.weaponType == MoonayHelper.WeaponType.SWORD)
+        } else if (this.weaponType != MoonayHelper.WeaponType.AXE)
             return TypedActionResult.pass(stack);
         return TypedActionResult.pass(stack);
     }
