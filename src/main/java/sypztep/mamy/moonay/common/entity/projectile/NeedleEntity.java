@@ -22,6 +22,7 @@ import sypztep.mamy.moonay.common.init.ModEntityTypes;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 public class NeedleEntity extends PersistentProjectileEntity {
+	protected float damage;
 	private static final ParticleEffect PARTICLE = new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.POINTED_DRIPSTONE));
 
 	public NeedleEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
@@ -30,6 +31,10 @@ public class NeedleEntity extends PersistentProjectileEntity {
 
 	public NeedleEntity(World world, LivingEntity owner) {
 		super(ModEntityTypes.NEEDLE, owner, world);
+	}
+	public NeedleEntity(World world, LivingEntity owner, float amount) {
+		super(ModEntityTypes.NEEDLE, owner, world);
+		this.damage = amount;
 	}
 
 	@Override
@@ -60,7 +65,7 @@ public class NeedleEntity extends PersistentProjectileEntity {
 				entity = part.owner;
 			}
 			Entity owner = getOwner();
-			if (MoonayHelper.shouldHurt(owner, entity) && entity.damage(ModDamageTypes.create(getWorld(), ModDamageTypes.NEEDLE, this, owner), 6)) {
+			if (MoonayHelper.shouldHurt(owner, entity) && entity.damage(ModDamageTypes.create(getWorld(), ModDamageTypes.NEEDLE, this, owner), damage)) {
 				playSound(getHitSound(), 1, 1.2F / (random.nextFloat() * 0.2F + 0.9F));
 				addParticles();
 				discard();

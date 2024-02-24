@@ -56,10 +56,9 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
         int amp = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
         if (amp > 3) {
             for (int i = 0; i < MathHelper.nextInt(user.getRandom(), 32, 64); i++) {
-                NeedleEntity needleEntity = new NeedleEntity(world , user);
+                NeedleEntity needleEntity = new NeedleEntity(world , user,6);
                 needleEntity.setOwner(user);
                 needleEntity.setPosition(user.getX(),user.getEyeY() + 2,user.getZ());
-
                 double x = -Math.sin(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
                 double y = -Math.sin(Math.toRadians(user.getPitch() + 10));
                 double z = Math.cos(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
