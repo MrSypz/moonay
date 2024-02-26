@@ -55,12 +55,12 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
         int amp = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
         if (amp > 0) {
-            for (int i = 0; i < Math.pow(4,amp); i++) {
+            for (int i = 0; i < Math.pow(3,amp); i++) {
                 NeedleEntity needleEntity = new NeedleEntity(world , user,6);
                 needleEntity.setOwner(user);
                 needleEntity.setPosition(user.getX(),user.getEyeY() + 2,user.getZ());
                 double x = -Math.sin(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
-                double y = -Math.sin(Math.toRadians(user.getPitch() + 10));
+                double y = -Math.sin(Math.toRadians(user.getPitch() + 15));
                 double z = Math.cos(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
 
                 double length = Math.sqrt(x * x + y * y + z * z);
@@ -70,7 +70,6 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
 
                 needleEntity.setVelocity(new Vec3d(x + user.getRandom().nextGaussian() , y, z + user.getRandom().nextGaussian() / 2).multiply(level * 0.9f));
                 user.getWorld().spawnEntity(needleEntity);
-                MoonayHelper.addStatus(user,ModStatusEffects.THOUSANDNEEDLE,30 + level * 12, amp - 1);
             }
         }
     }
