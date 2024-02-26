@@ -116,7 +116,7 @@ public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements I
     public void applyOnUser(LivingEntity user, int level) {
         if (level != 0) {
             int hitcount = MoonayHelper.getStatusCount(user, ModStatusEffects.STALWART, level);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STALWART, 20 + level * 12, hitcount));
+            MoonayHelper.addStatus(user, ModStatusEffects.STALWART,20 + level * 12, hitcount);
         }
     }
 }

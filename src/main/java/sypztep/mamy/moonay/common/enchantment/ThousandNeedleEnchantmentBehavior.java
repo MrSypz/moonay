@@ -47,15 +47,15 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
     public void applyOnUser(LivingEntity user, int level) {
         if (level != 0) {
             int hitcount = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
-            user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.THOUSANDNEEDLE, 30 + level * 12, hitcount));
+            MoonayHelper.addStatus(user,ModStatusEffects.THOUSANDNEEDLE, 30 + level * 12, hitcount);
         }
     }
 
     @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
         int amp = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
-        if (amp > 3) {
-            for (int i = 0; i < MathHelper.nextInt(user.getRandom(), 32, 64); i++) {
+        if (amp > 0) {
+            for (int i = 0; i < Math.pow(4,amp); i++) {
                 NeedleEntity needleEntity = new NeedleEntity(world , user,6);
                 needleEntity.setOwner(user);
                 needleEntity.setPosition(user.getX(),user.getEyeY() + 2,user.getZ());
@@ -70,6 +70,7 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
 
                 needleEntity.setVelocity(new Vec3d(x + user.getRandom().nextGaussian() , y, z + user.getRandom().nextGaussian() / 2).multiply(level * 0.9f));
                 user.getWorld().spawnEntity(needleEntity);
+                MoonayHelper.addStatus(user,ModStatusEffects.THOUSANDNEEDLE,30 + level * 12, amp - 1);
             }
         }
     }
@@ -78,7 +79,7 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
     public TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, ItemStack stack) {
         int amp = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
         this.weaponType = checkIsItemCorrectUse(user);
-        if (MoonayHelper.hasEnchantment(this, stack) && this.weaponType == MoonayHelper.WeaponType.HOE && amp > 3) {
+        if (MoonayHelper.hasEnchantment(this, stack) && this.weaponType == MoonayHelper.WeaponType.HOE && amp > 0) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
         } else if (this.weaponType != MoonayHelper.WeaponType.HOE)
