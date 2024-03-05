@@ -29,7 +29,6 @@ public class OnHitApplyEnchantment extends EmptyEnchantment implements Enchantme
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof SwordItem;
     }
-
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
 

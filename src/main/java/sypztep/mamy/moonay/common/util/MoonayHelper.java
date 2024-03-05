@@ -28,16 +28,6 @@ public class MoonayHelper {
     public static boolean stillHaveThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) != null;
     }
-    public static WeaponType checkIsItemCorrectUse(LivingEntity user) {
-        if (user.getMainHandStack().getItem() instanceof AxeItem)
-            return WeaponType.AXE;
-         else if (user.getMainHandStack().getItem() instanceof SwordItem)
-            return WeaponType.SWORD;
-         else if (user.getMainHandStack().getItem() instanceof HoeItem)
-             return WeaponType.HOE;
-        // Default case or unknown item type
-        return null;
-    }
     public static void addStatus(LivingEntity user, StatusEffect effect, int time) {
         user.addStatusEffect(new StatusEffectInstance(effect,time));
     }
@@ -140,6 +130,14 @@ public class MoonayHelper {
         context.drawText(textRenderer,text,x ,y - 1,color,shadow);
         context.drawText(textRenderer,text,x,y,color,shadow);
     }
+    public static WeaponType checkIsItemCorrectUse(LivingEntity user) {
+        var heldItem = user.getMainHandStack().getItem();
+        if (heldItem instanceof AxeItem) return WeaponType.AXE;
+        if (heldItem instanceof SwordItem) return WeaponType.SWORD;
+        if (heldItem instanceof HoeItem) return WeaponType.HOE;
+        return null; // No need for a default branch here
+    }
+
 
     public enum WeaponType {
         AXE(),
