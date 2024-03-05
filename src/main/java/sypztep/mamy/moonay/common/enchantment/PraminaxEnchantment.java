@@ -1,6 +1,5 @@
 package sypztep.mamy.moonay.common.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,8 +12,6 @@ import sypztep.mamy.moonay.common.init.ModSoundEvents;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.DamageHandler;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
-
-import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
 public class PraminaxEnchantment extends OnHitApplyEnchantment implements DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;

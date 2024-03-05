@@ -16,8 +16,6 @@ import sypztep.mamy.moonay.common.util.EnchantmentSpecialEffect;
 import sypztep.mamy.moonay.common.util.ItemEnchantmentBehavior;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
-import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
-
 public class OnHitApplyEnchantment extends EmptyEnchantment implements EnchantmentSpecialEffect, ItemEnchantmentBehavior {
     protected MoonayHelper.WeaponType weaponType;
     public OnHitApplyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
