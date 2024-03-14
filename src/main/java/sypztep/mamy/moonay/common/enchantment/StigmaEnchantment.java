@@ -21,9 +21,9 @@ import sypztep.mamy.moonay.common.util.*;
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
 
-public class StigmaEnchantmentBehavior extends OnHitApplyEnchantment implements DamageHandler {
+public class StigmaEnchantment extends OnHitApplyEnchantment implements DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
-    public StigmaEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public StigmaEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.setName("stigma");
     }

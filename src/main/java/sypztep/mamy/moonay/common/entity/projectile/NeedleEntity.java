@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -66,6 +67,7 @@ public class NeedleEntity extends PersistentProjectileEntity {
 			}
 			Entity owner = getOwner();
 			if (MoonayHelper.shouldHurt(owner, entity) && entity.damage(ModDamageTypes.create(getWorld(), ModDamageTypes.NEEDLE, this, owner), damage)) {
+				MoonayHelper.addStatus((LivingEntity) entity, StatusEffects.POISON,120);
 				playSound(getHitSound(), 1, 1.2F / (random.nextFloat() * 0.2F + 0.9F));
 				addParticles();
 				discard();

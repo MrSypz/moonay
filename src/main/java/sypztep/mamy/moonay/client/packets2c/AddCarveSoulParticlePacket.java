@@ -13,7 +13,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.enchantment.CarveEnchantmentBehavior;
+import sypztep.mamy.moonay.common.enchantment.CarveEnchantment;
 
 public class AddCarveSoulParticlePacket {
     public static final Identifier ID = MoonayMod.id("add_carvesoul_particle");
@@ -32,7 +32,7 @@ public class AddCarveSoulParticlePacket {
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null)
-                    CarveEnchantmentBehavior.carvesoulParticle(entity,pow);
+                    CarveEnchantment.carvesoulParticle(entity,pow);
             });
         }
     }

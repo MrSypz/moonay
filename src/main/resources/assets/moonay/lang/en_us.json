@@ -26,12 +26,15 @@
   "enchantment.moonay.apinox.desc": "Increases Critical Damage for every 10% exceeding 100% Crit Chance by 1% per level.",
   "enchantment.moonay.praminax" : "Praminax",
   "enchantment.moonay.praminax.desc": "After attacking twice, the next attack deals player attack damage multiplied by 20% per enchantment level.",
+  "enchantment.moonay.thousandneedle": "Thousand needle",
+  "enchantment.moonay.thousandneedle.desc": "Shoots needles from the sky. The number of needles increases with the status effect amplifier.",
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
   "effect.moonay.carve" : "Carve",
   "effect.moonay.stigma_cooldown" : "Stigma Cooldown",
   "effect.moonay.praminax" : "Praminax Stack",
+  "effect.moonay.thousandneedle" : "Thousand Needle's Stack",
 
   "text.autoconfig.moonay.title": "Moonay Config",
   "text.autoconfig.moonay.option.critOptional": "New Critical Overhaul",

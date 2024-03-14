@@ -15,6 +15,8 @@ import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
+import java.util.List;
+
 public class MoonayHelper {
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
@@ -34,7 +36,6 @@ public class MoonayHelper {
     public static void addStatus(LivingEntity user, StatusEffect effect, int time, int amp) {
         user.addStatusEffect(new StatusEffectInstance(effect,time,amp));
     }
-
     public static boolean hasStatusWithAmpValue$lessthan(StatusEffect statusEffect, LivingEntity user, int lessthan) {
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
         if (instance != null)

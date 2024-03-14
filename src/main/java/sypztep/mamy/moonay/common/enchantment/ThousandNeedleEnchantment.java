@@ -17,8 +17,8 @@ import sypztep.mamy.moonay.common.util.MoonayHelper;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
-    public ThousandNeedleEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+public class ThousandNeedleEnchantment extends OnHitApplyEnchantment {
+    public ThousandNeedleEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.name = "thousandneedle";
     }
@@ -32,10 +32,6 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
         return 3;
     }
 
-    @Override
-    public boolean isTreasure() {
-        return true;
-    }
     @Override
     public UseAction useAction(ItemStack stack) {
         return UseAction.BOW;
@@ -51,24 +47,27 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
 
     @Override
     public void onFinishUsing(ItemStack stack, World world, LivingEntity user, int level) {
+        float amount = 6.0f;
         int amp = MoonayHelper.getStatusCount(user, ModStatusEffects.THOUSANDNEEDLE, level);
-        if (amp > 0) {
-            for (int i = 0; i < Math.pow(3,amp); i++) {
-                NeedleEntity needleEntity = new NeedleEntity(world , user,6);
-                needleEntity.setOwner(user);
-                needleEntity.setPosition(user.getX(),user.getEyeY() + 2,user.getZ());
-                double x = -Math.sin(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
-                double y = -Math.sin(Math.toRadians(user.getPitch() + 15));
-                double z = Math.cos(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
+        if (amp <= 0)
+            return;
 
-                double length = Math.sqrt(x * x + y * y + z * z);
-                x /= length;
-                y /= length;
-                z /= length;
+        for (int i = 0; i < Math.pow(3, amp); i++) {
+            NeedleEntity needleEntity = new NeedleEntity(world, user, amount);
+            needleEntity.setOwner(user);
+            needleEntity.setPosition(user.getX(), user.getEyeY() + 2, user.getZ());
 
-                needleEntity.setVelocity(new Vec3d(x + user.getRandom().nextGaussian() , y, z + user.getRandom().nextGaussian() / 2).multiply(level * 0.9f));
-                user.getWorld().spawnEntity(needleEntity);
-            }
+            double x = -Math.sin(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
+            double y = -Math.sin(Math.toRadians(user.getPitch() + 15));
+            double z = Math.cos(Math.toRadians(user.getYaw())) * Math.cos(Math.toRadians(user.getPitch()));
+
+            double length = Math.sqrt(x * x + y * y + z * z);
+            x /= length;
+            y /= length;
+            z /= length;
+
+            needleEntity.setVelocity(new Vec3d(x + user.getRandom().nextGaussian(), y, z + user.getRandom().nextGaussian() / 2).multiply(level * 0.9f));
+            user.getWorld().spawnEntity(needleEntity);
         }
     }
 
@@ -86,6 +85,6 @@ public class ThousandNeedleEnchantmentBehavior extends OnHitApplyEnchantment {
 
     @Override
     public int maxUseTime(ItemStack stack) {
-        return 5;
+        return 10;
     }
 }

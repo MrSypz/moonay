@@ -25,9 +25,9 @@ import sypztep.mamy.moonay.common.util.*;
 
 import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
 
-public class CarveEnchantmentBehavior extends OnHitApplyEnchantment implements ItemEnchantmentBehavior, EnchantmentSpecialEffect {
+public class CarveEnchantment extends OnHitApplyEnchantment implements ItemEnchantmentBehavior, EnchantmentSpecialEffect {
     private boolean soundPlayed = false;
-    public CarveEnchantmentBehavior(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public CarveEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.setName("carve");
     }
