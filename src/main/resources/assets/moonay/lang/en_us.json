@@ -34,7 +34,7 @@
   "effect.moonay.carve" : "Carve",
   "effect.moonay.stigma_cooldown" : "Stigma Cooldown",
   "effect.moonay.praminax" : "Praminax Stack",
-  "effect.moonay.thousandneedle" : "Thousand Needle's Stack",
+  "effect.moonay.thousandneedle" : "Thousand Needle",
 
   "text.autoconfig.moonay.title": "Moonay Config",
   "text.autoconfig.moonay.option.critOptional": "New Critical Overhaul",
