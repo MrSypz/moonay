@@ -30,9 +30,6 @@ public class NeedleEntity extends PersistentProjectileEntity {
 		super(entityType, world);
 	}
 
-	public NeedleEntity(World world, LivingEntity owner) {
-		super(ModEntityTypes.NEEDLE, owner, world);
-	}
 	public NeedleEntity(World world, LivingEntity owner, float amount) {
 		super(ModEntityTypes.NEEDLE, owner, world);
 		this.damage = amount;

@@ -29,7 +29,6 @@ public class MoonayClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AddCarveSoulParticlePacket.ID, new AddCarveSoulParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddStigmaParticlePacket.ID, new AddStigmaParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(SyncCritS2CPacket.ID, new SyncCritS2CPacket.Receiver());
-        ClientPlayNetworking.registerGlobalReceiver(ConfigSyncPacket.ID, new ConfigSyncPacket.Receiver());
 
         ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
         particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);

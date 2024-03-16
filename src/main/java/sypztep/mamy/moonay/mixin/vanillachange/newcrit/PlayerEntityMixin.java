@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import sypztep.mamy.moonay.common.data.CritOverhaulConfig;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEntityAttributes;
 
@@ -24,8 +23,6 @@ import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntityMixin {
-    @Unique
-    CritOverhaulConfig critOverhaulConfig = new CritOverhaulConfig();
     @Unique
     private boolean alreadyCalculated;
 
@@ -73,10 +70,9 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
             //Luck
             critRate.add(Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_LUCK)).getValue() * 5); //Get From attribute
             //Add from item now stackable
-            List<String> equippedItemIds = getItemIdsFromEquippedSlots();
-            for (String itemId : equippedItemIds) {
-                critRate.add(critOverhaulConfig.getCritDataForItem(itemId).getCritChance());
-            }
+            /*
+            Add method
+             */
             return critRate.floatValue();
         }
         return 0;
@@ -94,10 +90,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
 
             critDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue()); //Get From attribute
             //Add from item now stackable
-            List<String> equippedItemIds = getItemIdsFromEquippedSlots();
-            for (String itemId : equippedItemIds) {
-                critDamage.add(critOverhaulConfig.getCritDataForItem(itemId).getCritDamage());
-            }
             return critDamage.floatValue();
         }
         return 0;

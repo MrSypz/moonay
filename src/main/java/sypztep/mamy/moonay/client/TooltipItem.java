@@ -12,8 +12,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import sypztep.mamy.moonay.common.MoonayMod;
-import sypztep.mamy.moonay.common.data.CritOverhaulConfig;
-import sypztep.mamy.moonay.common.data.CritOverhaulEntry;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModStatusEffects;
@@ -25,17 +23,9 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TooltipItem {
-    private static final CritOverhaulConfig CRIT_OVERHAUL_LOAD_CONFIG = new CritOverhaulConfig();
     public static void onTooltipRender(ItemStack stack, List<Text> lines, TooltipContext context) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         String itemId = Registries.ITEM.getId(stack.getItem()).toString();
-        if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).isValid()) {
-            if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() > 0)
-                addCritOverhaulTooltip(stack, lines, Formatting.DARK_GREEN);
-             else if (CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemId).getCritChance() < 0)
-                addCritOverhaulTooltip(stack, lines, Formatting.RED);
-             else return;
-        }
         if (MoonayHelper.hasEnchantment(ModEnchantments.CARVE, stack)) {
             addCarveTooltip(lines, player);
         } else if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, stack)) {
@@ -43,14 +33,6 @@ public class TooltipItem {
         } else if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, stack)) {
             addPraminaxTooltip(lines, player);
         }
-    }
-    private static void addCritOverhaulTooltip(ItemStack stack, List<Text> lines,Formatting color) {
-        String itemName = Registries.ITEM.getId(stack.getItem()).toString();
-
-        CritOverhaulEntry critData = CRIT_OVERHAUL_LOAD_CONFIG.getCritDataForItem(itemName);
-
-        addFormattedTooltip(lines, critData.getCritChance(), "critchance" ,color);
-        addFormattedTooltip(lines, critData.getCritDamage(), "critdmg" ,color);
     }
 
     private static void addCarveTooltip(List<Text> lines, ClientPlayerEntity client) {
