@@ -30,30 +30,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         super(type, world);
     }
     /**
-     * Retrieves a list of item IDs from the equipped slots of the entity.
-     * Excludes the offhand slot.
-     *
-     * @return A list of item IDs from the equipped slots.
-     */
-    @Unique
-    private List<String> getItemIdsFromEquippedSlots() {
-        List<String> itemIds = new ArrayList<>();
-        EquipmentSlot[] slots = EquipmentSlot.values();
-
-        for (EquipmentSlot slot : slots) {
-            if (ModConfig.CONFIG.exceptoffhandslot && slot == EquipmentSlot.OFFHAND)
-                continue;
-            ItemStack itemStack = this.getEquippedStack(slot);
-            if (!itemStack.isEmpty()) {
-                String itemId = Registries.ITEM.getId(itemStack.getItem()).toString();
-                itemIds.add(itemId);
-            }
-        }
-
-        return itemIds;
-    }
-
-    /**
      * Retrieves the total crit chance from equipped items, attributes, and other sources.
      * Takes into account the new crit overhaul configuration.
      *
@@ -69,10 +45,6 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
             critRate.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE)).getValue()); //Get From attribute
             //Luck
             critRate.add(Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_LUCK)).getValue() * 5); //Get From attribute
-            //Add from item now stackable
-            /*
-            Add method
-             */
             return critRate.floatValue();
         }
         return 0;
@@ -87,9 +59,9 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         //TODO: Have it mor configable
         if (ModConfig.CONFIG.shouldDoCrit()) {
             MutableFloat critDamage = new MutableFloat();
-
+            //ATTRIBUTE
+            //CritDamage
             critDamage.add(Objects.requireNonNull(this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_DAMAGE)).getValue()); //Get From attribute
-            //Add from item now stackable
             return critDamage.floatValue();
         }
         return 0;
