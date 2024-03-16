@@ -1,5 +1,5 @@
 {
-  "id": "tiered:trash_armor_1",
+  "id": "tiered:trash_armor_4",
   "verifiers": [
     {
       "tag": "c:helmets"
@@ -20,11 +20,25 @@
   },
   "attributes": [
     {
-      "type": "moonay:generic.crit_chance",
+      "type": "generic.movement_speed",
       "modifier": {
-        "name": "tiered:trash_armor_1",
+        "name": "tiered:trash_armor_4",
+        "operation": "MULTIPLY_TOTAL",
+        "amount": -0.15
+      },
+      "optional_equipment_slots": [
+        "FEET",
+        "LEGS",
+        "CHEST",
+        "HEAD"
+      ]
+    },
+    {
+      "type": "generic.armor",
+      "modifier": {
+        "name": "tiered:trash_armor_4",
         "operation": "ADDITION",
-        "amount": -10
+        "amount": -3.0
       },
       "optional_equipment_slots": [
         "FEET",
@@ -36,9 +50,9 @@
     {
       "type": "generic.max_health",
       "modifier": {
-        "name": "tiered:trash_armor_1",
+        "name": "tiered:trash_armor_4",
         "operation": "ADDITION",
-        "amount": -4
+        "amount": -4.0
       },
       "optional_equipment_slots": [
         "FEET",

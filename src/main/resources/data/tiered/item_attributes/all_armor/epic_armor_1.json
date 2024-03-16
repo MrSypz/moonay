@@ -32,21 +32,7 @@
                 "CHEST",
                 "HEAD"
             ]
-        },
-        {
-            "type": "tiered:generic.durable",
-            "modifier": {
-                "name": "tiered:epic_armor_1",
-                "operation": "MULTIPLY_TOTAL",
-                "amount": 0.2
-            },
-            "optional_equipment_slots": [
-                "FEET",
-                "LEGS",
-                "CHEST",
-                "HEAD"
-            ]
-        },
+        }
         {
             "type": "generic.max_health",
             "modifier": {
