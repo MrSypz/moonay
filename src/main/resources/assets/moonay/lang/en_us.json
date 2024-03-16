@@ -2,6 +2,24 @@
   "attribute.generic.crit_chance": "Crit Chance",
   "attribute.generic.crit_damage": "Crit Damage",
 
+  "tiered:trash_armor_1.label": "Trash",
+  "tiered:trash_armor_2.label": "Trash",
+  "tiered:trash_armor_3.label": "Trash",
+  "tiered:trash_armor_4.label": "Trash",
+  "tiered:trash_armor_5.label": "Trash",
+
+  "tiered:common_armor_5.label": "Common",
+
+  "tiered:uncommon_armor_5.label": "Uncommon",
+
+  "tiered:rare_armor_5.label": "Rare",
+
+  "tiered:epic_armor_5.label": "Epic",
+
+  "tiered:legendary_armor_5.label": "Legendary",
+
+  "tiered:unique_armor_5.label": "Unique",
+
   "moonay.modifytooltip.carve":"Healing Bonus ♥ : ",
   "moonay.modifytooltip.stigma": "Deals additional damage for each target hit and heals ♥ : ",
   "moonay.modifytooltip.stigma.condition": " | (Amount of targets in user's range)",

@@ -1,0 +1,37 @@
+{
+  "id": "tiered:uncommon_armor_3",
+  "verifiers": [
+    {
+      "tag": "c:helmets"
+    },
+    {
+      "tag": "c:chestplates"
+    },
+    {
+      "tag": "c:leggings"
+    },
+    {
+      "tag": "c:boots"
+    }
+  ],
+  "weight": 55,
+  "style": {
+    "color": "dark_green"
+  },
+  "attributes": [
+    {
+      "type": "generic.max_health",
+      "modifier": {
+        "name": "tiered:uncommon_armor_3",
+        "operation": "ADDITION",
+        "amount": 6.0
+      },
+      "optional_equipment_slots": [
+        "FEET",
+        "LEGS",
+        "CHEST",
+        "HEAD"
+      ]
+    }
+  ]
+}

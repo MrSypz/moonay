@@ -1,0 +1,37 @@
+{
+  "id": "tiered:unique_armor_2",
+  "verifiers": [
+    {
+      "tag": "c:helmets"
+    },
+    {
+      "tag": "c:chestplates"
+    },
+    {
+      "tag": "c:leggings"
+    },
+    {
+      "tag": "c:boots"
+    }
+  ],
+  "weight": 0,
+  "style": {
+    "color": "light_purple"
+  },
+  "attributes": [
+    {
+      "type": "generic.armor",
+      "modifier": {
+        "name": "tiered:unique_armor_2",
+        "operation": "ADDITION",
+        "amount": 12.0
+      },
+      "optional_equipment_slots": [
+        "FEET",
+        "LEGS",
+        "CHEST",
+        "HEAD"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "tiered:legendary_armor_4",
+  "verifiers": [
+    {
+      "tag": "c:helmets"
+    },
+    {
+      "tag": "c:chestplates"
+    },
+    {
+      "tag": "c:leggings"
+    },
+    {
+      "tag": "c:boots"
+    }
+  ],
+  "weight": 3,
+  "style": {
+    "color": "gold"
+  },
+  "attributes": [
+    {
+      "type": "moonay:generic.crit_damage",
+      "modifier": {
+        "name": "tiered:legendary_armor_4",
+        "operation": "ADDITION",
+        "amount": 55.0
+      },
+      "optional_equipment_slots": [
+        "FEET",
+        "LEGS",
+        "CHEST",
+        "HEAD"
+      ]
+    }
+  ]
+}

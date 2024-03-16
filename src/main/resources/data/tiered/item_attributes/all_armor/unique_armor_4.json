@@ -1,0 +1,37 @@
+{
+  "id": "tiered:unique_armor_4",
+  "verifiers": [
+    {
+      "tag": "c:helmets"
+    },
+    {
+      "tag": "c:chestplates"
+    },
+    {
+      "tag": "c:leggings"
+    },
+    {
+      "tag": "c:boots"
+    }
+  ],
+  "weight": 0,
+  "style": {
+    "color": "light_purple"
+  },
+  "attributes": [
+    {
+      "type": "moonay:generic.crit_damage",
+      "modifier": {
+        "name": "tiered:unique_armor_4",
+        "operation": "ADDITION",
+        "amount": 70.0
+      },
+      "optional_equipment_slots": [
+        "FEET",
+        "LEGS",
+        "CHEST",
+        "HEAD"
+      ]
+    }
+  ]
+}
