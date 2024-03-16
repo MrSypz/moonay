@@ -20,11 +20,11 @@
     },
     "attributes": [
         {
-            "type": "tiered:generic.durable",
+            "type": "moony:generic.crit_chance",
             "modifier": {
                 "name": "tiered:common_armor_2",
-                "operation": "MULTIPLY_TOTAL",
-                "amount": -0.3
+                "operation": "ADDITION",
+                "amount": -1.25
             },
             "optional_equipment_slots": [
                 "FEET",
