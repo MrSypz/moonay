@@ -1,4 +1,7 @@
 {
+  "attribute.generic.crit_chance": "Crit Chance",
+  "attribute.generic.crit_damage": "Crit Damage",
+
   "moonay.modifytooltip.carve":"Healing Bonus ♥ : ",
   "moonay.modifytooltip.stigma": "Deals additional damage for each target hit and heals ♥ : ",
   "moonay.modifytooltip.stigma.condition": " | (Amount of targets in user's range)",
