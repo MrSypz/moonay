@@ -14,13 +14,13 @@
             "tag": "c:boots"
         }
     ],
-    "weight": 80,
+    "weight": 50,
     "style": {
-        "color": "gray"
+        "color": "lightGray"
     },
     "attributes": [
         {
-            "type": "moony:generic.crit_chance",
+            "type": "moonay:generic.crit_chance",
             "modifier": {
                 "name": "tiered:common_armor_2",
                 "operation": "ADDITION",

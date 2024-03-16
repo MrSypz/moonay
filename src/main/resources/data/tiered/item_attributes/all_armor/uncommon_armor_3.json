@@ -20,7 +20,7 @@
     },
     "attributes": [
         {
-            "type": "moony:generic.crit_damage",
+            "type": "moonay:generic.crit_damage",
             "modifier": {
                 "name": "tiered:uncommon_armor_3",
                 "operation": "ADDITION",
