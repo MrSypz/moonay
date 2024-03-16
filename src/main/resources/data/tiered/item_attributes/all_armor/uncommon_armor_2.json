@@ -34,6 +34,20 @@
             ]
         },
         {
+            "type": "moony:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:uncommon_armor_2",
+                "operation": "ADDITION",
+                "amount": 7.5
+            },
+            "optional_equipment_slots": [
+                "FEET",
+                "LEGS",
+                "CHEST",
+                "HEAD"
+            ]
+        },
+        {
             "type": "generic.max_health",
             "modifier": {
                 "name": "tiered:uncommon_armor_2",
