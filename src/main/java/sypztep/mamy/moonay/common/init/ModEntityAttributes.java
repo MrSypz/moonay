@@ -7,8 +7,8 @@ import net.minecraft.registry.Registry;
 import sypztep.mamy.moonay.common.MoonayMod;
 
 public class ModEntityAttributes {
-    public static EntityAttribute GENERIC_CRIT_CHANCE = new ClampedEntityAttribute("attribute.generic.crit_chance",0.0,-1024.0,1024).setTracked(true);
-    public static EntityAttribute GENERIC_CRIT_DAMAGE = new ClampedEntityAttribute("attribute.generic.crit_damage",0.0,-1024.0,1024).setTracked(true);
+    public static EntityAttribute GENERIC_CRIT_CHANCE = new ClampedEntityAttribute("attribute.generic.crit_chance",0.0D,-1024.0D,1024.0D).setTracked(true);
+    public static EntityAttribute GENERIC_CRIT_DAMAGE = new ClampedEntityAttribute("attribute.generic.crit_damage",0.0D,-1024.0D,1024.0D).setTracked(true);
 
     public static void init() {
         init("generic.crit_chance",GENERIC_CRIT_CHANCE);
