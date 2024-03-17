@@ -43,20 +43,24 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         DamageHandler handler = MoonayHelper.getDamageHandler(mainHandStack);
         float attackDamage = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
         int praminaxLevel = MoonayHelper.getEnchantmentLvl(ModEnchantments.PRAMINAX, mainHandStack);
+        int goliathLevel = MoonayHelper.getEnchantmentLvl(ModEnchantments.GOLIATH, mainHandStack);
 
         if (!MoonayHelper.hasDamageHandler(mainHandStack)) {
             return baseDamage;
         }
 
-        if (handler != null && handler.isShouldTriggerAdditionalDamage()) {
-            if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, mainHandStack) && target instanceof LivingEntity) {
+        if (handler != null && handler.isShouldTriggerAdditionalDamage() && target instanceof LivingEntity livingTarget) {
+            if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, mainHandStack)) {
                 handler.setShouldTriggerAdditionalDamage(false);
                 return baseDamage + (attackDamage * (0.2f * praminaxLevel));
-            }
-
-            if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, mainHandStack) && target instanceof LivingEntity) {
+            } else
+            if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, mainHandStack) ) {
                 handler.setShouldTriggerAdditionalDamage(false);
-                return baseDamage + ((LivingEntity) target).getMaxHealth() * 10f;
+                return baseDamage + livingTarget.getMaxHealth() * 10f;
+            } else
+            if (MoonayHelper.hasEnchantment(ModEnchantments.GOLIATH, mainHandStack)) {
+                handler.setShouldTriggerAdditionalDamage(false);
+                return baseDamage + livingTarget.getHealth() * (goliathLevel * 2); // max 6%
             }
         }
 

@@ -15,6 +15,10 @@ public class ModEnchantments {
     public static EmptyEnchantment CARVE = new CarveEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment APINOX = new EmptyEnchantment("apinox",3,Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     public static EmptyEnchantment PRAMINAX = new PraminaxEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment GOLIATH = new GoliathEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
+    /**
+     * <Strong>Hoe
+     */
     public static EmptyEnchantment THOUSAND_NEEDLE = new ThousandNeedleEnchantment(Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEAPON,EquipmentSlot.MAINHAND);
     /**
      * <Strong>Axe
@@ -26,6 +30,7 @@ public class ModEnchantments {
         init(PRAMINAX);
         init(STIGMA);
         init(THOUSAND_NEEDLE);
+        init(GOLIATH);
     }
     private static void init(EmptyEnchantment enchantment) {
         String name = enchantment.getName();
