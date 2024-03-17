@@ -42,12 +42,14 @@ public class MoonayHelper {
             return instance.getAmplifier() < lessthan;
         return false;
     }
+
     public static boolean hasStatusWithAmpValue$greather(StatusEffect statusEffect, LivingEntity user, int greathan) {
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
         if (instance != null)
             return instance.getAmplifier() > greathan;
         return false;
     }
+
     public static int getStatusAmp(StatusEffect statusEffect,LivingEntity user) {
         int amp = 0;
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
@@ -55,9 +57,13 @@ public class MoonayHelper {
             amp = instance.getAmplifier();
         return amp;
     }
-    public static boolean hasEnchantWithRangeDistance(Enchantment enchantment, LivingEntity user, Entity target, double lessthan) {
-        return !hasEnchantment(enchantment, user.getMainHandStack()) && !(user.distanceTo(target) >= lessthan) && target instanceof LivingEntity;
+
+    public static boolean hasEnchantWithRangeDistance(Enchantment dontHaveEnchantment, LivingEntity user, Entity target, double lessThan) {
+        return !hasEnchantment(dontHaveEnchantment, user.getMainHandStack()) &&
+                user.distanceTo(target) >= lessThan &&
+                target instanceof LivingEntity;
     }
+
     public static int getStatusCount(LivingEntity user, StatusEffect statusEffect, int i) {
         StatusEffectInstance cooldownInstance = user.getStatusEffect(statusEffect);
         if (cooldownInstance != null) {
