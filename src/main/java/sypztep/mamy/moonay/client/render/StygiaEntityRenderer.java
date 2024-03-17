@@ -16,7 +16,7 @@ import sypztep.mamy.moonay.common.entity.projectile.StygiaEntity;
 
 @Environment(EnvType.CLIENT)
 public class StygiaEntityRenderer extends ProjectileEntityRenderer<StygiaEntity> {
-    private static final Identifier TEXTURE = MoonayMod.id("textures/entity/static/orbital.png");
+    private static final Identifier TEXTURE = MoonayMod.id("textures/entity/static/stygia.png");
     public StygiaEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
     }
