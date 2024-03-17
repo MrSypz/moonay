@@ -26,7 +26,7 @@ public class PraminaxEnchantment extends OnHitApplyEnchantment implements Damage
     }
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
-        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
+        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 7)) {
             return;
         }
         if (target instanceof LivingEntity living && this.weaponType == MoonayHelper.WeaponType.SWORD) {
