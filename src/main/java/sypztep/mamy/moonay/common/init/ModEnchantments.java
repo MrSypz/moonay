@@ -24,6 +24,7 @@ public class ModEnchantments {
      * <Strong>Axe
      */
     public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment STYGIA = new StygiaEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEARABLE, EquipmentSlot.LEGS);
     public static void init() {
         init(CARVE);
         init(APINOX);
@@ -31,6 +32,7 @@ public class ModEnchantments {
         init(STIGMA);
         init(THOUSAND_NEEDLE);
         init(GOLIATH);
+        init(STYGIA);
     }
     private static void init(EmptyEnchantment enchantment) {
         String name = enchantment.getName();

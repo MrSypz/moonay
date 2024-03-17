@@ -51,6 +51,9 @@
   "enchantment.moonay.thousandneedle.desc": "Shoots needles from the sky. The number of needles increases with the status effect amplifier.",
   "enchantment.moonay.goliath": "Goliath",
   "enchantment.moonay.goliath.desc": "Deals extra damage based on current target's health. by 3% per enchantment level.",
+  "enchantment.moonay.stygia": "Stygia",
+  "enchantment.moonay.stygia.desc": "When the wearer's health falls below 30%, taps into the power of Styx, granting regeneration, absorption, and enhanced speed while inducing a temporary state of nausea. Activates once per cooldown period.",
+
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
@@ -58,6 +61,7 @@
   "effect.moonay.stigma_cooldown" : "Stigma Cooldown",
   "effect.moonay.praminax" : "Praminax Stack",
   "effect.moonay.thousandneedle" : "Thousand Needle",
+  "effect.moonay.stygia_cooldown" : "Stygia Cooldown ",
 
   "text.autoconfig.moonay.title": "Moonay Config",
   "text.autoconfig.moonay.option.critOptional": "New Critical Overhaul",

@@ -12,6 +12,7 @@ import sypztep.mamy.moonay.client.particle.BloodwaveParticle;
 import sypztep.mamy.moonay.client.particle.ShockwaveParticle;
 import sypztep.mamy.moonay.client.particle.WarpParticle;
 import sypztep.mamy.moonay.client.render.NeedleEntityRenderer;
+import sypztep.mamy.moonay.client.render.StygiaEntityRenderer;
 import sypztep.mamy.moonay.common.init.ModConfig;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.init.ModEntityTypes;
@@ -36,6 +37,7 @@ public class MoonayClient implements ClientModInitializer {
         particleRegistry.register(ModParticles.WARP, WarpParticle.Factory::new);
 
         EntityRendererRegistry.register(ModEntityTypes.NEEDLE, NeedleEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.STYGIA, StygiaEntityRenderer::new);
 
 
         HudRenderCallback.EVENT.register(new HealthBarRenderEvent());

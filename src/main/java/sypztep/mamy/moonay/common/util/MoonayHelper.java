@@ -19,6 +19,9 @@ public class MoonayHelper {
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
     }
+    public static boolean hasEnchantment(Enchantment enchantment, Entity entity) {
+        return entity instanceof LivingEntity living && EnchantmentHelper.getEquipmentLevel(enchantment, living) > 0;
+    }
     public static int getEnchantmentLvl(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack);
     }

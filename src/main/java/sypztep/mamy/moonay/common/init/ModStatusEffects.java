@@ -25,6 +25,7 @@ public class ModStatusEffects {
     public static final StatusEffect STIGMA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.BENEFICIAL);
     public static final StatusEffect PRAMINAX = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL);
     public static final StatusEffect THOUSANDNEEDLE = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL);
+    public static final StatusEffect STYGIA_COOLDOWN = new CooldownStatusEffect(StatusEffectCategory.NEUTRAL);
 
     public static void init() {
         init("carve", CARVE);
@@ -33,6 +34,7 @@ public class ModStatusEffects {
         init("stigma_cooldown", STIGMA_COOLDOWN);
         init("praminax", PRAMINAX);
         init("thousandneedle", THOUSANDNEEDLE);
+        init("stygia_cooldown", STYGIA_COOLDOWN);
     }
     private static void init(String name,StatusEffect statusEffect){
         Registry.register(Registries.STATUS_EFFECT, MoonayMod.id(name), statusEffect);
