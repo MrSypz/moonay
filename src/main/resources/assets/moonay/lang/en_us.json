@@ -49,6 +49,8 @@
   "enchantment.moonay.praminax.desc": "After attacking twice, the next attack deals player attack damage multiplied by 20% per enchantment level.",
   "enchantment.moonay.thousandneedle": "Thousand needle",
   "enchantment.moonay.thousandneedle.desc": "Shoots needles from the sky. The number of needles increases with the status effect amplifier.",
+  "enchantment.moonay.goliath": "Goliath",
+  "enchantment.moonay.goliath.desc": "Deals extra damage based on current target's health. by 3% per enchantment level.",
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
   "effect.moonay.stalwart" : "Stalwart",
