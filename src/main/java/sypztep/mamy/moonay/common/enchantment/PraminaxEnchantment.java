@@ -13,6 +13,8 @@ import sypztep.mamy.moonay.common.init.ModStatusEffects;
 import sypztep.mamy.moonay.common.util.DamageHandler;
 import sypztep.mamy.moonay.common.util.MoonayHelper;
 
+import static sypztep.mamy.moonay.common.util.MoonayHelper.checkIsItemCorrectUse;
+
 public class PraminaxEnchantment extends OnHitApplyEnchantment implements DamageHandler {
     private static boolean shouldTriggerAdditionalDamage = false;
     public PraminaxEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
@@ -26,9 +28,10 @@ public class PraminaxEnchantment extends OnHitApplyEnchantment implements Damage
     }
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
-        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 7)) {
+        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
+        this.weaponType = checkIsItemCorrectUse(user);
         if (target instanceof LivingEntity living && this.weaponType == MoonayHelper.WeaponType.SWORD) {
             StatusEffectInstance instance = user.getStatusEffect(ModStatusEffects.PRAMINAX);
             if (instance != null && instance.getAmplifier() == 2) {

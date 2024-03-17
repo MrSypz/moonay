@@ -15,8 +15,6 @@ import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
-import java.util.List;
-
 public class MoonayHelper {
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
@@ -58,12 +56,9 @@ public class MoonayHelper {
         return amp;
     }
 
-    public static boolean hasEnchantWithRangeDistance(Enchantment dontHaveEnchantment, LivingEntity user, Entity target, double lessThan) {
-        return !hasEnchantment(dontHaveEnchantment, user.getMainHandStack()) &&
-                user.distanceTo(target) >= lessThan &&
-                target instanceof LivingEntity;
+    public static boolean hasEnchantWithRangeDistance(Enchantment enchantment, LivingEntity user, Entity target, double lessthan) {
+        return !hasEnchantment(enchantment, user.getMainHandStack()) && !(user.distanceTo(target) >= lessthan) && target instanceof LivingEntity;
     }
-
     public static int getStatusCount(LivingEntity user, StatusEffect statusEffect, int i) {
         StatusEffectInstance cooldownInstance = user.getStatusEffect(statusEffect);
         if (cooldownInstance != null) {

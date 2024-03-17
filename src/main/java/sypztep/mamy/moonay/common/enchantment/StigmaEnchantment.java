@@ -66,7 +66,7 @@ public class StigmaEnchantment extends OnHitApplyEnchantment implements DamageHa
 
     @Override
     public void applyOnTarget(LivingEntity user, Entity target, int level) {
-        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 7)) {
+        if (MoonayHelper.hasEnchantWithRangeDistance(this, user, target, 6)) {
             return;
         }
         if (target instanceof LivingEntity livingTarget && this.weaponType == MoonayHelper.WeaponType.AXE) {

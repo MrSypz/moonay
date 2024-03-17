@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.mamy.moonay.common.MoonayMod;
 import sypztep.mamy.moonay.common.init.ModEnchantments;
 import sypztep.mamy.moonay.common.util.EnchantmentSpecialEffect;
 import sypztep.mamy.moonay.common.util.DamageHandler;
@@ -49,21 +50,22 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             return baseDamage;
         }
 
-        if (handler != null && handler.isShouldTriggerAdditionalDamage() && target instanceof LivingEntity livingTarget) {
+        if (handler != null && handler.isShouldTriggerAdditionalDamage() && target instanceof LivingEntity livingEntity) {
             if (MoonayHelper.hasEnchantment(ModEnchantments.PRAMINAX, mainHandStack)) {
                 handler.setShouldTriggerAdditionalDamage(false);
                 return baseDamage + (attackDamage * (0.2f * praminaxLevel));
-            } else
-            if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, mainHandStack) ) {
+            }
+            if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, mainHandStack)) {
                 handler.setShouldTriggerAdditionalDamage(false);
-                return baseDamage + livingTarget.getMaxHealth() * 10f;
-            } else
+                return baseDamage + livingEntity.getMaxHealth() * 10f;
+            }
             if (MoonayHelper.hasEnchantment(ModEnchantments.GOLIATH, mainHandStack)) {
                 handler.setShouldTriggerAdditionalDamage(false);
-                return baseDamage + livingTarget.getHealth() * (goliathLevel * 2); // max 6%
+                return baseDamage + (0.01f * livingEntity.getHealth()) * (goliathLevel * 3);
             }
         }
 
         return baseDamage;
     }
+
 }
