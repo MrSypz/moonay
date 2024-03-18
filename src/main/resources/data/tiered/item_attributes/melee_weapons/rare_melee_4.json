@@ -1,0 +1,25 @@
+{
+    "id": "tiered:rare_melee_4",
+    "verifiers": [
+        {
+            "tag": "c:swords"
+        }
+    ],
+    "weight": 15,
+    "style": {
+        "color": "blue"
+    },
+    "attributes": [
+        {
+            "type": "generic.attack_speed",
+            "modifier": {
+                "name": "tiered:rare_melee_4",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.12
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "id": "tiered:rare_ranged_3",
+    "verifiers": [
+        {
+            "tag": "c:bows"
+        },
+        {
+            "tag": "c:crossbows"
+        }
+    ],
+    "weight": 15,
+    "style": {
+        "color": "blue"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:rare_ranged_3",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.2
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "id": "tiered:epic_armor_1",
+    "verifiers": [
+        {
+            "tag": "c:helmets"
+        },
+        {
+            "tag": "c:chestplates"
+        },
+        {
+            "tag": "c:leggings"
+        },
+        {
+            "tag": "c:boots"
+        }
+    ],
+    "weight": 8,
+    "style": {
+        "color": "dark_purple"
+    },
+
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:epic_armor_1",
+                "operation": "ADDITION",
+                "amount": 13
+            },
+            "optional_equipment_slots": [
+                "FEET",
+                "LEGS",
+                "CHEST",
+                "HEAD"
+            ]
+        },
+		{
+            "type": "moonay:generic.crit_damage",
+            "modifier": {
+                "name": "tiered:epic_armor_1",
+                "operation": "ADDITION",
+                "amount": 40.0
+            },
+            "optional_equipment_slots": [
+                "FEET",
+                "LEGS",
+                "CHEST",
+                "HEAD"
+            ]
+		}
+    ]
+}

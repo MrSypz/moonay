@@ -1,0 +1,25 @@
+{
+    "id": "tiered:unique_shield_1",
+    "verifiers": [
+        {
+            "tag": "c:shields"
+        }
+    ],
+    "weight": 0,
+    "style": {
+        "color": "light_purple"
+    },
+    "attributes": [
+        {
+            "type": "generic.knockback_resistance",
+            "modifier": {
+                "name": "tiered:epic_shield_1",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.5
+            },
+            "optional_equipment_slots": [
+                "OFFHAND"
+            ]
+        }
+    ]
+}

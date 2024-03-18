@@ -64,6 +64,14 @@
   "effect.moonay.stygia_cooldown" : "Stygia Cooldown ",
 
   "text.autoconfig.moonay.title": "Moonay Config",
+
+  "text.autoconfig.moonay.category.enchantment": "Enchantment",
+  "text.autoconfig.moonay.category.gameplay": "Gameplay",
+
+  "text.autoconfig.moonay.option.carvehealratio": "Carve heal ratio",
+  "text.autoconfig.moonay.option.stigmarange": "Stigma range",
+  "text.autoconfig.moonay.option.stigmahealratio": "Stigma heal ratio",
+
   "text.autoconfig.moonay.option.critOptional": "New Critical Overhaul",
   "text.autoconfig.moonay.option.playerstats": "Playerstats UI",
   "text.autoconfig.moonay.option.exceptoffhandslot": "Except offhand slot"

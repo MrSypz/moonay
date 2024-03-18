@@ -1,0 +1,25 @@
+{
+    "id": "tiered:unique_shield_2",
+    "verifiers": [
+        {
+            "tag": "c:shields"
+        }
+    ],
+    "weight": 0,
+    "style": {
+        "color": "light_purple"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_damage",
+            "modifier": {
+                "name": "tiered:unique_shield_2",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 2.0
+            },
+            "optional_equipment_slots": [
+                "OFFHAND"
+            ]
+        }
+    ]
+}

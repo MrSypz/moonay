@@ -1,0 +1,25 @@
+{
+    "id": "tiered:uncommon_shield_1",
+    "verifiers": [
+        {
+            "tag": "c:shields"
+        }
+    ],
+    "weight": 35,
+    "style": {
+        "color": "dark_green"
+    },
+    "attributes": [
+        {
+            "type": "generic.knockback_resistance",
+            "modifier": {
+                "name": "tiered:uncommon_shield_1",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.15
+            },
+            "optional_equipment_slots": [
+                "OFFHAND"
+            ]
+        }
+    ]
+}

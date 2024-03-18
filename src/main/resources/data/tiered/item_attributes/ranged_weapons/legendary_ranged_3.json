@@ -1,0 +1,28 @@
+{
+    "id": "tiered:legendary_ranged_3",
+    "verifiers": [
+        {
+            "tag": "c:bows"
+        },
+        {
+            "tag": "c:crossbows"
+        }
+    ],
+    "weight": 3,
+    "style": {
+        "color": "gold"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:legendary_ranged_3",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.5
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "tiered:legendary_shield_1",
+    "verifiers": [
+        {
+            "tag": "c:shields"
+        }
+    ],
+    "weight": 3,
+    "style": {
+        "color": "gold"
+    },
+    "attributes": [
+        {
+            "type": "generic.knockback_resistance",
+            "modifier": {
+                "name": "tiered:legendary_shield_1",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.35
+            },
+            "optional_equipment_slots": [
+                "OFFHAND"
+            ]
+        }
+    ]
+}

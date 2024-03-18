@@ -1,0 +1,34 @@
+{
+    "id": "tiered:rare_tool_4",
+    "verifiers": [
+        {
+            "tag": "c:axes"
+        },
+        {
+            "tag": "c:pickaxes"
+        },
+        {
+            "tag": "c:shovels"
+        },
+        {
+            "tag": "c:hoes"
+        }
+    ],
+    "weight": 15,
+    "style": {
+        "color": "blue"
+    },
+    "attributes": [
+        {
+            "type": "reach-entity-attributes:reach",
+            "modifier": {
+                "name": "tiered:rare_tool_4",
+                "operation": "ADDITION",
+                "amount": 1.5
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

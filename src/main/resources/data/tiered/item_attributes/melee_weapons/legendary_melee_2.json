@@ -1,0 +1,25 @@
+{
+    "id": "tiered:legendary_melee_2",
+    "verifiers": [
+        {
+            "tag": "c:swords"
+        }
+    ],
+    "weight": 3,
+    "style": {
+        "color": "gold"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_damage",
+            "modifier": {
+                "name": "tiered:legendary_melee_2",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 1.2
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

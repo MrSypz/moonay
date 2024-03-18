@@ -1,0 +1,25 @@
+{
+    "id": "tiered:unique_melee_3",
+    "verifiers": [
+        {
+            "tag": "c:swords"
+        }
+    ],
+    "weight": 0,
+    "style": {
+        "color": "light_purple"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:unique_melee_3",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 1.0
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "id": "tiered:uncommon_ranged_3",
+    "verifiers": [
+        {
+            "tag": "c:bows"
+        },
+        {
+            "tag": "c:crossbows"
+        }
+    ],
+    "weight": 35,
+    "style": {
+        "color": "dark_green"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:uncommon_ranged_3",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.15
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}

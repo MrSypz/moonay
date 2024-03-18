@@ -1,0 +1,51 @@
+{
+    "id": "tiered:unique_armor_1",
+    "verifiers": [
+        {
+            "tag": "c:helmets"
+        },
+        {
+            "tag": "c:chestplates"
+        },
+        {
+            "tag": "c:leggings"
+        },
+        {
+            "tag": "c:boots"
+        }
+    ],
+    "weight": 0,
+    "style": {
+        "color": "light_purple"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_chance",
+            "modifier": {
+                "name": "tiered:unique_armor_1",
+                "operation": "ADDITION",
+                "amount": 18
+            },
+            "optional_equipment_slots": [
+                "FEET",
+                "LEGS",
+                "CHEST",
+                "HEAD"
+            ]
+        },
+		{
+            "type": "moonay:generic.crit_damage",
+            "modifier": {
+                "name": "tiered:unique_armor_1",
+                "operation": "ADDITION",
+                "amount": 70
+            },
+            "optional_equipment_slots": [
+                "FEET",
+                "LEGS",
+                "CHEST",
+                "HEAD"
+            ]
+		}
+    ]
+}

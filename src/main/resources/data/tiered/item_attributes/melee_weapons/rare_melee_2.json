@@ -1,0 +1,25 @@
+{
+    "id": "tiered:rare_melee_2",
+    "verifiers": [
+        {
+            "tag": "c:swords"
+        }
+    ],
+    "weight": 15,
+    "style": {
+        "color": "blue"
+    },
+    "attributes": [
+        {
+            "type": "moonay:generic.crit_damage",
+            "modifier": {
+                "name": "tiered:rare_melee_2",
+                "operation": "MULTIPLY_TOTAL",
+                "amount": 0.6
+            },
+            "optional_equipment_slots": [
+                "MAINHAND"
+            ]
+        }
+    ]
+}
