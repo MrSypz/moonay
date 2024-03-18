@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "enchantment.special.ItemMixin",
+    "enchantment.special.LivingEntityMixin",
     "enchantment.special.PlayerEntityMixin",
     "vanillachange.newcrit.LivingEntityMixin",
     "vanillachange.newcrit.PlayerEntityMixin",

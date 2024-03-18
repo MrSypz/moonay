@@ -1,10 +1,12 @@
 package sypztep.mamy.moonay.mixin.enchantment.special;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,19 +33,20 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"),method = "damage")
     public void moonay$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source == null)
-            return;
         if (!MoonayHelper.hasEnchantment(ModEnchantments.STYGIA,this))
             return;
-        if (!AbilityHelper.targetMissingHealthPercentBelow(this, 0.3f) || !MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STYGIA_COOLDOWN, this))
-            return;
-        if (amount > this.getHealth())
+        if ((AbilityHelper.targetMissingHealthPercentBelow(this, 0.3f) || fetalDamage(amount)) && MoonayHelper.dontHaveThisStatusEffect(ModStatusEffects.STYGIA_COOLDOWN, this)) {
             this.setHealth(Math.max(1,amount - 3.5f));
-        useStygia();
+            useStygia();
+        }
+    }
+    @Unique
+    private boolean fetalDamage(float amount) {
+        return amount >= this.getHealth();
     }
     @Unique
     private void useStygia() {
-        int i = AbilityHelper.getEntityByArea(this,10);
+        int i = Math.max(1,Math.min(5,AbilityHelper.getEntityByArea(this,10)));
 
         World world = this.getWorld();
 
