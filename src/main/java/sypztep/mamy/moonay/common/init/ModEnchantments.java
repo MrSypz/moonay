@@ -25,6 +25,12 @@ public class ModEnchantments {
      */
     public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment STYGIA = new StygiaEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEARABLE, EquipmentSlot.LEGS);
+    /**
+     * <Strong>Armor
+     * <p>----------<p>
+     * <Strong>Chestplate
+     */
+    public static EmptyEnchantment LEVIATHAN = new LeviathanEnchantment(Enchantment.Rarity.VERY_RARE,EnchantmentTarget.WEARABLE, EquipmentSlot.CHEST);
     public static void init() {
         init(CARVE);
         init(APINOX);
@@ -33,6 +39,7 @@ public class ModEnchantments {
         init(THOUSAND_NEEDLE);
         init(STIGMA);
         init(STYGIA);
+        init(LEVIATHAN);
     }
     private static void init(EmptyEnchantment enchantment) {
         String name = enchantment.getName();
