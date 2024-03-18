@@ -25,7 +25,6 @@ import java.util.List;
 public class TooltipItem {
     public static void onTooltipRender(ItemStack stack, List<Text> lines, TooltipContext context) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        String itemId = Registries.ITEM.getId(stack.getItem()).toString();
         if (MoonayHelper.hasEnchantment(ModEnchantments.CARVE, stack)) {
             addCarveTooltip(lines, player);
         } else if (MoonayHelper.hasEnchantment(ModEnchantments.STIGMA, stack)) {
