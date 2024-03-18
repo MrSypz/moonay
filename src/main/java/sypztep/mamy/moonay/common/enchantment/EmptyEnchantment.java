@@ -3,10 +3,13 @@ package sypztep.mamy.moonay.common.enchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 
 public class EmptyEnchantment extends Enchantment {
     protected String name;
     protected int level;
+    protected boolean REQUIRES_PREFERRED_SLOT = true;
     public EmptyEnchantment(String name,Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
         this.name = name;
@@ -40,4 +43,11 @@ public class EmptyEnchantment extends Enchantment {
     public String getName() {
         return name;
     }
+    public boolean requiresPreferredSlot(){
+        return REQUIRES_PREFERRED_SLOT;
+    }
+    public void onEquipmentChange(int oldLevel, int newLevel, ItemStack oldItem, ItemStack newItem, LivingEntity entity){
+
+    }
+
 }

@@ -5,6 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.effect.StatusEffect;
@@ -14,6 +15,15 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import org.apache.commons.lang3.mutable.MutableInt;
+import sypztep.mamy.moonay.common.enchantment.EmptyEnchantment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MoonayHelper {
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
@@ -150,6 +160,66 @@ public class MoonayHelper {
         if (heldItem instanceof HoeItem) return WeaponType.HOE;
         return null; // No need for a default branch here
     }
+    private static void forEachEnchantment(Consumer consumer, ItemStack stack) {
+        if (stack != null && !stack.isEmpty()) {
+            NbtList NbtList = stack.getEnchantments();
+
+            for(int i = 0; i < NbtList.size(); ++i) {
+                String string = NbtList.getCompound(i).getString("id");
+                int j = NbtList.getCompound(i).getInt("lvl");
+                Registries.ENCHANTMENT.getOrEmpty(Identifier.tryParse(string)).ifPresent((enchantment) -> {
+                    if(enchantment instanceof EmptyEnchantment) {
+                        consumer.accept((EmptyEnchantment) enchantment, j, stack);
+                    }
+                });
+            }
+        }
+    }
+    private static void forEachEnchantment(Consumer consumer, Iterable<ItemStack> stacks) {
+        for (ItemStack itemStack : stacks) {
+            forEachEnchantment(consumer, itemStack);
+        }
+    }
+    public static int getEnchantmentAmountCorrectlyWorn(Iterable<ItemStack> equipment, Enchantment target, LivingEntity entity) {
+        MutableInt mutableInt = new MutableInt();
+        forEachEnchantment((enchantment, level, itemStack) -> {
+            if(enchantment == target && entity.getEquippedStack(LivingEntity.getPreferredEquipmentSlot(itemStack)) == itemStack) {
+                mutableInt.add(level);
+            }
+        }, equipment);
+        return mutableInt.intValue();
+    }
+    public static int countEnchantmentInstancesCorrectlyWorn(Iterable<ItemStack> equipment, Enchantment target, LivingEntity entity) {
+        MutableInt mutableInt = new MutableInt();
+        forEachEnchantment((enchantment, level, itemStack) -> {
+            if(enchantment == target &&
+                    doesPassPreferenceRequirement(enchantment,itemStack,entity)) {
+                mutableInt.add(1);
+            }
+        }, equipment);
+        return mutableInt.intValue();
+    }
+    public static boolean doesPassPreferenceRequirement(EmptyEnchantment enchantment, ItemStack itemStack, LivingEntity entity){
+        if(enchantment.requiresPreferredSlot()) {
+            return entity.getEquippedStack(LivingEntity.getPreferredEquipmentSlot(itemStack)) == itemStack;
+        }
+        return true;
+    }
+    public static void onEquipmentChange(LivingEntity livingEntity, EquipmentSlot equipmentSlot, ItemStack previousStack, ItemStack currentStack){
+        Map<EmptyEnchantment, Pair<Integer,Integer>> enchantmentsToCheck = new HashMap<>();
+        MoonayHelper.forEachEnchantment((enchantment, level, itemStack) ->
+                enchantmentsToCheck.put(enchantment, new Pair<>(level,0)),previousStack);
+        MoonayHelper.forEachEnchantment((enchantment, level, itemStack) -> {
+            if(enchantmentsToCheck.containsKey(enchantment)) {
+                enchantmentsToCheck.put(enchantment, new Pair<>(enchantmentsToCheck.get(enchantment).getLeft(),level));
+            }
+            else {
+                enchantmentsToCheck.put(enchantment, new Pair<>(0,level));
+            }
+        },currentStack);
+        enchantmentsToCheck.forEach((enchantment,levels) ->
+                enchantment.onEquipmentChange(levels.getLeft(),levels.getRight(),previousStack,currentStack,livingEntity));
+    }
 
 
     public enum WeaponType {
@@ -160,5 +230,8 @@ public class MoonayHelper {
         WeaponType() {
         }
     }
-
+    @FunctionalInterface
+    interface Consumer {
+        void accept(EmptyEnchantment enchantment, int level, ItemStack itemStack);
+    }
 }
