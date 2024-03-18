@@ -52,7 +52,7 @@
   "enchantment.moonay.goliath": "Goliath",
   "enchantment.moonay.goliath.desc": "Deals extra damage based on current target's health. by 3% per enchantment level.",
   "enchantment.moonay.stygia": "Stygia",
-  "enchantment.moonay.stygia.desc": "When the wearer's health falls below 30%, taps into the power of Styx, granting regeneration, absorption, and enhanced speed while inducing a temporary state of nausea. Activates once per cooldown period.",
+  "enchantment.moonay.stygia.desc": "When the wearer's health falls below 30% or fetal damage but it less than user maxHp, taps into the power of Styx, granting regeneration, absorption, and enhanced speed while inducing a temporary state of nausea. Activates once per cooldown period.",
 
 
   "effect.moonay.stalwart_cooldown" : "Stalwart Cooldown",
