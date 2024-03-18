@@ -49,7 +49,8 @@ public interface NewCriticalOverhaul {
         } else {
             if (MoonayHelper.hasEnchantment(ModEnchantments.APINOX, player.getMainHandStack()))
                 return Math.min(100, totalCritRate);
-            return totalCritRate;
+            else
+                return totalCritRate;
         }
     }
     default float getTotalCritDamage() {
