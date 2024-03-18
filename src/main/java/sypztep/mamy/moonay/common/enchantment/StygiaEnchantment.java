@@ -13,4 +13,7 @@ public class StygiaEnchantment extends EmptyEnchantment {
         super(weight, target, slotTypes);
         this.setName("stygia");
     }
+    /*
+    Part onUserDamage Move to Mixin now for more useful
+     */
 }
