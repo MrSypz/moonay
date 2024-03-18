@@ -1,5 +1,6 @@
 package sypztep.mamy.moonay.common.util;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 
@@ -8,7 +9,8 @@ import java.util.List;
 public class AbilityHelper {
     private static int counts;
     public static void boxArea(LivingEntity user, DamageSource source, double range, float amount, float minamount) {
-        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(range,3, range));
+        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox()
+                .expand(range,3, range));
         counts = 0;
         for (LivingEntity target : entities) {
             if (target != user) {
@@ -23,7 +25,8 @@ public class AbilityHelper {
         }
     }
     public static void boxArea(LivingEntity user, double range) {
-        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(range,3, range));
+        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox()
+                .expand(range,3, range));
         counts = 0;
         for (LivingEntity target : entities) {
             if (target != user) {
@@ -33,6 +36,10 @@ public class AbilityHelper {
                 else counts = 0;
             }
         }
+    }
+    public static int getEntityByArea(Entity user, double range) {
+        return user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox()
+                .expand(range, 0.25D, range)).size() - 1;
     }
     public static float getMissingHealth(LivingEntity living) {
         return living.getMaxHealth() - living.getHealth();
@@ -53,6 +60,10 @@ public class AbilityHelper {
     public static boolean targetMissingHealthPercentBelow(LivingEntity living, float percentofmissinghealth) {
         // Check if the target's health is below 5%
         return living.getHealth() / living.getMaxHealth() <= percentofmissinghealth;
+    }
+    public static boolean targetMissingHealthPercentBelow(Entity entity, float percentofmissinghealth) {
+        // Check if the target's health is below 5%
+        return entity instanceof LivingEntity living && living.getHealth() / living.getMaxHealth() <= percentofmissinghealth;
     }
     public static int getHitAmount(){
         return counts;

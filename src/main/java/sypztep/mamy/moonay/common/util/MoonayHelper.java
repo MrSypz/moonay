@@ -28,6 +28,9 @@ public class MoonayHelper {
     public static boolean dontHaveThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) == null;
     }
+    public static boolean dontHaveThisStatusEffect(StatusEffect statusEffect, Entity entity) {
+        return entity instanceof LivingEntity living && living.getStatusEffect(statusEffect) == null;
+    }
     public static boolean stillHaveThisStatusEffect(StatusEffect statusEffect, LivingEntity user) {
         return user.getStatusEffect(statusEffect) != null;
     }
@@ -37,6 +40,11 @@ public class MoonayHelper {
     public static void addStatus(LivingEntity user, StatusEffect effect, int time, int amp) {
         user.addStatusEffect(new StatusEffectInstance(effect,time,amp));
     }
+    public static void addStatus(Entity entity, StatusEffect effect, int time, int amp) {
+        if (entity instanceof LivingEntity user)
+            user.addStatusEffect(new StatusEffectInstance(effect,time,amp));
+    }
+
     public static boolean hasStatusWithAmpValue$lessthan(StatusEffect statusEffect, LivingEntity user, int lessthan) {
         StatusEffectInstance instance = user.getStatusEffect(statusEffect);
         if (instance != null)
