@@ -36,8 +36,6 @@ public abstract class LivingEntityMixin extends Entity implements NewCriticalOve
     @Unique
     private final Random critRateRandom = new Random();
 
-    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot var1);
-
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
 
     protected LivingEntityMixin(EntityType<?> type, World world) {
