@@ -63,7 +63,7 @@ public interface NewCriticalOverhaul {
             if (lvl > 0) {
                 float additionalCritDamage = 0.0F;
                 if (totalCritRate > 100.0F)
-                    additionalCritDamage = lvl * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
+                    additionalCritDamage = (lvl * 2) * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 2% lvl 2 = 4% lvl 3 = 8%
                 return additionalCritDamage + totalCritDamage;
             }
             return totalCritDamage;

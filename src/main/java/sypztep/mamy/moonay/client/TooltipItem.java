@@ -53,7 +53,7 @@ public class TooltipItem {
     }
     private static void addApinoxTooltip(List<Text> lines, ClientPlayerEntity client) {
         int lvl = MoonayHelper.getEnchantmentLvl(ModEnchantments.APINOX,client.getMainHandStack());
-        float amount = lvl * ((float) Math.floor((client.getAttributeValue(ModEntityAttributes.GENERIC_CRIT_CHANCE) - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
+        float amount = (lvl * 2) * ((float) Math.floor((client.getAttributeValue(ModEntityAttributes.GENERIC_CRIT_CHANCE) - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
         addFormattedTooltip(lines,amount + "%", "apinox" );
     }
 
