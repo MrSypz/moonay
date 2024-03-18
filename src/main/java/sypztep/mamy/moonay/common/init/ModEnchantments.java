@@ -29,9 +29,9 @@ public class ModEnchantments {
         init(CARVE);
         init(APINOX);
         init(PRAMINAX);
-        init(STIGMA);
-        init(THOUSAND_NEEDLE);
         init(GOLIATH);
+        init(THOUSAND_NEEDLE);
+        init(STIGMA);
         init(STYGIA);
     }
     private static void init(EmptyEnchantment enchantment) {
