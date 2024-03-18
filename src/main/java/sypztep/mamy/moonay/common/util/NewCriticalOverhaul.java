@@ -58,10 +58,9 @@ public interface NewCriticalOverhaul {
         if (!(this instanceof PlayerEntity player)) {
             return totalCritDamage;
         } else {
-            if (MoonayHelper.hasEnchantment(ModEnchantments.APINOX, player.getMainHandStack())) {
-                int lvl = MoonayHelper.getEnchantmentLvl(ModEnchantments.APINOX, player.getMainHandStack());
-                //not use getTotalCritRate it decrease value
-                float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+            float totalCritRate = this.moonay$getCritRate() + this.moonay$getCritRateFromEquipped();
+            int lvl = MoonayHelper.getEnchantmentLvl(ModEnchantments.APINOX, player.getMainHandStack());
+            if (lvl > 0) {
                 float additionalCritDamage = 0.0F;
                 if (totalCritRate > 100.0F)
                     additionalCritDamage = lvl * ((float) Math.floor((totalCritRate - 100.0F) / 10.0F)); // Formula enchant lvl * ((totalcrit * 100) / 10) exam:lvl 1 = 1% lvl 2 = 2% lvl 3 = 3%
