@@ -41,6 +41,10 @@ public class StygiaEntity extends PersistentProjectileEntity {
 		super(ModEntityTypes.STYGIA, owner, world);
 		setPosition(owner.getX(), owner.getEyeY() - 0.3, owner.getZ());
 	}
+	public StygiaEntity(World world, Entity owner) {
+		super(ModEntityTypes.STYGIA, (LivingEntity) owner, world);
+		setPosition(owner.getX(), owner.getEyeY() - 0.3, owner.getZ());
+	}
 
 
 	@Override
