@@ -20,9 +20,6 @@
     ],
     "modmenu": [
       "sypztep.mamy.moonay.common.compat.ModMenuIntegration"
-    ],
-    "cardinal-components-entity": [
-      "sypztep.mamy.moonay.common.init.ModEntityComponents"
     ]
   },
   "mixins": [
@@ -33,9 +30,5 @@
     "fabric": "*",
     "minecraft": "${minecraft_version}",
     "cloth-config2": ">=${cloth_config_version}"
-  },
-  "custom": {
-    "cardinal-components": [
-    ]
   }
 }

@@ -44,9 +44,9 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}")
-    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}")
-    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cardinal_components_version}")
+//    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}")
+//    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}")
+//    modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cardinal_components_version}")
 
     modCompileOnly "maven.modrinth:sodium:${sodium_version}"
     modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
