@@ -29,7 +29,7 @@ public class CarveEnchantment extends OnHitApplyEnchantment implements ItemEncha
     private boolean soundPlayed = false;
     public CarveEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
-        this.setName("carve");
+        this.name = "carve";
     }
 
     @Override

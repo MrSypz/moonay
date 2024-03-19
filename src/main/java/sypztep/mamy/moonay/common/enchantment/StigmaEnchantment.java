@@ -25,7 +25,7 @@ public class StigmaEnchantment extends OnHitApplyEnchantment implements DamageHa
     private static boolean shouldTriggerAdditionalDamage = false;
     public StigmaEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
-        this.setName("stigma");
+        this.name = "stigma";
     }
 
     @Override

@@ -14,7 +14,7 @@ public class GoliathEnchantment extends OnHitApplyEnchantment implements DamageH
     private static boolean shouldTriggerAdditionalDamage = false;
     public GoliathEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
-        this.setName("goliath");
+        this.name =  "goliath";
     }
 
     @Override

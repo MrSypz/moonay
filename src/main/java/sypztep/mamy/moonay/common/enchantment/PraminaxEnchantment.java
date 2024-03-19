@@ -19,7 +19,7 @@ public class PraminaxEnchantment extends OnHitApplyEnchantment implements Damage
     private static boolean shouldTriggerAdditionalDamage = false;
     public PraminaxEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
-        this.setName("praminax");
+        this.name = "praminax";
     }
 
     @Override

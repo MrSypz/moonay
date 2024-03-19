@@ -20,9 +20,6 @@ public class EmptyEnchantment extends Enchantment {
         this.name = name;
         this.level = lvl;
     }
-    protected void setName(String name) {
-        this.name = name;
-    }
     @Override
     public int getMaxLevel() {
         return this.level;

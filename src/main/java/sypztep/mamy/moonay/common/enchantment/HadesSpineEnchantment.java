@@ -10,7 +10,7 @@ public class HadesSpineEnchantment extends EmptyEnchantment {
     private static final String HADES_SPINE_KEY = MoonayMod.MODID + "HadesSpineCount";
     public HadesSpineEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
-        this.setName("hadesspine");
+        this.name = "hadesspine";
     }
 
     private void addHadesSpineCount(ItemStack stack, int amount) {
