@@ -24,12 +24,17 @@ public class ModEnchantments {
      * <Strong>Axe
      */
     public static EmptyEnchantment STIGMA = new StigmaEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment STYGIA = new EmptyEnchantment("stygia",1,Enchantment.Rarity.RARE,EnchantmentTarget.WEARABLE, EquipmentSlot.LEGS);
     /**
      * <Strong>Armor
      * <p>----------<p>
      * <Strong>Chestplate
      */
+    /**
+     * <p>----------<p>
+     * <Strong>Legging
+     */
+
+    public static EmptyEnchantment STYGIA = new EmptyEnchantment("stygia",1,Enchantment.Rarity.RARE,EnchantmentTarget.WEARABLE, EquipmentSlot.LEGS);
     public static void init() {
         init(CARVE);
         init(APINOX);
